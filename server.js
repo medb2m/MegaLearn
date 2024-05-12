@@ -1,6 +1,6 @@
 import app from './backend/app.js'
 
-const port = process.env.PORT || 3030
+const port = process.env.PORT 
 
 app.set('port', port)
 
