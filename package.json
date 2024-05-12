@@ -18,7 +18,11 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^8.3.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
