@@ -9,13 +9,20 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
 
+app.use('/login', (req, res) => {
+    res.send('<h1>Login page</h1>')
+})
+
+app.use('/register', (req, res) => {
+    res.send('<h1>Resgister page</h1>')
+})
 
 app.use((req, res, next) => {
-    console.log('First MiddleWare')
+    console.log('First MiddleWare just ran')
     next()
 })
 
-app.use((req, res) => {
+app.use('/',(req, res) => {
     res.send('Hello from Express!')
 })
 
