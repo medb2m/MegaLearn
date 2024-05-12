@@ -11,7 +11,7 @@ app.use(morgan("dev"))
 
 
 app.use((req, res, next) => {
-    console.log('First MiddleWare')
+    console.log('First MiddleWare just ran')
     next()
 })
 
