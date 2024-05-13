@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
-import { authConfig } from "../../config/auth.config";
+import { authConfig } from "../../config/auth.config.js";
 
 const { Schema } = mongoose;
 
