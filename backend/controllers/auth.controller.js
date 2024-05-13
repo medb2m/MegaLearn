@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { secret } from "../config/auth.config.js";
+import { authConfig } from "../config/auth.config.js";
 import db from '../models/users/index.js';
 
 const { user: User, role: Role } = db;
@@ -46,7 +46,7 @@ export const signin = async (req, res) => {
       return res.status(401).send({ message: "Invalid Password!" });
     }
 
-    const token = jwt.sign({ id: user.id }, secret, {
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
       algorithm: 'HS256',
       expiresIn: 86400, // 24 hours
     });

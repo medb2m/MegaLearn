@@ -2,7 +2,7 @@ import db from '../models/users/index.js';
 
 const ROLES = db.ROLES
 
-const User = db.User
+const User = db.user
 
 
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { secret } from "../config/auth.config.js";
+import { authConfig } from "../config/auth.config.js";
 import db from '../models/users/index.js';
 
 const { user: User, role: Role } = db;
@@ -12,7 +12,7 @@ export const verifyToken = async (req, res, next) => {
       return res.status(403).json({ message: "No token provided!" });
     }
 
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, authConfig.secret);
     req.userId = decoded.id;
     next();
   } catch (error) {
