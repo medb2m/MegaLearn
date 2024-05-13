@@ -16,7 +16,8 @@ const app=express()
 dotenv.config()
 
 var corsOptions = {
-    origin : "http://localhost:3031"
+    origin : "http://localhost:3031",
+    credentials : true
 }
 
 app.use(cors(corsOptions))

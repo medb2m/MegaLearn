@@ -1,5 +1,5 @@
 import { checkDuplicateUsernameOrEmail, checkRolesExisted } from "../middlewares/verifySignUp.js";
-import { signup, signin, signout } from "../controllers/auth.controller.js";
+import { signup, signin, signout, refreshToken } from "../controllers/auth.controller.js";
 
 export default function authRoutes(app) {
   app.use(function(req, res, next) {
@@ -22,4 +22,6 @@ export default function authRoutes(app) {
   app.post("/api/auth/signin", signin);
 
   app.post("/api/auth/signout", signout);
+
+  app.post("/api/auth/refreshtoken", refreshToken);
 };

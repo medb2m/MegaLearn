@@ -33,54 +33,39 @@ export const signup = async (req, res) => {
   }
 };
 // after refresh token 
-export const signin = (req, res) => {
-  User.findOne({
-    username: req.body.username,
-  })
-    .populate("roles", "-__v")
-    .exec(async (err, user) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
+export const signin = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username }).populate("roles", "-__v");
 
-      if (!user) {
-        return res.status(404).send({ message: "User Not found." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
 
-      let passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+    const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!",
-        });
-      }
+    if (!passwordIsValid) {
+      return res.status(401).send({ accessToken: null, message: "Invalid Password!" });
+    }
 
-      let token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: authConfig.jwtExpiration,
-      });
+    const token = jwt.sign({ id: user.id }, authConfig.secret, { expiresIn: authConfig.jwtExpiration });
+    const refreshToken = await RefreshToken.createToken(user);
 
-      let refreshToken = await RefreshToken.createToken(user);
+    const authorities = user.roles.map((role) => "ROLE_" + role.name.toUpperCase());
 
-      let authorities = [];
-
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-      }
-      res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-        accessToken: token,
-        refreshToken: refreshToken,
-      });
+    return res.status(200).send({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+      accessToken: token,
+      refreshToken: refreshToken,
     });
+  } catch (error) {
+    console.error("Error during user sign-in:", error);
+    return res.status(500).send({ message: "Internal server error." });
+  }
 };
+
 
 
 //before refresh token 
