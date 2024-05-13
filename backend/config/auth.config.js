@@ -1,3 +1,3 @@
-export const authConfig = {
-    secretc: "perpill_secret_key"
+export const secret = {
+    secret: "perpill_secret_key"
   };
