@@ -15,12 +15,12 @@ const app=express()
 
 dotenv.config()
 
-var corsOptions = {
-    origin : "http://localhost:3031",
-    credentials : true
-}
-
-app.use(cors(corsOptions))
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:4200"],
+  }) 
+);
 
 // parse requests of content-type - application/json
 app.use(express.json())
@@ -78,8 +78,12 @@ app.use((req, res, next) => {
     next()
 })
 
+
+
 authRoutes(app);
 userRoutes(app);
+
+
 
 app.use('/',(req, res) => {
     res.json({message : "Welcome to perpill application"})

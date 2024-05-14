@@ -13,7 +13,8 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 
-import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { httpInterceptorProviders } from './_helpers/AccessLevel';
+import { PasswordPatternDirective } from './directives/password-pattern.directive';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    BoardTutorComponent
+    BoardTutorComponent,
+    PasswordPatternDirective
   ],
   imports: [
     BrowserModule,
