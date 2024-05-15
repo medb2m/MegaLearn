@@ -32,6 +32,6 @@ const reclamationSchema = new Schema({
   ]
 });
  
-const reclamation = mongoose.model("Claim", claimSchema);
+const reclamation = mongoose.model("reclamation", reclamationSchema);
  
 export default reclamation;

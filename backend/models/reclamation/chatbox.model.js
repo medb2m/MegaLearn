@@ -28,3 +28,6 @@ const chatMessageSchema = new Schema({
     default: false
   },
 });
+const chatMessage = mongoose.model("chatMessage", chatMessageSchema);
+ 
+export default chatMessage;
