@@ -14,7 +14,7 @@ const reclamationSchema = new Schema({
   status: {
     type: String,
     enum: ["Ouverte", "En cours", "Résolue", "Fermée"],
-    default: "Open"
+    default: "Ouverte"
   },
   createdAt: {
     type: Date,
