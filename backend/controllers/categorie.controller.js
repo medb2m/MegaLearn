@@ -1,8 +1,8 @@
-import Category from '../models/categorie.model.js'
+import Categorie from '../models/categorie.model.js'
 
 // Create a new category
-export const createCategory = async (req, res) => {
-  const category = new Category(req.body)
+export const CreateCategorie = async (req, res) => {
+  const category = new Categorie(req.body)
   await category.save()
   res.status(201).json(category)
 };

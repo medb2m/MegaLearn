@@ -7,4 +7,4 @@ const CategorySchema = new Schema({
     courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
   });
   
-  export default model('Category', CategorySchema);
+  export default model('Categorie', CategorySchema);

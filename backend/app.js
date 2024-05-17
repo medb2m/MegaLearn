@@ -8,7 +8,7 @@ import db from './models/users/index.js';
 import { dbConfig } from "./config/db.config.js";
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
-
+import catergoryRoutes from './routes/categorie.routes.js'
 
 const Role = db.role;
 const app=express()
@@ -85,5 +85,7 @@ app.use('/',(req, res) => {
     res.json({message : "Welcome to perpill application"})
 })
 
+//categorie
+app.use('/cat',catergoryRoutes)
 
 export default app
