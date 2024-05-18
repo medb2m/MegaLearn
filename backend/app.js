@@ -8,6 +8,7 @@ import db from './models/users/index.js';
 import { dbConfig } from "./config/db.config.js";
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
+import reclamationRoutes from './routes/reclamation.routes.js'; 
 
 
 const Role = db.role;
@@ -77,6 +78,8 @@ app.use((req, res, next) => {
     console.log('First MiddleWare just ran')
     next()
 })
+
+
 
 authRoutes(app);
 userRoutes(app);
