@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "back": "nodemon server.js"
+    "back": "nodemon ./backend/server.js"
   },
   "private": true,
   "dependencies": {
@@ -19,15 +19,8 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
-    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
-    "cookie-session": "^2.1.0",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.4",
-    "morgan": "^1.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -43,7 +36,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "nodemon": "^3.1.0",
     "typescript": "~4.9.4"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.",
