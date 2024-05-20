@@ -76,3 +76,16 @@ export function register(req, res, next) {
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
 }
+
+export function verifyEmailSchema(req, res, next) {
+    const schema = Joi.object({
+        token: Joi.string().required()
+    });
+    validateRequest(req, next, schema);
+}
+
+export function verifyEmail(req, res, next) {
+    UserService.verifyEmail(req.body)
+        .then(() => res.json({ message: 'Verification successful, you can now login' }))
+        .catch(next);
+}
