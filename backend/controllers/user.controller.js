@@ -57,3 +57,22 @@ export function revokeToken(req, res, next) {
         .then(() => res.json({ message: 'Token revoked' }))
         .catch(next);
 }
+
+export function registerSchema(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).required(),
+        confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
+        acceptTerms: Joi.boolean().valid(true).required()
+    });
+    validateRequest(req, next, schema);
+}
+
+export function register(req, res, next) {
+    UserService.register(req.body, req.get('origin'))
+        .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
+        .catch(next);
+}
