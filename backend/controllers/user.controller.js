@@ -1,16 +1,14 @@
-export const allAccess = (req, res) => {
-    res.status(200).send("Public Content.");
-  };
-  
-export const userBoard = (req, res) => {
-    res.status(200).send("User Content.");
-  };
-  
-export const adminBoard = (req, res) => {
-    res.status(200).send("Admin Content.");
-  };
-  
-export const moderatorBoard = (req, res) => {
-    res.status(200).send("Moderator Content.");
-  };
-  
+﻿import Joi from 'joi';
+import validateRequest from '../_middleware/validate-request.js'
+import UserService from './user.service.js'
+import Role from '../_helpers/role.js';
+
+
+export function authenticateSchema(req, res, next) {
+    const schema = Joi.object({
+        email: Joi.string().required(),
+        password: Joi.string().required()
+    });
+    validateRequest(req, next, schema);
+}
+
