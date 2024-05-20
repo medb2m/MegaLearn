@@ -15,12 +15,7 @@ const app=express()
 
 dotenv.config()
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:4200"],
-  }) 
-);
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json())

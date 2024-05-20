@@ -13,9 +13,6 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 
-import { httpInterceptorProviders } from './_helpers/AccessLevel';
-import { PasswordPatternDirective } from './directives/password-pattern.directive';
-
 
 @NgModule({
   declarations: [
@@ -27,7 +24,6 @@ import { PasswordPatternDirective } from './directives/password-pattern.directiv
     BoardAdminComponent,
     BoardUserComponent,
     BoardTutorComponent,
-    PasswordPatternDirective
   ],
   imports: [
     BrowserModule,
@@ -36,7 +32,7 @@ import { PasswordPatternDirective } from './directives/password-pattern.directiv
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
