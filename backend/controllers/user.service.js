@@ -9,7 +9,7 @@ import User from '../models/user.model.js'
 import RefreshToken from '../models/refresh-token.model.js'
 
 function generateJwtToken (user) {
-    // create a jwt token containing the User id that expires in 15 minutes
+    // create a jwt token containing the User id that expires in 60 minutes
     return jwt.sign({ sub: user.id, id: user.id }, config.secret, { expiresIn: '60m' })
 }
 
