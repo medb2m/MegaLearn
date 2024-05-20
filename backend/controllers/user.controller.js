@@ -89,3 +89,16 @@ export function verifyEmail(req, res, next) {
         .then(() => res.json({ message: 'Verification successful, you can now login' }))
         .catch(next);
 }
+
+export function forgotPasswordSchema(req, res, next) {
+    const schema = Joi.object({
+        email: Joi.string().email().required()
+    });
+    validateRequest(req, next, schema);
+}
+
+export function forgotPassword(req, res, next) {
+    UserService.forgotPassword(req.body, req.get('origin'))
+        .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
+        .catch(next);
+}
