@@ -32,7 +32,7 @@ const httpServer = createServer(app)
 // Init Socket.io with the HTTP Server
 const io = new Server(httpServer, {
     cors: {
-        origin: '*', // Update this with your client's origin if needed
+        origin: '*', 
         methods: ['GET', 'POST']
     }
 });
@@ -107,7 +107,7 @@ app.use('/event', eventRoutes);
 app.use(errorHandler);
 
 // start server
-const port = 4000;
+const port = 3030
 httpServer.listen(port, () => {
     console.log('Server listening on port ' + port);
 });
