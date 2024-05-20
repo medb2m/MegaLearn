@@ -4,7 +4,7 @@ const ROLES = db.ROLES
 
 const User = db.user
 
-
+// function duplicate 
 export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   try {
     // Vérification du nom d'utilisateur
