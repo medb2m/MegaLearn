@@ -1,5 +1,5 @@
 import express from 'express';
-import reclamationController from '../controllers/reclamation.controller';
+import reclamationController from '../controllers/reclamation.controller.js';
 
 const router = express.Router();
 

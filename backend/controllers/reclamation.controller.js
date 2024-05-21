@@ -1,4 +1,5 @@
-import Reclamation from './reclamation';
+//import Reclamation from './reclamation';
+import Reclamation from '../models/reclamation/reclamation.model.js';
 
 const reclamationController = {
   // Fonction pour créer une nouvelle réclamation
