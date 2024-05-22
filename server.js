@@ -1,10 +1,14 @@
-import app from './backend/app.js'
+import app, { startServer } from './backend/app.js';
+import http from 'http';
+import { Server } from 'socket.io';
 
-const port = process.env.PORT || 3030
+const port = process.env.PORT || 3030;
+app.set('port', port);
 
-app.set('port', port)
+const server = http.createServer(app);
+const io = new Server(server);
 
-
-app.listen(port, ()=>{ 
-    console.log(`Server running on http://localhost:${port}`)
-})
+server.listen(port, () => { 
+  console.log(`Server running on http://localhost:${port}`);
+  startServer(io); // Pass the io instance to startServer
+});
