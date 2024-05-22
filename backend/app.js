@@ -9,7 +9,7 @@ import { dbConfig } from "./config/db.config.js";
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import reclamationRoutes from './routes/reclamation.routes.js'; // Importation des routes de réclamations
-
+import chatMessageRoutes from './routes/chatMessage.routes.js';
 const Role = db.role;
 const app = express()
 
@@ -78,7 +78,7 @@ app.use((req, res, next) => {
 authRoutes(app);
 userRoutes(app);
 app.use('/api', reclamationRoutes); // Utilisation des routes de réclamations
-
+app.use('/api', chatMessageRoutes); // Utilisation des routes de réclamations
 app.use((req, res) => {
   res.json({ message: "Welcome to perpill application" })
 })

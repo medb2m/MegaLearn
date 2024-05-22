@@ -1,13 +1,11 @@
-import ChatMessage from './chatMessage';
-import Reclamation from './reclamation';
+import ChatMessage from '../models/reclamation/chatMessage.model.js';
+import Reclamation from '../models/reclamation/reclamation.model.js';
 
 const chatMessageController = {
-  // Fonction pour créer un nouveau message de chat
   createChatMessage: async (req, res) => {
     try {
       const { reclamationId, senderId, message } = req.body;
 
-      // Vérifier si la réclamation existe
       const reclamation = await Reclamation.findById(reclamationId);
       if (!reclamation) {
         return res.status(404).json({ error: 'Réclamation non trouvée' });
@@ -26,7 +24,6 @@ const chatMessageController = {
     }
   },
 
-  // Fonction pour récupérer tous les messages de chat
   getAllChatMessages: async (req, res) => {
     try {
       const chatMessages = await ChatMessage.find().populate('reclamation sender');
@@ -36,7 +33,6 @@ const chatMessageController = {
     }
   },
 
-  // Fonction pour récupérer les messages de chat par réclamation
   getChatMessagesByReclamationId: async (req, res) => {
     try {
       const { reclamationId } = req.params;
@@ -50,7 +46,6 @@ const chatMessageController = {
     }
   },
 
-  // Fonction pour mettre à jour un message de chat
   updateChatMessage: async (req, res) => {
     try {
       const { id } = req.params;
@@ -72,7 +67,6 @@ const chatMessageController = {
     }
   },
 
-  // Fonction pour supprimer un message de chat
   deleteChatMessage: async (req, res) => {
     try {
       const { id } = req.params;
