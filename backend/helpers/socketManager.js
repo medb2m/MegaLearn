@@ -1,4 +1,4 @@
-import chatMessageController from '../controllers/chatMessage.controller.js';
+import { createChat } from '../controllers/chat.controller.js';
 
 export function handleSocketEvents(io) {
     io.on('connection', (socket) => {
@@ -14,12 +14,14 @@ export function handleSocketEvents(io) {
             console.log('Message:', msg);
             if (socket.username) {
                 const message = {
-                    sender: socket.username,
+                    sender: msg.sender, // Use msg.sender from the client
                     message: msg.message,
-                    reclamation: msg.reclamationId
+                    reclamation: msg.reclamationId,
+                    timestamp: msg.timestamp, // Use the timestamp sent from the client
+                    isRead: msg.isRead
                 };
                 try {
-                    await chatMessageController.createChatMessage({ body: message }, {
+                    await createChat({ body: message }, {
                         status: (code) => ({ json: (data) => console.log(data) })
                     });
                     io.emit('receive message', message);

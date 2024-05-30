@@ -1,20 +1,27 @@
 import express from 'express';
 import reclamationController from '../controllers/reclamation.controller.js';
 
+
 const router = express.Router();
 
 // Endpoint pour créer une nouvelle réclamation
-router.post('/reclamations', reclamationController.createReclamation);
+router.post('/', reclamationController.createReclamation)
 
 // Endpoint pour récupérer toutes les réclamations
-router.get('/reclamations', reclamationController.getAllReclamations);
+router.get('/', reclamationController.getAllReclamations)
 
 // Endpoint pour récupérer une réclamation par son ID
-router.get('/reclamations/:id', reclamationController.getReclamationById);
+router.get('/:claimId', reclamationController.getReclamationById)
 
 // Endpoint pour mettre à jour une réclamation
-router.put('/reclamations/:id', reclamationController.updateReclamation);
+router.put('/:claimId', reclamationController.updateReclamation)
 
 // Endpoint pour supprimer une réclamation
-router.delete('/reclamations/:id', reclamationController.deleteReclamation);
+router.delete('/:claimId', reclamationController.deleteReclamation)
+
+// Endpoint pour le  controlleur qui creer une discussion pour une reclamation
+//router.post('/chat/:claimId', reclamationController.createDiscussion)
+//router.post('/reclamations/:id/:receiverID', reclamationController.createReclamation);
+
+
 export default router;

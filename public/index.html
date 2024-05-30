@@ -33,7 +33,7 @@
     socket.on('receive message', (message) => {
       const messages = document.getElementById('messages');
       const messageElement = document.createElement('div');
-      messageElement.textContent = `${message.name}: ${message.message}`;
+      messageElement.textContent = `${message.sender}: ${message.message} (Sent at: ${new Date(message.timestamp).toLocaleTimeString()})`;
       messages.appendChild(messageElement);
       messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
     });
@@ -41,8 +41,17 @@
     function sendMessage() {
       const messageInput = document.getElementById('messageInput');
       const message = messageInput.value;
+      const reclamationId = 'your_reclamation_id'; // Replace with actual reclamation ID
+      const senderId = 'your_sender_id'; // Replace with actual sender ID
+      const timestamp = new Date(); // Capture the current time
       if (message.trim()) {
-        socket.emit('send message', { message });
+        socket.emit('send message', { 
+          message, 
+          reclamationId, 
+          sender: senderId, 
+          timestamp,
+          isRead: false 
+        });
         messageInput.value = '';
       }
     }

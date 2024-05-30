@@ -9,7 +9,7 @@ import { dbConfig } from "./config/db.config.js";
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import reclamationRoutes from './routes/reclamation.routes.js';
-import chatMessageRoutes from './routes/chatMessage.routes.js';
+import chatMessageRoutes from './routes/chat.routes.js';
 import { handleSocketEvents } from './helpers/socketManager.js'; // Import the socket manager
 
 const Role = db.role;
@@ -18,11 +18,11 @@ const app = express();
 dotenv.config();
 
 var corsOptions = {
-  origin: "http://localhost:3031",
+  origin: "http://localhost:3030",
   credentials: true
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 
 authRoutes(app);
 userRoutes(app);
-app.use('/api', reclamationRoutes);
+app.use('/api/reclamations', reclamationRoutes);
 app.use('/api', chatMessageRoutes); // Use the chat message routes
 
 // Error handling

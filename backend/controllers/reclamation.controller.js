@@ -1,5 +1,7 @@
-//import Reclamation from './reclamation';
+
 import Reclamation from '../models/reclamation/reclamation.model.js';
+
+
 
 const reclamationController = {
   // Fonction pour créer une nouvelle réclamation
@@ -30,7 +32,7 @@ const reclamationController = {
   // Fonction pour récupérer une réclamation par son ID
   getReclamationById: async (req, res) => {
     try {
-      const reclamation = await Reclamation.findById(req.params.id);
+      const reclamation = await Reclamation.findById(req.params.claimId);
       if (!reclamation) {
         return res.status(404).json({ error: 'Réclamation non trouvée' });
       }
@@ -43,7 +45,7 @@ const reclamationController = {
   // Fonction pour mettre à jour une réclamation
   updateReclamation: async (req, res) => {
     try {
-      const updatedReclamation = await Reclamation.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const updatedReclamation = await Reclamation.findByIdAndUpdate(req.params.claimId, req.body, { new: true });
       if (!updatedReclamation) {
         return res.status(404).json({ error: 'Réclamation non trouvée' });
       }
@@ -56,7 +58,7 @@ const reclamationController = {
   // Fonction pour supprimer une réclamation
   deleteReclamation: async (req, res) => {
     try {
-      const deletedReclamation = await Reclamation.findByIdAndRemove(req.params.id);
+      const deletedReclamation = await Reclamation.findByIdAndDelete(req.params.claimId);
       if (!deletedReclamation) {
         return res.status(404).json({ error: 'Réclamation non trouvée' });
       }
@@ -65,6 +67,10 @@ const reclamationController = {
       res.status(500).json({ error: 'Erreur du serveur', details: error });
     }
   },
+
 };
+
+
+// controlleur pour creer une discussion pour une reclamation
 
 export default reclamationController;
