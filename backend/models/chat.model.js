@@ -25,9 +25,9 @@ const messageSchema = new Schema ({
  
 const ChatSchema = new Schema({
   title : {type : String},
-  reclamation: {
+  claim: {
     type: Schema.Types.ObjectId,
-    ref: "Reclamation",
+    ref: "Claim",
     //required: true
   },
   sender: {
@@ -40,7 +40,7 @@ const ChatSchema = new Schema({
   timestamp: {
     type: Date,
     default: Date.now
-  },
+  }
 })
 
 export default model("Chat", ChatSchema)

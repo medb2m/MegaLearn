@@ -1,0 +1,37 @@
+{
+    "name": "mega-learn-backend",
+    "version": "1.0.0",
+    "description": "elearning",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "scripts": {
+        "start": "node ./server.js",
+        "back": "nodemon ./server.js"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-jwt": "^6.0.0",
+        "http": "^0.0.1-security",
+        "joi": "^17.1.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^6.6.2",
+        "mongoose": "^8.3.5",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.4.6",
+        "socket.io": "^4.7.5",
+        "uuid": "^9.0.1",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.3"
+    },
+    "type": "module"
+}

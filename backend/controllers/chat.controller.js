@@ -1,29 +1,33 @@
-import Chat from '../models/reclamation/chat.model.js';
-import Message from '../models/reclamation/message.model.js';
-import Reclamation from '../models/reclamation/reclamation.model.js';
+import Chat from '../models/chat.model.js';
+import Claim from '../models/claim.model.js';
 
-// router.post('/chat/:claimId', chat.createChat)
+// Fonction pour creer une discussion
 export const createChat = async (req, res) => {
   try {
     const { claimId } = req.params.claimId
-    // senderId = req.user._id
 
-    const reclamation = await Reclamation.findById(req.params.claimId)
-    if (!reclamation) {
+    const claim = await Claim.findById(req.params.claimId).populate('chat')
+    if (!claim) {
       return res.status(404).json({ error: 'Réclamation non trouvée' });
+    }
+    
+
+    if(claim.chat){
+        const chat = claim.chat
+        return res.status(400).json({ error: 'chat already created ', chat });
     }
 
     const chatData = {
       title: req.body.title,
-      reclamation: req.params.claimId,
-      //sender: senderId,
+      claim: req.params.claimId,
+      sender: req.user.id,
     };
 
     const chat = new Chat(chatData);
     await chat.save(); 
     
-    reclamation.chat = chat._id
-    await reclamation.save()
+    claim.chat = chat._id
+    await claim.save()
 
     res.status(201).json({ message: 'Discussion créée avec succès' , chat});
   } catch (error) {
@@ -37,7 +41,7 @@ export const addMessageToChat = async (req, res) => {
     try {
       const { chatId } = req.params;
       const { message } = req.body;
-      // userId = req.user._id
+      const userId = req.user.id
 
       const chat = await Chat.findById(chatId);
       if (!chat) {
@@ -45,22 +49,23 @@ export const addMessageToChat = async (req, res) => {
       }
 
       chat.message.push({
+        userId: userId,
         message
       });
 
       await chat.save();
       res.status(200).json({ message: 'Message ajouté avec succès', chat });
     } catch (error) {
-      res.status(400).json({ error: 'Impossible d\'ajouter le message', details: error });
+      res.status(400).json({ error: 'Impossible d\'ajouter le message', message : error.message });
     }
   }
 
 
 // Fonction pour récupérer un chat par réclamation ID
-export const getChatByReclamationId = async (req, res) => {
+export const getChatByClaimId = async (req, res) => {
   try {
     const { claimId } = req.params;
-    const chat = await Chat.find({ reclamation: claimId }).populate('sender reclamation');
+    const chat = await Chat.find({ claim : claimId }).populate('sender claim');
     if (!chat) {
       return res.status(404).json({ error: 'Aucune discussion pour cette réclamation' });
     }
@@ -80,54 +85,20 @@ export const getAllChat = async (req, res) => {
     }
   }
 
-  // Fonction pour récupérer les messages de chat par réclamation ID
-export const igetChatByReclamationId = async (req, res) => {
-    try {
-      const { claimId } = req.params;
-      const chat = await Chat.find({ reclamation: claimId }).populate('sender message');
-      if (chatMessages.length === 0) {
-        return res.status(404).json({ error: 'Aucun message de chat trouvé pour cette réclamation' });
-      }
-      res.status(200).json(chatMessages);
-    } catch (error) {
-      res.status(500).json({ error: 'Erreur du serveur', details: error });
-    }
-  }
 
-  // Fonction pour mettre à jour un message de chat
-export const updateChatMessage = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { message, isRead } = req.body;
-
-      const updatedChatMessage = await ChatMessage.findByIdAndUpdate(
-        id,
-        { message, isRead },
-        { new: true }
-      );
-
-      if (!updatedChatMessage) {
-        return res.status(404).json({ error: 'Message de chat non trouvé' });
-      }
-
-      res.status(200).json({ message: 'Message de chat mis à jour avec succès', chatMessage: updatedChatMessage });
-    } catch (error) {
-      res.status(500).json({ error: 'Erreur du serveur', details: error });
-    }
-  }
 
   // Fonction pour supprimer un message de chat
 export const deleteChatMessage = async (req, res) => {
     try {
       const { id } = req.params;
 
-      const deletedChatMessage = await ChatMessage.findByIdAndRemove(id);
+      const deletedChatMessage = await ChatMessage.findByIdAndRemove(id); // delete
       if (!deletedChatMessage) {
         return res.status(404).json({ error: 'Message de chat non trouvé' });
       }
 
       res.status(204).json({ message: 'Message de chat supprimé avec succès' });
     } catch (error) {
-      res.status(500).json({ error: 'Erreur du serveur', details: error });
+      res.status(500).json({ error: 'Erreur du serveur', message : error.message });
     }
   }

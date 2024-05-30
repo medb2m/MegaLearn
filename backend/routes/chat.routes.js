@@ -1,19 +1,20 @@
 import express from 'express'
-import { createChat, addMessageToChat, getChatByReclamationId, getAllChat } from '../controllers/chat.controller.js'
+import { createChat, addMessageToChat, getAllChat, getChatByClaimId } from '../controllers/chat.controller.js'
+import authorize from '../_middleware/authorize.js'
 
 const router = express.Router()
 
 // Route pour créer une discussion pour une réclamation spécifique
-router.post('/chat/:claimId', createChat)
+router.post('/:claimId', authorize(),createChat)
 
 // Route pour ajouter un message dans une discussion
-router.post('/chat/add/:chatId', addMessageToChat)
+router.post('/add/:chatId', authorize(),addMessageToChat)
 
 // Route pour avoir tous les messages d'un chat 
-router.get('/chat/claim/:claimId', getChatByReclamationId)
+router.get('/claim/:claimId', authorize(),getChatByClaimId)
 
 // Route pour avoir tous les chats
-router.get('/chat', getAllChat)
+router.get('/', getAllChat)
 
 
 // Autres routes pour les messages de chat

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
  
 const { Schema, model } = mongoose;
  
-const reclamationSchema = new Schema({
+const claimSchema = new Schema({
   title: {
     type: String,
     //required: true
@@ -13,8 +13,8 @@ const reclamationSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["Ouverte", "En cours", "Résolue"],
-    default: "Ouverte"
+    enum: ["Open", "In progress", "Finished"],
+    default: "Open"
   },
   createdAt: {
     type: Date,
@@ -24,6 +24,11 @@ const reclamationSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  claimer:  // ID une discussion $$$ pas besoin de tableau 
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    },
   chat:  // ID une discussion $$$ pas besoin de tableau 
     {
       type: Schema.Types.ObjectId,
@@ -32,5 +37,5 @@ const reclamationSchema = new Schema({
   
 });
  
-export default model("Reclamation", reclamationSchema); 
+export default model("Claim", claimSchema); 
  
