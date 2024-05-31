@@ -21,6 +21,7 @@ import chatRoutes from "./routes/chat.routes.js";
 import quizRoutes from "./routes/quiz.routes.js";
 import certificateRoutes from "./routes/certificate.routes.js";
 import eventRoutes from "./routes/event.routes.js";
+import meetingRoutes from "./routes/meeting.routes.js";
 
 // Express Init
 const app = express();
@@ -101,6 +102,8 @@ app.use("/quiz", quizRoutes);
 app.use("/certificate", certificateRoutes);
 // Events Routers
 app.use("/event", eventRoutes);
+// meeting Routers
+app.use("/meeting", meetingRoutes);
 
 // global error handler
 app.use(errorHandler);
