@@ -188,7 +188,6 @@ export const enrollInCourse = async (req, res) => {
         .json({ message: "User already enrolled in this course" });
     }
 
-    console.log("222")
     course.enrolls.push(userId);
     await course.save();
 

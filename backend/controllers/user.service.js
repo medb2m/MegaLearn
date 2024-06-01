@@ -1,4 +1,4 @@
-﻿import { config } from '../_helpers/config.js'
+import { config } from '../_helpers/config.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'

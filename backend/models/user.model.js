@@ -1,13 +1,13 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
 const AchievementSchema = new Schema({
-    courseId: { type: Schema.Types.ObjectId, ref: 'Course' },
-    quizId: { type: Schema.Types.ObjectId, ref: 'Quiz' },
-    score: Number,
-    passed: Boolean,
-    date: { type: Date, default: Date.now }
+  courseId: { type: Schema.Types.ObjectId, ref: "Course" },
+  quizId: { type: Schema.Types.ObjectId, ref: "Quiz" },
+  score: Number,
+  passed: Boolean,
+  date: { type: Date, default: Date.now },
 });
 
 
@@ -32,8 +32,8 @@ const UserSchema = new Schema({
     enrolls : [{ type: Schema.Types.ObjectId, ref: 'Course', required : true }]
 })
 
-UserSchema.virtual('isVerified').get(function () {
-    return !!(this.verified || this.passwordReset);
+UserSchema.virtual("isVerified").get(function () {
+  return !!(this.verified || this.passwordReset);
 });
 
 UserSchema.set('toJSON', {
@@ -46,4 +46,4 @@ UserSchema.set('toJSON', {
     }
 });
 
-export default model('User', UserSchema);
+export default model("User", UserSchema);
