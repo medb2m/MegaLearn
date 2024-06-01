@@ -3,14 +3,20 @@ import { config } from '../_helpers/config.js'
 import User from '../models/user.model.js'
 import RefreshToken from '../models/refresh-token.model.js'
 
+
 const { secret } = config
 
+
+
 export default function authorize(roles = []) {
+    // roles param can be a single role string (e.g. Role.User or 'User') 
+    // or an array of roles (e.g. [Role.Admin, Role.User] or ['Admin', 'User'])
     if (typeof roles === 'string') {
         roles = [roles];
     }
 
     return [
+        // authenticate JWT token and attach user to request object (req.user)
         jwt({ secret, algorithms: ['HS256'] }),
 
         // authorize based on user role
@@ -25,7 +31,7 @@ export default function authorize(roles = []) {
 
             // authentication and authorization successful
             req.user = user
-            req.user.ownsToken = token => !!refreshTokens.find(x => x.token === token)
+            req.user.ownsToken = token => !!refreshTokens.find(x => x.token === token);
             next();
         }
     ];

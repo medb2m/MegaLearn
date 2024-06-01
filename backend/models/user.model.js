@@ -10,6 +10,7 @@ const AchievementSchema = new Schema({
     date: { type: Date, default: Date.now }
 });
 
+
 const UserSchema = new Schema({
     email: { type: String, unique: true, required: true },
     passwordHash: { type: String, required: true },
@@ -27,8 +28,9 @@ const UserSchema = new Schema({
     passwordReset: Date,
     created: { type: Date, default: Date.now },
     updated: Date,
-    achievements: [AchievementSchema]
-});
+    achievements: [AchievementSchema],
+    enrolls : [{ type: Schema.Types.ObjectId, ref: 'Course', required : true }]
+})
 
 UserSchema.virtual('isVerified').get(function () {
     return !!(this.verified || this.passwordReset);
@@ -39,8 +41,8 @@ UserSchema.set('toJSON', {
     versionKey: false,
     transform: function (doc, ret) {
         // to remove when converted
-        delete ret._id;
-        delete ret.passwordHash;
+        delete ret._id
+        delete ret.passwordHash
     }
 });
 

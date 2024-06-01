@@ -3,11 +3,11 @@ export const config = {
     secret: "Perpill secret 361!",
     emailFrom: "medobouh@gmail.com",
     smtpOptions: {
-        host: "smtp.ethereal.email",
+        host: "smtp.gmail.com",
         port: 587,
         auth: {
-            user: "travon.hessel@ethereal.email",
-            pass: "7Tf3Yg8VwHgERnztN7"
+            user: "sarah.mertz@gmail.com",
+            pass: "3c7n6XdpvXHnjyGTr2"
         }
     }
 };

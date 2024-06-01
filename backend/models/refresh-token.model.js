@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const {Schema,model} = mongoose
 
 const refreshSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: 'User' },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
     token: String,
     expires: Date,
     created: { type: Date, default: Date.now },
