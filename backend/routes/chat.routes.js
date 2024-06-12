@@ -1,5 +1,9 @@
 import express from 'express'
+<<<<<<< HEAD
 import { createChat, addMessageToChat, getAllChat, getChatByClaimId } from '../controllers/chat.controller.js'
+=======
+import { addMessageToChat, createChat, getAllChat, getChatByClaimId } from '../controllers/chat.controller.js'
+>>>>>>> origin/main
 import authorize from '../_middleware/authorize.js'
 
 const router = express.Router()
@@ -16,6 +20,7 @@ router.get('/claim/:claimId', authorize(),getChatByClaimId)
 // Route pour avoir tous les chats
 router.get('/', getAllChat)
 
+<<<<<<< HEAD
 
 // Autres routes pour les messages de chat
 // router.get('/chat', chat.getAllChatMessages);
@@ -23,4 +28,6 @@ router.get('/', getAllChat)
 // router.delete('/messages/:id', chat.deleteChatMessage);
 
 
+=======
+>>>>>>> origin/main
 export default router;

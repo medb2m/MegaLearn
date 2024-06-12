@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //import { addMessage } from '../controllers/chat.controller.js';
+=======
+import { addMessageToChat } from '../controllers/chat.controller.js';
+>>>>>>> origin/main
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 import { config } from './config.js';
@@ -45,7 +49,11 @@ export function handleSocketEvents(io) {
         });
 
         // Handle chat messages
+<<<<<<< HEAD
         /* socket.on('send message', async ({ claimID, receiverID, message }) => {
+=======
+        socket.on('send message', async ({ claimID, receiverID, message }) => {
+>>>>>>> origin/main
             if (socket.user) {
                 const messageData = {
                     senderID: socket.user._id,
@@ -59,7 +67,11 @@ export function handleSocketEvents(io) {
                 // Emit message to receiver only
                 socket.to(receiverID).emit('receive message', messageData);
             }
+<<<<<<< HEAD
         }); */
+=======
+        });
+>>>>>>> origin/main
 
         socket.on('disconnect', () => {
             console.log('User disconnected');
