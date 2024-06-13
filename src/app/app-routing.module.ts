@@ -7,8 +7,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { ClaimComponent } from './claim/claim.component'
-// the default routes is claim
+import { ClaimComponent } from './claim/claim.component';
+
+// The default route is 'claim'
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },

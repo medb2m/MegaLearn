@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="custom-toolbar">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="white" fill-opacity="0.01"/>
+          <path d="M4 5H20M4 12H20M4 19H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <h1>Megalearn</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened class="custom-toolbar2" >
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home" routerLinkActive="active">Home</a>
+        <a mat-list-item routerLink="/claim" routerLinkActive="active">Claim</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

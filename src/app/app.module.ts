@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +19,6 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 import { ClaimComponent } from './claim/claim.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +29,20 @@ import { ClaimComponent } from './claim/claim.component';
     BoardAdminComponent,
     BoardUserComponent,
     BoardTutorComponent,
-    ClaimComponent,
+    ClaimComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
