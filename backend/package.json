@@ -20,21 +20,14 @@
         "express-jwt": "^6.0.0",
         "http": "^0.0.1-security",
         "joi": "^17.1.1",
-<<<<<<< HEAD
         "jsonwebtoken": "^8.5.1",
-=======
-        "jsonwebtoken": "^9.0.2",
->>>>>>> origin/main
         "mongodb": "^6.6.2",
         "mongoose": "^8.3.5",
         "morgan": "^1.10.0",
         "multer": "^1.4.5-lts.1",
         "nodemailer": "^6.4.6",
-<<<<<<< HEAD
-=======
         "pdf-lib": "^1.17.1",
         "pdfkit": "^0.15.0",
->>>>>>> origin/main
         "socket.io": "^4.7.5",
         "uuid": "^9.0.1",
         "yamljs": "^0.3.0"

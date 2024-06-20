@@ -37,16 +37,11 @@ const ChatSchema = new Schema({
   },
   message: [messageSchema],
   //Cet attribut enregistre la date et l'heure exactes à laquelle le message de chat est créé.
-<<<<<<< HEAD
   timestamp: {
     type: Date,
     default: Date.now
   }
 })
-=======
-  
-}, {timestamps : true})
->>>>>>> origin/main
 
 export default model("Chat", ChatSchema)
  

@@ -18,6 +18,10 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 import { ClaimComponent } from './claim/claim.component';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -29,9 +33,11 @@ import { ClaimComponent } from './claim/claim.component';
     BoardAdminComponent,
     BoardUserComponent,
     BoardTutorComponent,
+    
     ClaimComponent
   ],
   imports: [
+    ToastModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -42,9 +48,11 @@ import { ClaimComponent } from './claim/claim.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ButtonModule,
+    MessageModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
