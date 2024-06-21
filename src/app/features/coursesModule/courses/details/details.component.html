@@ -1,0 +1,91 @@
+<!-- <div *ngIf="course" class="course-details-container">
+  <div class="course-image-container" *ngIf="course.image">
+    <img [src]="course.image" alt="{{ course.title }}" class="course-img">
+  </div>
+    <div class="course-header">
+      <h1 class="course-title">{{ course.title }}</h1>
+      <div class="video-player" *ngIf="account">
+        <button class="btn btn-secondary mb-2" *ngIf="account?.role === Role.Admin" (click)="showContent()">Show Content</button>
+        <app-videoplayer *ngIf="isEnrolled"  [sections]="course.sections || []"></app-videoplayer>
+      </div>
+      
+    </div>
+    <p class="course-description">{{ course.description }}</p>
+    
+  
+    <div class="course-info">
+      <div class="course-price-duration">
+        <p><strong>Price:</strong> {{discount(course.price)}} TND</p>
+        <p><strong>Duration:</strong> {{ course.duration }} hours</p>
+      </div>
+  
+      <div class="course-category-creator">
+        <p><strong>Category:</strong> {{ category.name }}</p>
+        <p><strong>Instructor:</strong> {{ instructor }}</p>
+      </div>
+    </div>
+  
+    <div class="course-sections" *ngIf="course.sections?.length">
+      <h3>Course Sections</h3>
+      <ul>
+        <li *ngFor="let section of chapter">{{ section.title }} <p>Description : {{section.vidDescription}}</p></li>
+        
+      </ul>
+    </div>
+
+    <div class="">
+      <button class="btn btn-primary" *ngIf="isEnrolled && account?.role !== Role.Admin" (click)="takeQuiz(course._id)">Take Quiz</button>
+    </div>
+  
+    <div class="enroll-button"> 
+      <button class="btn btn-primary" *ngIf="!isEnrolled && account?.role !== Role.Admin" (click)="proceedToPayment(course._id)">Enroll Course Now</button>
+    </div>
+  </div>
+  
+  <div *ngIf="!course" class="loading-message">
+    <p>Loading course details...</p>
+  </div>
+   -->
+
+   <div *ngIf="course" class="course-details-container">
+    <div class="course-image-container" *ngIf="course.image">
+      <img [src]="course.image" alt="{{ course.title }}" class="course-img">
+    </div>
+    <div class="course-header">
+      <h1 class="course-title">{{ course.title }}</h1>
+      <div class="video-player" *ngIf="account">
+        <button class="btn btn-secondary mb-2" *ngIf="account?.role === Role.Admin" (click)="showContent()">Show Content</button>
+        <app-videoplayer *ngIf="isEnrolled" [sections]="course.sections || []"></app-videoplayer>
+      </div>
+    </div>
+    <p class="course-description">{{ course.description }}</p>
+    <div class="course-info">
+      <div class="course-price-duration">
+        <p><strong>Price:</strong> {{ discount(course.price) }} TND</p>
+        <p><strong>Duration:</strong> {{ course.duration }} hours</p>
+      </div>
+      <div class="course-category-creator">
+        <p><strong>Category:</strong> {{ category.name }}</p>
+        <p><strong>Instructor:</strong> {{ instructor }}</p>
+      </div>
+    </div>
+    <div class="course-sections" *ngIf="course.sections?.length">
+      <h3>Course Sections</h3>
+      <ul>
+        <li *ngFor="let section of chapter">
+          {{ section.title }}
+          <p>Description: {{ section.vidDescription }}</p>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button class="btn btn-primary" *ngIf="isEnrolled && account?.role !== Role.Admin" (click)="takeQuiz(course._id)">Take Quiz</button>
+    </div>
+    <div class="enroll-button">
+      <button class="btn btn-primary" *ngIf="!isEnrolled && account?.role !== Role.Admin" (click)="proceedToPayment(course._id)">Enroll Course Now</button>
+    </div>
+  </div>
+  <div *ngIf="!course" class="loading-message">
+    <p>Loading course details...</p>
+  </div>
+  

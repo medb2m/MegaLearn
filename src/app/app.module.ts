@@ -1,58 +1,44 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { BoardTutorComponent } from './board-tutor/board-tutor.component';
-import { ClaimComponent } from './claim/claim.component';
-import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { JwtInterceptor, ErrorInterceptor } from '@core/interceptors';
+import { AccountService } from '@app/_services';
+import { appInitializer } from '@core/helpers';
+import { AppComponent } from './app.component';
+import { HomeComponent } from '@features/home';
+import { SharedModule } from '@shared/shared.module';
+import { BackButtonComponent } from './shared/components/back-button';
+import { NgxMaskModule } from 'ngx-mask'
+//import { PlyrModule } from 'ngx-plyr';
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    ProfileComponent,
-    BoardAdminComponent,
-    BoardUserComponent,
-    BoardTutorComponent,
-    
-    ClaimComponent
-  ],
-  imports: [
-    ToastModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    ButtonModule,
-    MessageModule,
-    MatButtonModule
-  ],
-  providers: [MessageService],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        SharedModule,
+        NgxMaskModule.forRoot()
+        //PlyrModule
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        BackButtonComponent,
+    ],
+    providers: [
+        { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,29 +1,34 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { BoardTutorComponent } from './board-tutor/board-tutor.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { ClaimComponent } from './claim/claim.component';
+import { Routes, RouterModule } from '@angular/router';
 
-// The default route is 'claim'
+import { HomeComponent } from '@features/home';
+import { AuthGuard } from '@core/index';
+import { Role } from '@app/_models';
+import { RedirectAdminGuard } from '@core/index';
+
+const accountModule = () => import('@features/accountsModule').then(x => x.AccountsModule);
+const adminModule = () => import('@features/admin/admin.module').then(x => x.AdminModule);
+const coursesModule = () => import('@features/coursesModule').then(x => x.CoursesModule);
+const PM = () => import('@features/accountsModule/profile/profile.module').then(x => x.ProfileModule);
+const PaymentModule = () => import('@features/coursesModule/payment').then(x => x.PaymentModule);
+const FM = () => import('@features/featuresModule/feature/features.module').then(x => x.FeatureModule);
+
+
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardTutorComponent },
-  { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'claim', pathMatch: 'full' },
-  { path: 'claim', component: ClaimComponent }
+    { path: '', component: HomeComponent, canActivate: [RedirectAdminGuard]},
+    { path: 'account', loadChildren: accountModule },
+    { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin], breadcrumb : 'admin' } },
+    { path: 'courses', loadChildren: coursesModule , canActivate : [AuthGuard] , data : { breadcrumb : 'courses' }},
+    { path: 'profile', loadChildren: PM , canActivate : [AuthGuard]},
+    { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard]},
+    { path: 'hello', loadChildren: FM , canActivate : [AuthGuard]},
+
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

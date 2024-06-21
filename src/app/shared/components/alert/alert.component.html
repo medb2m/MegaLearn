@@ -1,0 +1,5 @@
+﻿<div *ngFor="let alert of alerts" [ngClass]="getAlertClass(alert)" class="d-flex alert-container" role="alert">
+    <i [ngClass]="getAlertIcon(alert)" class="me-2"></i>
+    <span>{{ alert.message }}</span>
+    <button type="button" class="btn-close ms-auto" aria-label="Close" (click)="removeAlert(alert)"></button>
+</div>

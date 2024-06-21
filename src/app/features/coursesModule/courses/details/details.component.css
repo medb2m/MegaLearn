@@ -1,0 +1,143 @@
+.course-details-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.course-header {
+  margin-bottom: 20px;
+}
+
+.course-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+.course-description {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.course-image-container {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.course-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.course-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.course-price-duration, .course-category-creator {
+  flex: 1;
+  margin-right: 10px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.course-price-duration p, .course-category-creator p {
+  margin: 5px 0;
+}
+
+.course-sections {
+  margin-bottom: 20px;
+}
+
+.course-sections h3 {
+  margin-bottom: 10px;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.course-sections ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.course-sections li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.course-sections li p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #666;
+}
+
+.enroll-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-info {
+    flex-direction: column;
+  }
+
+  .course-price-duration, .course-category-creator {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .course-title {
+    font-size: 2em;
+  }
+}
