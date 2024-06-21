@@ -2,18 +2,21 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
+const OptionsSchema = new Schema({
+  optionText: { type: String, required: true },
+  isCorrect: { type: Boolean, required: true },
+});
+
 const QuestionSchema = new Schema({
-  question: { type: String, required: true },
-  options: [{ type: String, required: true }],
-  answer: { type: Number, required: true }
+  questionText: { type: String, required: true },
+  options: [OptionsSchema],
 });
 
 const QuizSchema = new Schema({
-  name : String,
+  title : { type : String, required : true},
   course: {
     type: Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true
+    ref: 'Course'
   },
   questions: [QuestionSchema],
   creator : { 
@@ -21,6 +24,6 @@ const QuizSchema = new Schema({
     ref : 'User',
     required :true
   }
-}, { timestamps : true});
+});
 
 export default model('Quiz', QuizSchema);

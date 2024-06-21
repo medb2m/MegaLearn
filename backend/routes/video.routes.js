@@ -6,7 +6,7 @@ import { uploadVideo } from '../_middleware/multerConfig.js';
 
 const router = express.Router();
 
-router.post('/upload/:courseId', authorize(), uploadVideo, createVideo);
+router.post('/upload', authorize(), uploadVideo, createVideo);
 router.get('/getall/:courseId', authorize(), getAllVideosByCourseId);
 router.get('/get/:id', authorize(), getVideoById);
 router.delete('/delete/:id', authorize(), deleteVideoById);
