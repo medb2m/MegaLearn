@@ -1,0 +1,21 @@
+.alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top : 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050; 
+    width: 90%;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+.alert-container .btn-close {
+    margin-left: auto;
+}
+
+.alert-container i {
+    font-size: 1.7rem; 
+}

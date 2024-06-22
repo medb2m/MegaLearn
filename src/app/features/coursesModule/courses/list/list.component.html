@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="text-center">
+        <h1 class="mb-5">List of Courses</h1>
+    </div>
+
+    <!-- Filter and Sort Controls -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <label for="priceFilter" class="form-label">Filter by Price:</label>
+            <input type="number" class="form-control" id="priceFilter" [(ngModel)]="priceFilter"
+                (input)="onPriceFilterChange()" placeholder="Enter max price">
+        </div>
+        <div class="col-md-4">
+            <label for="sortOrder" class="form-label">Sort by Price:</label>
+            <select id="sortOrder" class="form-select" [(ngModel)]="sortOrder" (change)="onSortOrderChange()">
+                <option value="">None</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="categoryFilter" class="form-label">Filter by Category:</label>
+            <select id="categoryFilter" class="form-select" [(ngModel)]="categoryFilter"
+                (change)="onCategoryFilterChange()">
+                <option value="">All Categories</option>
+                <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row g-4 justify-content-center" #courseContainer>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" *ngFor="let c of filteredCourses" #courseCard>
+            <div class="card course-card">
+                <img class="card-img-top" [src]="c.image" (click)="goto(c._id)" style="height: 150px; object-fit: cover;">
+                <div class="card-body">
+                    <a class="card-title" routerLink="/courses/details/{{c._id}}">{{c.title}}</a>
+                    <p class="card-text">{{c.description | truncate:55}}</p>
+                    <small class="text-muted">
+                        <span>by {{ c.creator.firstName + ' ' + c.creator.lastName }}</span>
+                    </small>
+                    <div class="d-flex flex-column justify-content-between">
+                        <small class="text-muted">
+                            <span class="text-danger">90% Disc. <del>{{c.price}}TND</del></span>
+                        </small>
+                        <button class="btn btn-primary" (click)="proceedToPayment(c._id)">
+                            <i class="bi bi-cart me-2"></i>Buy {{discount(c.price)}} TND</button>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <small class="text-muted">{{ c.category.name}}</small>
+                    <small class="text-muted"><i class="bi bi-clock text-primary me-2"></i>{{c.duration}} Hours</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

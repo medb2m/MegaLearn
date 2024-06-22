@@ -1,0 +1,249 @@
+
+   /* Search Styles */
+/*    .search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .suggestions-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #f1f1f1;
+  } */
+
+
+/* Lien stylisé */
+/* .styled-link {
+  position: relative;
+  text-decoration: none;
+  color: rgb(104, 85, 224);
+  font-weight: 600;
+  transition: color 0.4s;
+  padding: 5px 0; 
+}
+
+.styled-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0; 
+  background-color: rgb(104, 85, 224);
+  transition: all 0.4s ease-in-out;
+}
+
+.styled-link:hover::after {
+  width: 0; 
+} */
+
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+/* Lien stylisé */
+.styled-link {
+  position: relative;
+  text-decoration: none;
+  color: rgb(104, 85, 224);
+  font-weight: 600;
+  transition: color 0.4s;
+  padding: 5px 0; /* Ajoute un peu de padding pour l'espace du soulignement */
+}
+
+/* Lien actif non souligné */
+.styled-link:not(.active)::after {
+  content: '';
+  position: absolute;
+  width: 100%; /* Largeur maximale */
+  height: 2px;
+  bottom: -2px; /* Sous le texte */
+  left: 0; /* Commence à gauche */
+  background-color: transparent; /* Initiallement non souligné */
+}
+
+/* Lien actif non souligné et souligné au survol */
+.styled-link:not(.active):hover::after {
+  background-color: rgb(104, 85, 224); /* Soulignement au survol */
+  transition: all 0.4s ease-in-out;
+}
+
+/* Lien actif */
+.styled-link.active {
+  position: relative; /* Pour annuler la position absolue du ::after du non actif */
+  text-decoration: underline; /* Soulignement direct pour le lien actif */
+  color: rgb(104, 85, 224);
+}
+
+
+
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #67676720;
+  padding-right: 40px;
+  color:rgb(104, 85, 224);
+}
+.input-search::placeholder{
+  color:rgb(104, 85, 224);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:rgb(104, 85, 224);
+  background-color:transparent;
+  pointer-events: painted;  
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+
+/* test navbar brand */
+
+.navbar-brand-text {
+  font-size: 2rem; /* Taille par défaut pour les écrans larges */
+  margin: 0 0 0 0; /* Espace entre le logo et le texte */
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.container-fluid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.navbar-brand img {
+  max-height: 40px; /* Adjust the size of the logo as needed */
+}
+
+
+/* Pour les écrans moyens (tablettes) */
+@media (max-width: 991.98px) {
+  .navbar-brand-text {
+    font-size: 1.5rem; /* Réduire la taille de la police */
+  }
+}
+
+/* Pour les écrans petits (mobiles) */
+@media (max-width: 767.98px) {
+  .navbar-brand-text {
+    font-size: 1.3rem; /* Réduire davantage la taille de la police */
+  }
+  .hide-on-small {
+    display: none; /* Masquer le texte à l'intérieur du span */
+  }
+}
+
+/* Pour les écrans très petits (très petits téléphones) */
+@media (max-width: 575.98px) {
+  .hide-on-small {
+    display: none; /* Masquer le texte à l'intérieur du span */
+  }
+}
+
+/**/
+
+.navbar-profile {
+  order: 1;
+  margin-left: auto;
+}
+
+.navbar-profile .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand,
+.navbar-toggler {
+  flex-shrink: 0;
+}
+
+.navbar-toggler {
+  border-color: black solid 20px;
+  margin-left: auto;
+}
+
+@media (max-width: 767.98px) {
+  .navbar-profile {
+    order: 0;
+    margin-left: 0;
+  }
+
+  .navbar-profile .nav-item .nav-link img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .navbar-toggler {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar-profile .nav-item .nav-link img {
+    width: 20px;
+    height: 20px;
+  }
+}
