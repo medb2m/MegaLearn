@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { HomeComponent } from '@features/home';
 import { AuthGuard } from '@core/index';
 import { Role } from '@app/_models';
@@ -22,9 +21,8 @@ const routes: Routes = [
     { path: 'profile', loadChildren: PM , canActivate : [AuthGuard]},
     { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard]},
     { path: 'hello', loadChildren: FM , canActivate : [AuthGuard]},
-
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+   // { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
