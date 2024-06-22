@@ -31,6 +31,10 @@ const CertificateSchema = new Schema({
     type: String,
     required: true,
     unique: true
+  },
+  certificateLink : {
+    type : String,
+    required : true
   }
 });
 

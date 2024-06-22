@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const QuestionSchema = new Schema({
-  question: { type: String, required: true },
-  options: [{ type: String, required: true }],
-  answer: { type: Number, required: true }
+  question: { type: String, required: true },  // qu'est ce python
+  options: [{ type: String, required: true }],  // [ "un jeu video", "un language de programmation", "les deux" ]
+  answer: { type: Number, required: true }   // 1   =====> [1,0,3]
 });
 
 const QuizSchema = new Schema({

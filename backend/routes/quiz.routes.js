@@ -7,11 +7,11 @@ import Role from '../_helpers/role.js';
 const router = express.Router();
 
 router.post('/add/:courseId', authorize(), createQuiz);
-router.get('/', authorize(Role.Admin),getAllQuizzes);
-router.get('/:id', authorize(), getQuizById);
-router.get('/:courseId', authorize(), getQuizbyCourseID);
-router.put('/:id', authorize(Role.User), updateQuizById);
+router.get('/', authorize(/* Role.Admin */),getAllQuizzes);
+router.get('/:quizId', authorize(), getQuizById);
+router.get('/course/:courseId', authorize(), getQuizbyCourseID);
+router.put('/:quizId', authorize(Role.User), updateQuizById);
 router.delete('/:id', authorize(Role.User), deleteQuizById);
-router.post('/take/:courseId', authorize(), /* checkEnrollment, */takeQuiz);
+router.post('/take/:courseId', authorize(), checkEnrollment, takeQuiz);
 
 export default router;

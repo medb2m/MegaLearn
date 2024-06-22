@@ -2,24 +2,29 @@ import PDFDocument from 'pdfkit';
 import fs from 'fs';
 
 
+export const templateGenerator = async (firstName, lastName, courseTitle, certificateid) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const userName = firstName +" "+ lastName
+      const certificateId = certificateid;
 
-export function templateGenerator(username,certificateid) {
-    
-    const userName = username
-    const certificateId = certificateid
-    
-    
-    const doc = new PDFDocument({
-      layout: 'landscape',
-      size: 'A4',
-    });
-    
-    const jumpLine = (doc, lines) => {
+      const doc = new PDFDocument({
+        layout: 'landscape',
+        size: 'A4',
+      })
+
+      const jumpLine = (doc, lines) => {
         for (let index = 0; index < lines; index++) {
           doc.moveDown();
         }
-      };
+      }
 
+<<<<<<< Updated upstream
+=======
+      const outputPath = path.join(__dirname, '..', 'public', 'pdfs', `${firstName}_certificate.pdf`);
+      const writeStream = fs.createWriteStream(outputPath);
+      doc.pipe(writeStream);
+>>>>>>> Stashed changes
 
 
 doc.pipe(fs.createWriteStream('output.pdf'));
@@ -50,7 +55,17 @@ doc.image('../assets/tmp/assets/MegaLearnLOGO.jpg', doc.page.width / 2 - maxWidt
   align: 'center',
 }); 
 
+<<<<<<< Updated upstream
 jumpLine(doc, 10)
+=======
+      doc
+        .font(fontPathRegular)
+        .fontSize(16)
+        .fill('#021c27')
+        .text(`Certificate of completion : ${courseTitle}`, {
+          align: 'center',
+        });
+>>>>>>> Stashed changes
 
 doc
   .font('../assets/tmp/fonts/NotoSansJP-Light.otf')

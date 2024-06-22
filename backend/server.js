@@ -11,7 +11,6 @@ import { Server } from 'socket.io';
 import { handleSocketEvents } from './_helpers/socketManager.js'
 
 
-
 //  Routes Imports
 import userRoutes from './routes/user.routes.js'
 import courseRoutes from './routes/course.routes.js'
@@ -78,6 +77,8 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 app.use("/img" ,express.static("public/images"))
 // Videos Routes
 app.use("/vid" ,express.static("public/videos"))
+// PDF Storage
+app.use("/pdf" ,express.static("public/pdfs"))
 
 
 // auth routes

@@ -22,7 +22,7 @@ export const getCertificateById = async (req, res) => {
 export const getAllCertificates = async (req, res) => {
   try {
     const certificates = await Certificate.find().populate('user').populate('course');
-    res.json(certificates);
+    res.status(200).json(certificates);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving certificates', error: error.message });
   }
@@ -33,30 +33,34 @@ export const getAllCertificates = async (req, res) => {
 export const getCertificatesByCourse = async (req, res) => {
   try {
     const courseId = req.params.courseId;
-    const userId = req.user.id; 
+    const userId = req.user.id;
 
     const course = await Course.findById(courseId);
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
     }
 
-    if (req.user.role !== 'Admin' && course.creator.toString() !== userId) {
+    // check if the user is an admin or the creator of the course
+    /* if (req.user.role !== 'Admin' && course.creator.toString() !== userId) {
       return res.status(403).json({ message: 'Unauthorized' });
-    }
+    }  */
 
     const certificates = await Certificate.find({ course: courseId }).populate('user');
-    res.json(certificates);
+    res.status(200).json(certificates);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving certificates', error: error.message });
   }
 };
 
 
-export function deleteOnce (req, res) {
-  Certificate.findByIdAndDelete({_id : req.params.id}).then(() => {
-   res.status(200).json('certif deleted :)')
-   }).catch(err => {
-       console.log(err)
-   res.status(404).json(err)
-   })
+export const  deleteOnce = async (req, res) =>{
+  try {
+    const certificate = await Certificate.findByIdAndDelete(req.params.id)
+    if (!certificate) {
+    return res.status(404).json({ message: 'certificate not found' })
+  }
+  res.status(203).json({ message: 'certificate deleted' })
+  } catch (error) {
+    res.status(500).json({ message: 'Error while deleting certificate', error: error.message });
+  }
 }

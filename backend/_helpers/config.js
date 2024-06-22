@@ -6,8 +6,10 @@ export const config = {
         host: "smtp.ethereal.email",
         port: 587,
         auth: {
-            user: "travon.hessel@ethereal.email",
-            pass: "7Tf3Yg8VwHgERnztN7"
+           // user: "travon.hessel@ethereal.email",
+           // pass: "7Tf3Yg8VwHgERnztN7"
+            user: 'nichole.bosco50@ethereal.email',
+            pass: 'nBKPZA6uqE6jpPRBWe'
         }
     }
 };

@@ -2,9 +2,9 @@ import Certificate from '../models/certificate.model.js';
 import { templateGenerator } from '../assets/tmp/templateCreator.js';
 import { v4 as uuidv4 } from 'uuid';
 
-export const generateCertificate = async (userId, courseId, quizId, score, name) => {
+export const generateCertificate = async (userId, courseId, quizId, score, firstName, lastName, courseTitle, req) => {
     const certificateId = uuidv4()
-    await templateGenerator(name, certificateId)
+    await templateGenerator(firstName, lastName, courseTitle, certificateId)
     // Save the certificate details to the database
     const certificate = new Certificate({
         user: userId,
@@ -12,9 +12,11 @@ export const generateCertificate = async (userId, courseId, quizId, score, name)
         quiz: quizId,
         date: new Date(),
         score: score,
-        certificateId: certificateId
+        certificateId: certificateId,    
+        certificateLink : `${req.protocol}://${req.get('host')}/pdf/${req.user.firstName}_certificate.pdf`
+        // certificateLink : `http://localhost:4000/pdf/${firstName}_certificate.pdf`
     });
 
   await certificate.save();
   return certificate;
-};
+}

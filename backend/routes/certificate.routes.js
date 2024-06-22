@@ -6,7 +6,7 @@ import Role from '../_helpers/role.js';
 const router = express.Router();
 
 router.get('/:id', authorize(), getCertificateById);
-router.get('/',  authorize(Role.Admin), getAllCertificates);
+router.get('/', authorize(/* Role.Admin */), getAllCertificates);
 router.get('/course/:courseId', authorize(), getCertificatesByCourse);
 router.delete('/:id', deleteOnce)
 
