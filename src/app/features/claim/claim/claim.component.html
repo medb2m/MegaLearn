@@ -4,16 +4,26 @@
       <table>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Title</th>
             <th>Status</th>
+            <th>Actions</th>
+            <th>Chat</th> <!-- Nouvelle colonne pour le bouton Chat -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let claim of claims">
-            <td>{{ claim._id }}</td>
             <td>{{ claim.title }}</td>
             <td>{{ claim.status }}</td>
+            <td>
+              <button (click)="editClaim(claim)">
+                <img src="assets/styling/img/edit icon/Edit_icon-icons.webp" alt="Edit" style="width: 20px; height: 20px;">
+              </button>
+            </td>
+            <td>
+              <button >
+                Chat <!-- Texte du bouton Chat -->
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
