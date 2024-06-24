@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, delay, of } from 'rxjs';
-import { Course } from '@app/_models/course';
+import { Course } from '';
 
 import { environment } from '@environments/environment';
 
