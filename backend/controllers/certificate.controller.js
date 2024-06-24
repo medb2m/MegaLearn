@@ -59,8 +59,10 @@ export const  deleteOnce = async (req, res) =>{
     if (!certificate) {
     return res.status(404).json({ message: 'certificate not found' })
   }
+  
   res.status(203).json({ message: 'certificate deleted' })
   } catch (error) {
     res.status(500).json({ message: 'Error while deleting certificate', error: error.message });
   }
+
 }
