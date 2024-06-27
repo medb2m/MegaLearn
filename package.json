@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run start:backend",
+    "start:backend": "nodemon ./backend/server.js & npm run start:frontend",
+    "start:frontend": "ng serve",
     "build": "ng build"
   },
   "private": true,
