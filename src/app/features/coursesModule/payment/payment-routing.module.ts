@@ -8,7 +8,11 @@ import { PaymentMethodComponent } from './payment-method/payment-method.componen
 const routes: Routes = [
   
   {
+<<<<<<< HEAD
     path: '', component: LayoutComponent,
+=======
+    path: '', component: LayoutComponent,data: { skipBreadcrumb: true },
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     children: [
         { path: 'method', component: PaymentMethodComponent },
         { path: 'card/:id', component: CardMethodComponent },

@@ -29,7 +29,11 @@
     </div>
 
     <div class="row g-4 justify-content-center" #courseContainer>
+<<<<<<< HEAD
         <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" *ngFor="let c of filteredCourses" #courseCard>
+=======
+        <div class="col-lg-3 col-md-6 col-sm-6" data-wow-delay="0.1s" *ngFor="let c of filteredCourses" #courseCard>
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
             <div class="card course-card">
                 <img class="card-img-top" [src]="c.image" (click)="goto(c._id)" style="height: 150px; object-fit: cover;">
                 <div class="card-body">

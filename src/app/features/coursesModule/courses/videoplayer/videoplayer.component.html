@@ -1,12 +1,24 @@
 <div class="video-player-container">
     <div class="video-section">
       <plyr #player class="player" [plyrPlaysInline]="true" [plyrSources]="videoSources" [plyrOptions]="plyrOptions"></plyr> 
+<<<<<<< HEAD
       
+=======
+      <div class="sections-list">
+        <h4>Sections</h4>
+        <ul>
+          <li *ngFor="let section of sections; let i = index" (click)="playVideo(i)">
+            {{ section.title }}
+          </li>
+        </ul>
+      </div>
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
       <div class="video-details">
         <h3>{{ currentVideo?.title }}</h3>
         <p>{{ currentVideo?.vidDescription }}</p>
       </div>
     </div>
+<<<<<<< HEAD
     <div class="sections-list">
       <h4>Sections</h4>
       <ul>
@@ -17,3 +29,6 @@
     </div>
   </div>
   
+=======
+  </div>
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559

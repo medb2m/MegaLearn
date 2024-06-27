@@ -8,7 +8,10 @@ import { VerifyEmailComponent } from './verify-email';
 import { ForgotPasswordComponent } from './forgot-password';
 import { ResetPasswordComponent } from './reset-password';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 const routes: Routes = [
     {
         path: '', component: LayoutComponent,
@@ -17,9 +20,13 @@ const routes: Routes = [
             { path: 'register', component: RegisterComponent },
             { path: 'verify-email', component: VerifyEmailComponent },
             { path: 'forgot-password', component: ForgotPasswordComponent },
+<<<<<<< HEAD
             { path: 'reset-password', component: ResetPasswordComponent },
           
 
+=======
+            { path: 'reset-password', component: ResetPasswordComponent }
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
         ]
     }
 ];

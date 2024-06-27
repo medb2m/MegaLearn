@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 <div class="container">
     <h2>Choose Payment Method</h2>
+=======
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h2>Choose Payment Method</h2>
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
       <div class="form-group">
         <label>Payment Method:</label>
         <div class="payment-method-options">
@@ -17,6 +24,7 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
 
   
     <div class="payment-details" *ngIf="selectedPaymentMethod">
@@ -25,4 +33,23 @@
       <!-- <app-paypal *ngIf="selectedPaymentMethod === 'paypal'"></app-paypal>
       <app-bank-transfer *ngIf="selectedPaymentMethod === 'd17'"></app-bank-transfer> -->
     </div>
+=======
+    </div>
+
+    <div class="col">
+      <div class="payment-details" *ngIf="selectedPaymentMethod">
+        <h2>Payment Details : {{selectedPaymentMethod}}</h2>
+        <app-card-method *ngIf="selectedPaymentMethod === 'creditCard'"></app-card-method>
+        <!-- <app-paypal *ngIf="selectedPaymentMethod === 'paypal'"></app-paypal>
+        <app-bank-transfer *ngIf="selectedPaymentMethod === 'd17'"></app-bank-transfer> -->
+      </div>
+    </div>
+
+
+  </div>
+   
+
+  
+    
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
   </div>

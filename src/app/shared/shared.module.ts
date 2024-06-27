@@ -6,12 +6,20 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { AlertComponent, FooterComponent, NavbarComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './components/list';
+<<<<<<< HEAD
+=======
+import { BreadcrumbComponent } from './components/breadcrumb';
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 
 @NgModule({
   declarations: [
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+<<<<<<< HEAD
+=======
+    BreadcrumbComponent,
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     ListComponent,
     SearchPipe,
     TruncatePipe
@@ -27,6 +35,10 @@ import { ListComponent } from './components/list';
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+<<<<<<< HEAD
+=======
+    BreadcrumbComponent,
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     ListComponent,
     SearchPipe,
     TruncatePipe
