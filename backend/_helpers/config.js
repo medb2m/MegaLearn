@@ -1,11 +1,6 @@
 export const config = {
-<<<<<<< HEAD
-    //connectionString: "mongodb://127.0.0.1:27017/backtest",
-    connectionString: "mongodb+srv://medb2m:theHolyPass2121.@cluster0.yziclg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-=======
     connectionString: "mongodb://127.0.0.1:27017/backtest",
     //connectionString: "mongodb+srv://medb2m:theHolyPass2121.@cluster0.yziclg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     secret: "Perpill secret 361!",
     /* FACE_API_KEY: '96f1ace58c424d06998f93bc9d98c2f3',
     FACE_API_HOST: 'https://perpill.cognitiveservices.azure.com/',
@@ -21,8 +16,4 @@ export const config = {
             pass: "JYwU8gKF7muGZ6jNkE"
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
