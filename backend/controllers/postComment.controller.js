@@ -13,13 +13,13 @@ export const createComment = async (req, res) => {
 
 // Get all comments
 export const getAllCommentsForPost = async (req, res) => {
-  const comments = await Comment.find({ post : req.params.postId}).populate('content').populate('author', 'firstName lastName')
+  const comments = await Comment.find({ post : req.params.postId}).populate('content').populate('author', 'firstName lastName').populate('createdAt')
   res.json(comments)
 }
 
 // Get a single comment by id
 export const getCommentById = async (req, res) => {
-  const comment = await Comment.findById(req.params.id).populate('content').populate('author', 'firstName lastName').populate('post')
+  const comment = await Comment.findById(req.params.id).populate('content').populate('author', 'firstName lastName').populate('createdAt')
   if (!comment) {
     return res.status(404).json({ message: 'comment not found' })
   }

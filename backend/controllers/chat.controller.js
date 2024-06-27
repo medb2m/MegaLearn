@@ -1,103 +1,38 @@
-import Chat from '../models/chat.model.js';
-import Claim from '../models/claim.model.js';
+import Chat from '../models/chat.model.js'
 
-// Fonction pour creer une discussion
-export const createChat = async (req, res) => {
-    try {
-        const { claimId } = req.params.claimId
+// add Message to chat
+export function addMessage (req, res) {
+    const messageData = {
+        senderID: req.user.id,
+        senderName: req.user.firstName,
+        receiverID: req.body.receiverID,
+        claimID: req.body.claimID, // send claimID in the request
+        message: req.body.message
+    };
 
-        const claim = await Claim.findById(req.params.claimId).populate('chat')
-        if (!claim) {
-            return res.status(404).json({ error: 'Réclamation non trouvée' });
+    Chat.create(messageData).then(newMsg => {
+        if (res) {
+            res.status(201).json(newMsg);
         }
-
-
-        if (claim.chat) {
-            const chat = claim.chat
-            return res.status(400).json({ error: 'chat already created ', chat });
+    })
+    .catch(err => {
+        if(res) {
+            res.status(500).json(err)
         }
-
-        const chatData = {
-            title: req.body.title,
-            claim: req.params.claimId,
-            sender: req.user.id,
-        };
-
-        const chat = new Chat(chatData);
-        await chat.save();
-
-        claim.chat = chat._id
-        await claim.save()
-
-        res.status(201).json({ message: 'Discussion créée avec succès', chat });
-    } catch (error) {
-        res.status(500).json({ error: 'Impossible de créer la discussion', message: error.message });
-    }
+    })
 }
 
+// get messages for a specific claim between two users
+export function getMessages (req, res) {
+    const { claimID } = req.params;
+    const userID = req.user.id;
 
-// Fonction pour ajouter un message dans une discussion
-export const addMessageToChat = async (req, res) => {
-    try {
-        const { chatId } = req.params;
-        const { message } = req.body;
-        const userId = req.user.id
-
-        const chat = await Chat.findById(chatId);
-        if (!chat) {
-            return res.status(404).json({ error: 'Discussion non trouvée' });
-        }
-
-        chat.message.push({
-            userId: userId,
-            message
+    Chat.find({ claimID, $or: [{ senderID: userID }, { receiverID: userID }] })
+        .sort({ timestamp: 1 })
+        .then(messages => {
+            res.status(200).json(messages);
+        })
+        .catch(err => {
+            res.status(500).json(err);
         });
-
-        await chat.save();
-        res.status(200).json({ message: 'Message ajouté avec succès', chat });
-    } catch (error) {
-        res.status(400).json({ error: 'Impossible d\'ajouter le message', message: error.message });
-    }
-}
-
-
-// Fonction pour récupérer un chat par réclamation ID
-export const getChatByClaimId = async (req, res) => {
-    try {
-        const { claimId } = req.params;
-        const chat = await Chat.find({ claim: claimId }).populate('sender claim');
-        if (!chat) {
-            return res.status(404).json({ error: 'Aucune discussion pour cette réclamation' });
-        }
-        res.status(200).json(chat);
-    } catch (error) {
-        res.status(500).json({ error: 'Erreur du serveur', message: error.message });
-    }
-}
-
-// Fonction pour récupérer toutes les discussions
-export const getAllChat = async (req, res) => {
-    try {
-        const chats = await Chat.find()
-        res.status(200).json(chats);
-    } catch (error) {
-        res.status(500).json({ error: 'Erreur du serveur', message: error.message });
-    }
-}
-
-
-// Fonction pour supprimer un message de chat
-export const deleteChatMessage = async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const deletedChatMessage = await ChatMessage.findByIdAndRemove(id); // delete
-        if (!deletedChatMessage) {
-            return res.status(404).json({ error: 'Message de chat non trouvé' });
-        }
-
-        res.status(204).json({ message: 'Message de chat supprimé avec succès' });
-    } catch (error) {
-        res.status(500).json({ error: 'Erreur du serveur', message: error.message });
-    }
 }

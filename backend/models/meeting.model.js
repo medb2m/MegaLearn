@@ -8,6 +8,8 @@ const MeetingSchema = new Schema({
   endTime: { type: Date, required: true },
   meetingLink: { type: String, required: true },
   recordingLink: { type: String }
-}, { timestamps: true });
+},
+{ timestamps: true }
+);
 
 export default model('Meeting', MeetingSchema);

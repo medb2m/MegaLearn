@@ -20,7 +20,6 @@ const EventSchema = new Schema(
     },
     host: { type: Schema.Types.ObjectId, ref: "User", required: true },
     participants: [ParticipantSchema],
-    webrtcRoomId: { type: String },
     meetings: [{ type: Schema.Types.ObjectId, ref: 'Meeting' }]
   },
   { timestamps: true }

@@ -9,9 +9,8 @@ import {
     addParticipant, 
     participeToEvent, 
     approveParticipant, 
-    disapproveParticipant,
-    createMeetingForEvent
-    } from '../controllers/event.controller.js';
+    disapproveParticipant, 
+    createMeetingForEvent} from '../controllers/event.controller.js';
 
 const router = express.Router();
 

@@ -1,0 +1,32 @@
+<h1>Categories</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Create Category</a>
+<div>
+    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:30%">Name</th>
+            <th style="width:30%">N° Courses</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories | search: searchText"> <!-- | search: searchText -->
+            <td class="align-middle">{{category.name}}</td>
+            <td class="align-middle">{{getLen(category.courses)}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{category._id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+                <button (click)="deleteCategory(category._id)" class="btn btn-sm btn-danger btn-delete-course" [disabled]="category.isDeleting">
+                    <span *ngIf="category.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!category.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!categories || categories.length === 0">
+            <td colspan="5" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,345 @@
+Folder PATH listing for volume OS
+Volume serial number is 8E92-0EC0
+C:.
+¦   app-routing.module.ts
+¦   app.component.css
+¦   app.component.html
+¦   app.component.ts
+¦   app.module.ts
+¦   struct.txt
+¦   
++---core
+¦   ¦   index.ts
+¦   ¦   
+¦   +---guards
+¦   ¦       auth.guard.ts
+¦   ¦       index.ts
+¦   ¦       redirect-admin.guard.ts
+¦   ¦       
+¦   +---helpers
+¦   ¦       app.initializer.ts
+¦   ¦       index.ts
+¦   ¦       must-match.validator.ts
+¦   ¦       
+¦   +---interceptors
+¦   ¦       error.interceptor.ts
+¦   ¦       index.ts
+¦   ¦       jwt.interceptor.ts
+¦   ¦       
+¦   +---services
+¦           account.service.ts
+¦           alert.service.ts
+¦           alertpopup.service.ts
+¦           categories.service.ts
+¦           courses.service.ts
+¦           index.ts
+¦           video.service.ts
+¦           
++---features
+¦   +---accountsModule
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---account
+¦   ¦   ¦   ¦   account-routing.module.ts
+¦   ¦   ¦   ¦   account.module.ts
+¦   ¦   ¦   ¦   index.ts
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---forgot-password
+¦   ¦   ¦   ¦       forgot-password.component.html
+¦   ¦   ¦   ¦       forgot-password.component.ts
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---layout
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       layout.component.html
+¦   ¦   ¦   ¦       layout.component.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---login
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       login.component.html
+¦   ¦   ¦   ¦       login.component.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---register
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       register.component.html
+¦   ¦   ¦   ¦       register.component.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---reset-password
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       reset-password.component.html
+¦   ¦   ¦   ¦       reset-password.component.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---verify-email
+¦   ¦   ¦           index.ts
+¦   ¦   ¦           verify-email.component.html
+¦   ¦   ¦           verify-email.component.ts
+¦   ¦   ¦           
+¦   ¦   +---profile
+¦   ¦       ¦   index.ts
+¦   ¦       ¦   profile-routing.module.ts
+¦   ¦       ¦   profile.module.ts
+¦   ¦       ¦   
+¦   ¦       +---details
+¦   ¦       ¦       details.component.html
+¦   ¦       ¦       details.component.ts
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       
+¦   ¦       +---layout
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       layout.component.html
+¦   ¦       ¦       layout.component.ts
+¦   ¦       ¦       
+¦   ¦       +---update
+¦   ¦               index.ts
+¦   ¦               update.component.html
+¦   ¦               update.component.ts
+¦   ¦               
+¦   +---admin
+¦   ¦   ¦   admin-routing.module.ts
+¦   ¦   ¦   admin.module.ts
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---accounts
+¦   ¦   ¦   ¦   accounts-routing.module.ts
+¦   ¦   ¦   ¦   accounts.module.ts
+¦   ¦   ¦   ¦   index.ts
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---add-edit
+¦   ¦   ¦   ¦       add-edit.component.html
+¦   ¦   ¦   ¦       add-edit.component.ts
+¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---list
+¦   ¦   ¦           index.ts
+¦   ¦   ¦           list.component.html
+¦   ¦   ¦           list.component.ts
+¦   ¦   ¦           
+¦   ¦   +---courseModule
+¦   ¦   ¦   ¦   index.ts
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---categories
+¦   ¦   ¦   ¦   ¦   categories-routing.module.ts
+¦   ¦   ¦   ¦   ¦   categories.module.ts
+¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   +---add-edit-category
+¦   ¦   ¦   ¦   ¦       add-edit-category.component.css
+¦   ¦   ¦   ¦   ¦       add-edit-category.component.html
+¦   ¦   ¦   ¦   ¦       add-edit-category.component.ts
+¦   ¦   ¦   ¦   ¦       index.ts
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---list-category
+¦   ¦   ¦   ¦           index.ts
+¦   ¦   ¦   ¦           list-category.component.css
+¦   ¦   ¦   ¦           list-category.component.html
+¦   ¦   ¦   ¦           list-category.component.ts
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---courses
+¦   ¦   ¦       ¦   courses-routing.module.ts
+¦   ¦   ¦       ¦   courses.module.ts
+¦   ¦   ¦       ¦   
+¦   ¦   ¦       +---add-edit-course
+¦   ¦   ¦       ¦       add-edit-course.component.css
+¦   ¦   ¦       ¦       add-edit-course.component.html
+¦   ¦   ¦       ¦       add-edit-course.component.ts
+¦   ¦   ¦       ¦       index.ts
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---list-courses
+¦   ¦   ¦       ¦       index.ts
+¦   ¦   ¦       ¦       list-courses.component.css
+¦   ¦   ¦       ¦       list-courses.component.html
+¦   ¦   ¦       ¦       list-courses.component.ts
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---sections
+¦   ¦   ¦               index.ts
+¦   ¦   ¦               sections.component.css
+¦   ¦   ¦               sections.component.html
+¦   ¦   ¦               sections.component.ts
+¦   ¦   ¦               
+¦   ¦   +---dashboard
+¦   ¦   ¦   ¦   dashboard-routing.module.ts
+¦   ¦   ¦   ¦   dashboard.module.ts
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---dashboard
+¦   ¦   ¦           dashboard.component.css
+¦   ¦   ¦           dashboard.component.html
+¦   ¦   ¦           dashboard.component.ts
+¦   ¦   ¦           index.ts
+¦   ¦   ¦           
+¦   ¦   +---evaluationModule
+¦   ¦   ¦   ¦   index.ts
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---certificate
+¦   ¦   ¦   ¦       certificate-routing.module.ts
+¦   ¦   ¦   ¦       certificate.module.ts
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---quiz
+¦   ¦   ¦       ¦   quiz-routing.module.ts
+¦   ¦   ¦       ¦   quiz.module.ts
+¦   ¦   ¦       ¦   
+¦   ¦   ¦       +---add-edit-quiz
+¦   ¦   ¦       ¦       add-edit-quiz.component.css
+¦   ¦   ¦       ¦       add-edit-quiz.component.html
+¦   ¦   ¦       ¦       add-edit-quiz.component.ts
+¦   ¦   ¦       ¦       index.ts
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---list-quiz
+¦   ¦   ¦               index.ts
+¦   ¦   ¦               list-quiz.component.css
+¦   ¦   ¦               list-quiz.component.html
+¦   ¦   ¦               list-quiz.component.ts
+¦   ¦   ¦               
+¦   ¦   +---layout
+¦   ¦   ¦       index.ts
+¦   ¦   ¦       layout.component.html
+¦   ¦   ¦       layout.component.ts
+¦   ¦   ¦       
+¦   ¦   +---navbar
+¦   ¦   ¦       index.ts
+¦   ¦   ¦       navbar.component.html
+¦   ¦   ¦       navbar.component.ts
+¦   ¦   ¦       
+¦   ¦   +---sidebar
+¦   ¦   ¦       index.ts
+¦   ¦   ¦       sidebar.component.html
+¦   ¦   ¦       sidebar.component.ts
+¦   ¦   ¦       
+¦   ¦   +---_assets
+¦   ¦   ¦       admin.css
+¦   ¦   ¦       
+¦   ¦   +---_featureModule
+¦   ¦       ¦   index.ts
+¦   ¦       ¦   
+¦   ¦       +---entity
+¦   ¦           ¦   entity-routing.module.ts
+¦   ¦           ¦   entity.module.ts
+¦   ¦           ¦   index.ts
+¦   ¦           ¦   
+¦   ¦           +---add-edit-entity
+¦   ¦           ¦       add-edit-entity.component.css
+¦   ¦           ¦       add-edit-entity.component.html
+¦   ¦           ¦       add-edit-entity.component.ts
+¦   ¦           ¦       index.ts
+¦   ¦           ¦       
+¦   ¦           +---list-entities
+¦   ¦                   index.ts
+¦   ¦                   list-entities.component.css
+¦   ¦                   list-entities.component.html
+¦   ¦                   list-entities.component.ts
+¦   ¦                   
+¦   +---coursesModule
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---courses
+¦   ¦       ¦   courses-routing.module.ts
+¦   ¦       ¦   courses.module.ts
+¦   ¦       ¦   index.ts
+¦   ¦       ¦   
+¦   ¦       +---details
+¦   ¦       ¦       details.component.css
+¦   ¦       ¦       details.component.html
+¦   ¦       ¦       details.component.ts
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       
+¦   ¦       +---layout
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       layout.component.html
+¦   ¦       ¦       layout.component.ts
+¦   ¦       ¦       
+¦   ¦       +---list
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       list.component.css
+¦   ¦       ¦       list.component.html
+¦   ¦       ¦       list.component.ts
+¦   ¦       ¦       
+¦   ¦       +---my-courses
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       my-courses.component.css
+¦   ¦       ¦       my-courses.component.html
+¦   ¦       ¦       my-courses.component.ts
+¦   ¦       ¦       
+¦   ¦       +---videoplayer
+¦   ¦               index.ts
+¦   ¦               videoplayer.component.css
+¦   ¦               videoplayer.component.html
+¦   ¦               videoplayer.component.ts
+¦   ¦               
+¦   +---featuresModule
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---feature
+¦   ¦       ¦   features-routing.module.ts
+¦   ¦       ¦   features.module.ts
+¦   ¦       ¦   index.ts
+¦   ¦       ¦   
+¦   ¦       +---details
+¦   ¦       ¦       details.component.css
+¦   ¦       ¦       details.component.html
+¦   ¦       ¦       details.component.ts
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       
+¦   ¦       +---layout
+¦   ¦       ¦       index.ts
+¦   ¦       ¦       layout.component.html
+¦   ¦       ¦       layout.component.ts
+¦   ¦       ¦       
+¦   ¦       +---list
+¦   ¦               index.ts
+¦   ¦               list.component.css
+¦   ¦               list.component.html
+¦   ¦               list.component.ts
+¦   ¦               
+¦   +---home
+¦           home.component.html
+¦           home.component.ts
+¦           index.ts
+¦           
++---shared
+¦   ¦   index.ts
+¦   ¦   shared.module.ts
+¦   ¦   
+¦   +---components
+¦   ¦   ¦   index.ts
+¦   ¦   ¦   
+¦   ¦   +---alert
+¦   ¦   ¦       alert.component.css
+¦   ¦   ¦       alert.component.html
+¦   ¦   ¦       alert.component.ts
+¦   ¦   ¦       index.ts
+¦   ¦   ¦       
+¦   ¦   +---footer
+¦   ¦   ¦       footer.component.css
+¦   ¦   ¦       footer.component.html
+¦   ¦   ¦       footer.component.ts
+¦   ¦   ¦       index.ts
+¦   ¦   ¦       
+¦   ¦   +---navbar
+¦   ¦           index.ts
+¦   ¦           navbar.component.css
+¦   ¦           navbar.component.html
+¦   ¦           navbar.component.ts
+¦   ¦           
+¦   +---pipes
+¦           index.ts
+¦           search.pipe.ts
+¦           truncate.pipe.ts
+¦           
++---_models
+¦       account.ts
+¦       alert.ts
+¦       alertpopup.ts
+¦       category.ts
+¦       course.ts
+¦       entity.ts
+¦       index.ts
+¦       role.ts
+¦       video.ts
+¦       
++---_services
+        account.service.ts
+        alert.service.ts
+        categories.service.ts
+        courses.service.ts
+        entity.service.ts
+        index.ts
+        video.service.ts
+        

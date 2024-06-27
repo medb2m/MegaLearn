@@ -1,0 +1,35 @@
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">My Courses</h6>
+            <h1 class="mb-5">Enrolled Courses</h1>
+        </div>
+
+        <div class="text-center" *ngIf="courses.length === 0">
+            <p>You have not enrolled in any courses yet.</p>
+        </div>
+        
+        <div class="row g-4 justify-content-center" #courseContainer>
+            <div class="col-lg-3 col-md-6" *ngFor="let c of courses" #courseCard>
+                <div class="card course-card">
+                    <img class="card-img-top" [src]="c.image" (click)="goto(c._id)" style="height: 150px; object-fit: cover;">
+                    <div class="card-body">
+                        <a class="card-title" routerLink="/courses/details/{{c._id}}">{{c.title}}</a>
+                        <p class="card-text">{{c.description | truncate:55}}</p>
+                        <small class="text-muted">
+                            <span>by {{ c.creator.firstName + ' ' + c.creator.lastName }}</span>
+                        </small>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <small class="text-muted">{{ c.category.name}}</small>
+                        <small class="text-muted"><i class="bi bi-clock text-primary me-2"></i>{{c.duration}} Hours</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

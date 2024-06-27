@@ -1,5 +1,4 @@
 import Video from '../models/video.model.js';
-import Course from '../models/course.model.js';
 
 // Create a new video
 export const createVideo = async (req, res) => {
@@ -10,8 +9,7 @@ export const createVideo = async (req, res) => {
     const video = new Video({
       title : req.body.title,
       url : `${req.protocol}://${req.get('host')}/vid/${req.file.filename}`,
-      vidDescription: req.body.vidDescription,
-      course: req.params.courseId
+      vidDescription: req.body.vidDescription
     })
     await video.save()
     res.status(201).json({ url : video.url})

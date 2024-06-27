@@ -1,0 +1,35 @@
+<h1>Quizzes</h1>
+<!-- <a (click)="createQuiz('666a6c74713042f5e8ade911')" class="btn btn-sm btn-success mb-2">Create Quiz</a> -->
+<div>
+    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th style="width:30%">Name</th>
+        <th style="width:20%">Course</th>
+        <th style="width:20%">Creator</th>
+        <th style="width:15%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quiz of quizz | search:searchText">
+        <td class="align-middle">{{quiz.title}}</td>
+        <td class="align-middle">{{quiz.course.title}}</td>
+        <td class="align-middle">{{quiz.creator.firstName}} {{quiz.creator.lastName}}</td>
+        <td style="white-space: nowrap">
+          <a [routerLink]="'edit/' + quiz._id" class="btn btn-sm btn-primary me-1">Edit</a>
+          <button (click)="deleteQuiz(quiz)" class="btn btn-sm btn-danger btn-delete-quiz" [disabled]="quiz.isDeleting">
+            <span *ngIf="quiz.isDeleting" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!quiz.isDeleting">Delete</span>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="!quizz || quizz.length === 0">
+        <td colspan="5" class="text-center">
+          <span class="spinner-border spinner-border-lg align-center"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

@@ -1,0 +1,12 @@
+﻿<h1>My Profile</h1>
+<div *ngIf="account">
+    <div class="d-flex align-items-center">
+        
+        <img [src]="account.image || 'assets/img/pdp.jpg'" alt="Profile Picture"
+          class="rounded-circle" width="60" height="60">
+        <span class="ms-2">{{ account.username }} </span>
+    </div>
+    <strong>Name: </strong> {{account.title}} {{account.firstName}} {{account.lastName}}<br />
+    <strong>Email: </strong> {{account.email}}
+</div>
+<p><a routerLink="update">Update Profile</a></p>
