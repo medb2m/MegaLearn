@@ -46,7 +46,7 @@ export class AddEditQuizComponent  implements OnInit{
       this.title = 'Edit Quiz';
       this.loading = true;
       this.form = this.fb.group({
-        title: ['', Validators.required],
+        title: [''],
         course: [''],
         creator: [''],
         questions: this.fb.array([])
@@ -80,7 +80,7 @@ export class AddEditQuizComponent  implements OnInit{
     } else {
         this.title = 'Create Quiz';
         this.form = this.fb.group({
-        title: ['', Validators.required],
+        title: [''],
         questions: this.fb.array([])
       });
 
@@ -104,7 +104,7 @@ get f() { return this.form.controls; }
 
   addQuestion() {
     const questionForm = this.fb.group({
-      questionText: ['', Validators.required],
+      questionText: [''],
       options: this.fb.array([])
     });
     this.questions.push(questionForm);
@@ -113,8 +113,8 @@ get f() { return this.form.controls; }
   addOption(questionIndex: number) {
     const options = this.questions.at(questionIndex).get('options') as FormArray;
     const optionForm = this.fb.group({
-      optionText: ['', Validators.required],
-      isCorrect: [false, Validators.required]
+      optionText: [''],
+      isCorrect: [false]
     });
     options.push(optionForm);
   }
@@ -132,6 +132,7 @@ get f() { return this.form.controls; }
   onSubmit() {
     console.log('Form:', this.form.value);
     this.submitted = true;
+<<<<<<< Updated upstream
     if (this.form.invalid) {
       console.log('Form is invalid');
       return;
@@ -144,6 +145,12 @@ get f() { return this.form.controls; }
         formData.append('questions', this.form.get('Question')?.value)
         formData.append('creator', this.form.get('creator')?.value)
     console.log('title : ' + formData.get('title'))
+=======
+    // if (this.form.invalid) {
+    //   console.log('Form is invalid');
+    //   return;
+    // }
+>>>>>>> Stashed changes
     console.log('Form is valid');
     this.submitting = true;
     const quizData = this.form.value;
