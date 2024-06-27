@@ -1,5 +1,5 @@
 export const config = {
-    connectionString: "mongodb://127.0.0.1:27017/backtest",
+    connectionString: "mongodb://127.0.0.1:27017/finalPI",
     //connectionString: "mongodb+srv://medb2m:theHolyPass2121.@cluster0.yziclg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
     secret: "Perpill secret 361!",
     /* FACE_API_KEY: '96f1ace58c424d06998f93bc9d98c2f3',
