@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
+import { ClaimComponent } from './claim/claim.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BoardTutorComponent } from './board-tutor/board-tutor.component';
     BoardAdminComponent,
     BoardUserComponent,
     BoardTutorComponent,
+    ClaimComponent,
   ],
   imports: [
     BrowserModule,

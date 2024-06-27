@@ -7,7 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
-
+import { ClaimComponent } from './claim/claim.component'
+// the default routes is claim
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardTutorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'claim', pathMatch: 'full' },
+  { path: 'claim', component: ClaimComponent }
 ];
 
 @NgModule({
