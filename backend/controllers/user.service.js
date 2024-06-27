@@ -1,4 +1,4 @@
-import { config } from '../_helpers/config.js'
+﻿import { config } from '../_helpers/config.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
@@ -9,10 +9,12 @@ import User from '../models/user.model.js'
 import RefreshToken from '../models/refresh-token.model.js'
 
 function generateJwtToken (user) {
+    // create a jwt token containing the User id that expires in 60 minutes
     return jwt.sign({ sub: user.id, id: user.id }, config.secret, { expiresIn: '60m' })
 }
 
 function generateRefreshToken (user, ipAddress) {
+    // create a refresh token that expires in 7 days
     return new RefreshToken({
         user: user.id,
         token: randomTokenString(),
@@ -27,8 +29,8 @@ function randomTokenString() {
 
 
 function basicDetails(user){
-    const { id, title, firstName, lastName, email, role, created, updated, isVerified } = user
-    return { id, title, firstName, lastName, email, role, created, updated, isVerified }
+    const { id, title, username, firstName, lastName, email, role, created, updated, isVerified, image } = user
+    return { id, title, username, firstName, lastName, email, role, created, updated, isVerified, image }
 }
 
 async function getUser(id){
@@ -52,17 +54,17 @@ function hash(password){
 async function sendVerificationEmail(user, origin) {
     let message;
     if (origin) {
-        const verifyUrl = `${origin}/accounts/verify-email?token=${user.verificationToken}`;
+        const verifyUrl = `${origin}/account/verify-email?token=${user.verificationToken}`;
         message = `<p>Please click the below link to verify your email address:</p>
                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>`;
     } else {
-        message = `<p>Please use the below token to verify your email address with the <code>/accounts/verify-email</code> api route:</p>
+        message = `<p>Please use the below token to verify your email address with the <code>/User/verify-email</code> api route:</p>
                    <p><code>${user.verificationToken}</code></p>`;
     }
 
     await sendEmail({
         to: user.email,
-        subject: 'Lamine - Verify Email',
+        subject: 'MegaLearn - Verify Email',
         html: `<h4>Verify Email</h4>
                <p>Thanks for registering!</p>
                ${message}`

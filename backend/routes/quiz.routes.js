@@ -6,12 +6,12 @@ import checkEnrollment from '../_middleware/checkEnrollement.js';
 
 const router = express.Router();
 
-router.post('/add/:courseId', authorize(), createQuiz);
-router.get('/', authorize(),getAllQuizzes);
+router.post('/:id', authorize(), createQuiz);
+router.get('/', getAllQuizzes);
 router.get('/:id', authorize(), getQuizById);
 router.get('/course/:courseId', authorize(), getQuizbyCourseID);
 router.put('/:id', authorize(), updateQuizById);
 router.delete('/:id', authorize(), deleteQuizById);
-router.post('/take/:courseId', authorize(), checkEnrollment,takeQuiz);
+router.post('/take/:courseId', authorize(), checkEnrollment, takeQuiz);
 
 export default router;

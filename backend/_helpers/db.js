@@ -1,14 +1,9 @@
 import { config } from './config.js';
 import mongoose from 'mongoose'
 
-// Options de connexion Mongoose
-const connectionOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-};
 
 // Connexion à MongoDB
-mongoose.connect(process.env.MONGODB_URI || config.connectionString, connectionOptions)
+mongoose.connect(process.env.MONGODB_URI || config.connectionString)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => {
         console.error('MongoDB connection error:', err);

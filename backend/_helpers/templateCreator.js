@@ -6,24 +6,24 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const templateGenerator = async (name, certificateid) => {
+export const templateGenerator = async (firstName, lastName, courseTitle, certificateid) => {
   return new Promise((resolve, reject) => {
     try {
-      const userName = name;
+      const userName = firstName +" "+ lastName
       const certificateId = certificateid;
 
       const doc = new PDFDocument({
         layout: 'landscape',
         size: 'A4',
-      });
+      })
 
       const jumpLine = (doc, lines) => {
         for (let index = 0; index < lines; index++) {
           doc.moveDown();
         }
-      };
+      }
 
-      const outputPath = path.join(__dirname, '..', 'public', 'pdf', `${userName}_certificate.pdf`);
+      const outputPath = path.join(__dirname, '..', 'public', 'pdf', `${firstName}_certificate.pdf`);
       const writeStream = fs.createWriteStream(outputPath);
       doc.pipe(writeStream);
 
@@ -72,7 +72,7 @@ export const templateGenerator = async (name, certificateid) => {
         .font(fontPathRegular)
         .fontSize(16)
         .fill('#021c27')
-        .text('CERTIFICATE OF COMPLETION', {
+        .text(`Certificate of completion : ${courseTitle}`, {
           align: 'center',
         });
 

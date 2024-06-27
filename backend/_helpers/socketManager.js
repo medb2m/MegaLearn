@@ -1,4 +1,4 @@
-import { addMessageToChat } from '../controllers/chat.controller.js';
+import { addMessage } from '../controllers/chat.controller.js';
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 import { config } from './config.js';

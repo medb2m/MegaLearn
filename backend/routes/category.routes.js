@@ -5,12 +5,12 @@ import Role from '../_helpers/role.js';
 
 const router = express.Router();
 
-router.post('/add', authorize(/* Role.Admin */), createCategory);
+router.post('/add', authorize(Role.Admin), createCategory);
 router.get('/getall', getAllCategories);
 router.get('/get/:id', getCategoryById);
-router.put('/update/:id', authorize(/* Role.Admin */), updateCategoryById);
-router.delete('/delete/:id', authorize(/* Role.Admin */),deleteCategoryById);
-router.put('/:categoryId/addcourse/:courseId', authorize(/* Role.Admin */), associateCourseWithCategory);
-router.put('/:categoryId/deletecourse/:courseId', authorize(/* Role.Admin */), deleteCourseFromCategory);
+router.put('/update/:id', authorize(Role.Admin), updateCategoryById);
+router.delete('/delete/:id', authorize(Role.Admin),deleteCategoryById);
+router.put('/:categoryId/addcourse/:courseId', authorize(Role.Admin), associateCourseWithCategory);
+router.put('/:categoryId/deletecourse/:courseId', authorize(Role.Admin), deleteCourseFromCategory);
 
 export default router;

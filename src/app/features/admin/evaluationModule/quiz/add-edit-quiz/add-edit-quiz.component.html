@@ -1,0 +1,117 @@
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title">
+      <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+        <div *ngIf="f['title'].errors['required']">Title is required</div>
+      </div>
+    </div>
+  
+    <div *ngIf="title !== 'Create Quiz'">
+      <div>
+        <label for="creator">Creator</label>
+        <input id="creator" formControlName="creator" readonly>
+      </div>
+  
+      <div>
+        <label for="course">Course</label>
+        <input id="course" formControlName="course">
+      </div>
+    </div>
+
+    <div formArrayName="questions">
+        <div *ngFor="let question of questions.controls; let i = index" class="accordion-section">
+          <div class="accordion-header" (click)="toggleAccordion(i)">
+            Question {{ i + 1 }}
+          </div>
+          <div class="accordion-body" [ngClass]="{'show': isOpen(i)}">
+            <div [formGroupName]="i">
+              <label for="questionText-{{i}}">Question</label>
+              <input id="questionText-{{i}}" formControlName="questionText">
+              <div *ngIf="submitted && question.get('questionText')?.errors" class="invalid-feedback">
+                <div *ngIf="question.get('questionText')!.errors">Question is required</div>
+              </div>
+    
+              <div formArrayName="options">
+                <div *ngFor="let option of getOptions(i); let j = index" [formGroupName]="j">
+                  <label for="optionText-{{i}}-{{j}}">Option</label>
+                  <input id="optionText-{{i}}-{{j}}" formControlName="optionText">
+                  <label for="isCorrect-{{i}}-{{j}}">Correct</label>
+                  <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect">
+                  <div *ngIf="submitted && option.get('optionText')?.errors" class="invalid-feedback">
+                    <div *ngIf="option.get('optionText')?.errors">Option is required</div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" (click)="addOption(i)">Add Option</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    <button type="button" (click)="addQuestion()">Add Question</button>
+    <button type="submit">Save</button>
+  </form>
+   -->
+
+   <h2>{{ title }}</h2>
+   <div class="container p-5">
+     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+       <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+       <div *ngIf="!loading">
+         <div class="form-group">
+           <label for="title">Title</label>
+           <input id="title" formControlName="title" class="form-control">
+           <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+             <div *ngIf="f['title'].errors['required']">Title is required</div>
+           </div>
+         </div>
+     
+         <div *ngIf="title !== 'Create Quiz'" class="form-group">
+           <div class="form-group">
+             <p>Creator : {{ creatorName.firstName + ' ' + creatorName.lastName }}</p>
+           </div>
+     
+           <div class="form-group">
+             <p>Course : {{ courseName.title }}</p>
+           </div>
+         </div>
+     
+         <div formArrayName="questions">
+           <div *ngFor="let question of questions.controls; let i = index" class="accordion-section">
+             <div class="accordion-header" (click)="toggleAccordion(i)">
+               Question {{ i + 1 }}
+             </div>
+             <div class="accordion-body" [ngClass]="{'show': isOpen(i)}">
+               <div [formGroupName]="i" class="form-group">
+                 <label for="questionText-{{i}}">Question</label>
+                 <input id="questionText-{{i}}" formControlName="questionText" class="form-control">
+                 <div *ngIf="submitted && question.get('questionText')?.errors" class="invalid-feedback">
+                   <div *ngIf="question.get('questionText')?.errors">Question is required</div>
+                 </div>
+       
+                 <div formArrayName="options" class="form-group">
+                   <div *ngFor="let option of getOptions(i); let j = index" [formGroupName]="j" class="form-group">
+                     <label for="optionText-{{i}}-{{j}}">Option</label>
+                     <input id="optionText-{{i}}-{{j}}" formControlName="optionText" class="form-control">
+                     <div class="form-check">
+                       <label for="isCorrect-{{i}}-{{j}}" class="form-check-label">Correct</label>
+                       <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect" class="form-check-input">
+                     </div>
+                     <div *ngIf="submitted && option.get('optionText')?.errors" class="invalid-feedback">
+                       <div *ngIf="option.get('optionText')?.errors">Option is required</div>
+                     </div>
+                   </div>
+                 </div>
+                 <button type="button" (click)="addOption(i)" class="btn btn-secondary">Add Option</button>
+               </div>
+             </div>
+           </div>
+         </div>
+     
+         <button type="button" (click)="addQuestion()" class="btn btn-secondary">Add Question</button>
+         <button type="submit" class="btn btn-primary">Save</button>
+       </div>
+     </form>
+   </div>
+   

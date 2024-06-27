@@ -12,14 +12,14 @@ router.post('/posts', authorize(), uploadImage, createPost);
 router.get('/posts', getAllPosts); 
 router.get('/posts/:id', getPostById);
 router.put('/posts/:id', authorize(), updatePostById);
-router.delete('/posts/:id', authorize(/* Role.Admin */), deletePostById);
+router.delete('/posts/:id', authorize(Role.Admin), deletePostById);
 
 // Routes pour les commentaires
 router.post('/posts/comments/:postId', authorize(), createComment);
 router.get('/posts/comments/:postId', getAllCommentsForPost);
-router.get('/posts/:id/comments', getCommentById);
-router.put('/posts/:id/comments', authorize(), updateCommentById);
-router.delete('/posts/:id/comments', authorize(), deleteCommentById);
+router.get('/comments/:id', getCommentById);
+router.put('/comments/:id', authorize(), updateCommentById);
+router.delete('/comments/:id', authorize(), deleteCommentById);
 
 
 export default router;
