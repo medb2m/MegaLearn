@@ -4,14 +4,19 @@ import Meeting from '../models/meeting.model.js'
 // Create a new event
 export const createEvent = async (req, res) => {
   try {
-    const event = new Event({
-      ...req.body,
-      host: req.user.id
-    });
+    const eventData = {
+      title : req.body.title,
+      description : req.body.description,
+      date : req.body.date,
+      duration : req.body.duration,
+      type : req.body.type,
+      host : req.user.id
+    }
+    const event = new Event(eventData);
     await event.save();
     res.status(201).json(event);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating event', error: error.message });
+    res.status(500).json({ message: error, error: error.message });
   }
 };
 

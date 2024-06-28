@@ -1,0 +1,43 @@
+<h1>Events</h1>
+<a routerLink="create" class="btn btn-sm btn-success mb-2">Create Event</a>
+<div>
+  <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width:5%">
+        <input type="checkbox" (change)="toggleAll($event)" />
+      </th>
+      <th style="width:25%">Title</th>
+      <th style="width:25%">Description</th>
+      <th style="width:25%">Date</th>
+      <th style="width:15%">Duration (mins)</th>
+      <th style="width:5%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events "> <!-- filter:searchText -->
+      <td class="align-middle">
+        <input type="checkbox" [(ngModel)]="event.selected" (change)="updateSelection()" />
+      </td>
+      <td class="align-middle">{{ event.title }}</td>
+      <td class="align-middle">{{ event.description }}</td>
+      <td class="align-middle">{{ event.date | date: 'short'}}</td>
+      <td class="align-middle">{{ event.duration }}</td>
+      <td style="white-space: nowrap">
+        <a routerLink="edit/{{ event._id }}" class="btn btn-sm btn-primary me-1">Edit</a>
+        <button (click)="deleteEvent(event.id)" class="btn btn-sm btn-danger" [disabled]="event.isDeleting">
+          <span *ngIf="event.isDeleting" class="spinner-border spinner-border-sm"></span>
+          <span *ngIf="!event.isDeleting">Delete</span>
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="!events.length">
+      <td colspan="6" class="text-center">
+        <span class="spinner-border spinner-border-lg align-center"></span>
+      </td>
+    </tr>
+  </tbody>
+</table> <!-- (click)="deleteSelectedEvents()"  -->
+<button *ngIf="selectedEvents.length > 0" class="btn btn-sm btn-danger mt-2">Delete Selected</button>

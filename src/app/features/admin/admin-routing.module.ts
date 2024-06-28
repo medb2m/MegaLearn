@@ -13,6 +13,7 @@ const DashboardModule = () => import('@features/admin').then(x => x.DashboardMod
 const CategoriesModule = () => import('@features/admin').then(x => x.CategoriesModule);
 const QuizModule = () => import('@features/admin').then(x => x.QuizModule);
 const ProfileModule = () => import('@features/accountsModule/profile').then(x => x.ProfileModule);
+const eventModule = () => import('@features/admin/eventModule').then(x => x.EventModule);
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
             { path: 'feature', loadChildren: FeatureModule },
             { path: 'quiz', loadChildren: QuizModule },
             { path: 'profile', loadChildren: ProfileModule },
+            { path: 'event', loadChildren: eventModule },
         ]
     }
 ];

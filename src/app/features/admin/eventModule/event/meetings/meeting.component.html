@@ -1,0 +1,33 @@
+<h2>Schedule Meeting</h2>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <div *ngIf="!loading">
+      <div class="form-group">
+        <label>Start Time</label>
+        <input type="datetime-local" formControlName="startTime" class="form-control" />
+        <div *ngIf="submitted && f['startTime'].errors" class="invalid-feedback">
+          <div *ngIf="f['startTime'].errors['required']">Start Time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>End Time</label>
+        <input type="datetime-local" formControlName="endTime" class="form-control" />
+        <div *ngIf="submitted && f['endTime'].errors" class="invalid-feedback">
+          <div *ngIf="f['endTime'].errors['required']">End Time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Meeting Link</label>
+        <input type="url" formControlName="meetingLink" class="form-control" />
+        <div *ngIf="submitted && f['meetingLink'].errors" class="invalid-feedback">
+          <div *ngIf="f['meetingLink'].errors['required']">Meeting Link is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Schedule</button>
+        <a [routerLink]="['/events', eventId]" class="btn btn-link">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

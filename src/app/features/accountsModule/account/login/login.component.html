@@ -18,11 +18,15 @@
         </div>
         <div class="row">
             <div class="mb-3 col">
-                <button [disabled]="submitting" class="btn btn-primary">
-                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-                    Login
-                </button>
-                <a routerLink="../register" class="btn btn-link">Register</a>
+                <div class="wrap">
+                    <button [disabled]="submitting" class="button me-2">
+                        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                        Login
+                    </button>
+                    <button  class="button" routerLink="../register">
+                        register
+                    </button>
+                </div>
             </div>
             <div class="mb-3 col text-end">
                 <a routerLink="../forgot-password" class="btn btn-link pe-0">Forgot Password?</a>

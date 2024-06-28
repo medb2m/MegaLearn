@@ -20,8 +20,8 @@ export class EventService {
     return this.http.get<Event>(`${this.apiUrl}/${id}`);
   }
 
-  create(event: FormData): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event);
+  create(event: Event): Observable<Event> {
+    return this.http.post<Event>(`${this.apiUrl}/create`, event);
   }
 
   update(id: string, event: FormData): Observable<Event> {

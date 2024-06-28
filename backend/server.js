@@ -103,7 +103,7 @@ app.use('/quiz', quizRoutes);
 // Certificate Routers 
 app.use('/certificate', certificateRoutes);
 // Events Routers 
-app.use('/event', eventRoutes);
+app.use('/events', eventRoutes);
 app.use('/meeting', meetingRoutes);
 
 // Entity Router
