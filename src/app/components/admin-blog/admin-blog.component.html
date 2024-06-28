@@ -1,0 +1,11 @@
+<div class="blog-container">
+    <div *ngFor="let post of posts" class="blog-post">
+      <h2>{{ post.title }}</h2>
+      <img [src]="post.image" alt="{{ post.title }}">
+      <p>{{ post.content }}</p>
+      <small>By {{ post.author.firstName }} {{ post.author.lastName }} on {{ post.createdAt | date }}</small>
+      <button (click)="deletePost(post.id)">Delete</button>
+      <!-- Add update functionality here -->
+    </div>
+  </div>
+  

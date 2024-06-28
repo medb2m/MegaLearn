@@ -13,7 +13,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from '@features/home';
 import { SharedModule } from '@shared/shared.module';
 import { BackButtonComponent } from './shared/components/back-button';
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
+import { UserBlogComponent } from './components/user-blog/user-blog.component';
+import { AdminBlogComponent } from './components/admin-blog/admin-blog.component'
 //import { PlyrModule } from 'ngx-plyr';
 
 
@@ -33,6 +35,8 @@ import { NgxMaskModule } from 'ngx-mask'
         AppComponent,
         HomeComponent,
         BackButtonComponent,
+        UserBlogComponent,
+        AdminBlogComponent,
     ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

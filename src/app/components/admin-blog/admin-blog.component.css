@@ -1,0 +1,32 @@
+.blog-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .blog-post {
+    width: 45%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .blog-post img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .blog-post button {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .blog-post button:hover {
+    background-color: #c82333;
+  }
+  

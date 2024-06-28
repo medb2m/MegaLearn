@@ -15,6 +15,7 @@ const EventModule = () => import('@features/eventsModule').then(x => x.EventModu
 const FM = () => import('@features/featuresModule/feature/features.module').then(x => x.FeatureModule);
 
 
+
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [RedirectAdminGuard] , data : { breadcrumb : 'Home'  }},
     { path: 'account', loadChildren: accountModule },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard], data : { breadcrumb : 'Payment', title : 'Payment' }},
     { path: 'event', loadChildren: EventModule , data : { breadcrumb : 'Event', title : 'Events' }},
     { path: 'hello', loadChildren: FM , canActivate : [AuthGuard]},
+
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
