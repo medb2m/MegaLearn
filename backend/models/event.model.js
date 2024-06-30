@@ -20,7 +20,7 @@ const EventSchema = new Schema(
     },
     host: { type: Schema.Types.ObjectId, ref: "User", required: true },
     participants: [ParticipantSchema],
-    meetings: [{ type: Schema.Types.ObjectId, ref: 'Meeting' }]
+    meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' }
   },
   { timestamps: true }
 );

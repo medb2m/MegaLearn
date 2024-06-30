@@ -6,8 +6,7 @@ const MeetingSchema = new Schema({
   event: { type: Schema.Types.ObjectId, ref: 'Event', required: true },
   startTime: { type: Date, required: true },
   endTime: { type: Date, required: true },
-  meetingLink: { type: String, required: true },
-  recordingLink: { type: String }
+  meetingLink: { type: String, required: true }
 },
 { timestamps: true }
 );
