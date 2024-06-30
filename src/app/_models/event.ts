@@ -1,4 +1,5 @@
 import { Participant } from "./participant";
+import { Meeting } from "./meeting";
   export class Event {
     _id!: string;
     title!: string;
@@ -8,7 +9,7 @@ import { Participant } from "./participant";
     type!: 'webinar' | 'class' | 'private';
     host!: string;
     participants!: Participant[];
-    meetings!: string;
+    meeting!: Meeting;
     image !: string;
   }
   

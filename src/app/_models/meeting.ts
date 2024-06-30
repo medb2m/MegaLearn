@@ -4,6 +4,5 @@ export class Meeting {
     startTime!: Date;
     endTime!: Date;
     meetingLink!: string;
-    recordingLink?: string;
   }
   
