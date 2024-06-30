@@ -6,6 +6,7 @@ import { SharedModule } from '@app/shared';
 import { EventRoutingModule } from './event-routing.module';
 import { EventListComponent } from './list';
 import { EventdetailsComponent } from './details';
+import { VideoChatComponent } from './video-chat/video-chat.component';
 
 
 
@@ -13,7 +14,8 @@ import { EventdetailsComponent } from './details';
   declarations: [
     LayoutComponent,
     EventListComponent,
-    EventdetailsComponent
+    EventdetailsComponent,
+    VideoChatComponent
   
     
   ],

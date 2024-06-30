@@ -3,6 +3,9 @@
     <figure class="ag-event-detail_image">
       <img [src]="event.image || 'https://picsum.photos/800/450'" alt="" />
     </figure>
+    <div *ngFor="let meeting of event.meetings">
+      <button (click)="joinMeeting(meeting._id)">Join Meeting</button>
+    </div>
     <div class="ag-event-detail_body">
       <h2 class="ag-event-detail_title">{{ event.title }}</h2>
       <p class="ag-event-detail_description">{{ event.description }}</p>
@@ -12,16 +15,16 @@
       <h3 class="ag-event-detail_subtitle">Participants</h3>
       <p class="ag-event-detail_participants">Number of participants: {{ event.participants.length }}</p>
     </div>
-    <ng-container *ngIf="false ; else nojoin ">
+    
+    <ng-container *ngIf="event.meeting  ; else meeting ">
       <div class="wrap">
-        <button class="button">Join Now</button>
+        <button class="button" (click)="join()">Join Now</button>
       </div>
     </ng-container>
-    <ng-template #nojoin>
+    <ng-template #meeting>
       <div class="wrap">
         <button class="button">Meeting</button>
       </div>
     </ng-template>
-    
   </div>
 </div>
