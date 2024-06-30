@@ -1,5 +1,6 @@
 import Event from '../models/event.model.js'
 import Meeting from '../models/meeting.model.js'
+import { v4 as uuidv4 } from 'uuid';
 
 // Create a new event
 export const createEvent = async (req, res) => {
@@ -33,7 +34,21 @@ export const getAllEvents = async (req, res) => {
 // Get an event by id
 export const getEventById = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.eventId).populate('host').populate('participants.user');
+    const event = await Event.findById(req.params.eventId).populate('host').populate('participants.user').populate('meeting');
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    res.status(200).json(event);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving event', error: error.message });
+  }
+}
+
+// Get an event by user
+export const getEventByUser = async (req, res) => {
+  try {
+    console.log('helloooooo')
+    const event = await Event.find({'participants.user' : req.user.id});
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
@@ -66,36 +81,6 @@ export const deleteEvent = async (req, res) => {
     res.json({ message: 'Event deleted' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting event', error: error.message });
-  }
-}
-
-// Add participants to the event as the host
-export const addParticipant = async (req, res) => {
-  try {
-    const eventId = req.params.eventId;
-    const participantId = req.params.participantId;
-    const userId = req.user.id
-
-    const event = await Event.findById(eventId);
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
-    }
-
-    if (event.host.toString() !== userId) {
-      return res.status(403).json({ message : 'Only the host can add participants'})
-    }
-
-    if (event.participants.includes(participantId)) {
-      return res.status(400).json({ message: 'Participant already added' });
-    }
-
-    event.participants.push({ user: participantId, status: 'approved' });
-    event.updated = new Date();
-    await event.save();
-
-    res.status(200).json(event);
-  } catch (error) {
-    res.status(500).json({ message: 'Error adding participant', error: error.message });
   }
 }
 
@@ -192,8 +177,9 @@ export const disapproveParticipant = async (req, res) => {
 // Create a meeting for an event
 export const createMeetingForEvent = async (req, res) => {
   try {
+    const meetingId = uuidv4()
     const eventId = req.params.eventId
-    const { startTime, endTime, meetingLink, recordingLink } = req.body;
+    const { startTime, endTime } = req.body;
     // find event by ID
     const event = await Event.findById(eventId)
     if(!event){
@@ -215,13 +201,12 @@ export const createMeetingForEvent = async (req, res) => {
       event: eventId,
       startTime,
       endTime,
-      meetingLink,
-      recordingLink
+      meetingLink : `${req.protocol}://${req.get('host')}/meeting/${meetingId}`
     });
     await meeting.save();
 
-    // Add the meeting ID to the event's meetings array
-    event.meetings.push(meeting._id);
+    // Add the meeting ID to the event's meetings
+    event.meeting = meeting
 
     // Save the updated event with the new meeting added
     await event.save();
@@ -232,3 +217,12 @@ export const createMeetingForEvent = async (req, res) => {
   }
 }
 
+export const getPendingParticipants = async (req, res) => {
+try {
+  const event = await Event.findById(req.params.eventId).populate('participants');
+  const pendingParticipants = event.participants.filter(participant => participant.status === 'pending');
+  res.json(pendingParticipants);
+} catch (error) {
+  res.status(500).json({ message: error.message });
+}
+}

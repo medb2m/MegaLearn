@@ -13,7 +13,7 @@ export const createComment = async (req, res) => {
 
 // Get all comments
 export const getAllCommentsForPost = async (req, res) => {
-  const comments = await Comment.find({ post : req.params.postId}).populate('content').populate('author', 'firstName lastName').populate('createdAt')
+  const comments = await Comment.find({ post : req.params.postId}).populate('content').populate('author', 'firstName lastName username image').populate('createdAt')
   res.json(comments)
 }
 
