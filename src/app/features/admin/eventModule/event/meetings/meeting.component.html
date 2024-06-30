@@ -1,5 +1,5 @@
 <h2>Schedule Meeting</h2>
-<div class="container">
+<div class="container py-5">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
     <div *ngIf="!loading">
@@ -19,13 +19,10 @@
       </div>
       <div class="form-group">
         <label>Meeting Link</label>
-        <input type="url" formControlName="meetingLink" class="form-control" />
-        <div *ngIf="submitted && f['meetingLink'].errors" class="invalid-feedback">
-          <div *ngIf="f['meetingLink'].errors['required']">Meeting Link is required</div>
-        </div>
+        <input type="url" formControlName="meetingLink" class="form-control" readonly/>
       </div>
       <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Schedule</button>
+        <button [disabled]="loading" type="submit" class="btn btn-primary">Schedule</button>
         <a [routerLink]="['/events', eventId]" class="btn btn-link">Cancel</a>
       </div>
     </div>

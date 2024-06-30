@@ -1,5 +1,5 @@
 <h1>Events</h1>
-<a routerLink="create" class="btn btn-sm btn-success mb-2">Create Event</a>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Create Event</a>
 <div>
   <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
 </div>
@@ -13,6 +13,7 @@
       <th style="width:25%">Description</th>
       <th style="width:25%">Date</th>
       <th style="width:15%">Duration (mins)</th>
+      <th style="width:15%">Meeting</th>
       <th style="width:5%"></th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
       <td class="align-middle">{{ event.description }}</td>
       <td class="align-middle">{{ event.date | date: 'short'}}</td>
       <td class="align-middle">{{ event.duration }}</td>
+      <td class="align-middle"><a (click)="openMeetingModal(event._id)" class="btn btn-sm btn-primary">Add</a></td>
       <td style="white-space: nowrap">
         <a routerLink="edit/{{ event._id }}" class="btn btn-sm btn-primary me-1">Edit</a>
         <button (click)="deleteEvent(event.id)" class="btn btn-sm btn-danger" [disabled]="event.isDeleting">

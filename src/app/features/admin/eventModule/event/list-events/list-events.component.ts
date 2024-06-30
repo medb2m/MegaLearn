@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { EntityService, EventService } from '@app/_services';
 import { Entity } from '@app/_models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MeetingComponent } from '../meetings';
 
 @Component({
   selector: 'list-entities',
@@ -13,7 +15,10 @@ export class ListEventsComponent {
   searchText: string = '';
   selectedEvents: Event[] = [];
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadEvents();
@@ -42,6 +47,12 @@ export class ListEventsComponent {
 
   updateSelection() {
     this.selectedEvents = this.events.filter(event => event.selected);
+  }
+
+  openMeetingModal(eventId : string) {
+    const modalRef = this.modalService.open(MeetingComponent);
+    console.log(' add eddit '+ eventId)
+    modalRef.componentInstance.eventId = eventId;
   }
 
   /* deleteSelectedEvents(): void {

@@ -9,6 +9,8 @@ import { SharedModule } from '@app/shared';
 import { AddEditEventComponent } from './add-edit-event';
 import { ListEventsComponent } from './list-events';
 import { MeetingComponent } from './meetings';
+import { ParticipantComponent } from './participant/participant.component';
+import { VideoChatComponent } from './video-chat/video-chat.component';
 
 @NgModule({
     imports: [
@@ -21,7 +23,9 @@ import { MeetingComponent } from './meetings';
     declarations: [
         ListEventsComponent,
         AddEditEventComponent,
-        MeetingComponent
+        MeetingComponent,
+        ParticipantComponent,
+        VideoChatComponent
     ]
 })
 export class EventModule { }
