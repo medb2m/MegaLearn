@@ -29,7 +29,6 @@ import {
 import { uploadImage } from '../_middleware/multerConfig.js'
 
 
-
 const router = express.Router()
 
 router.post('/authenticate', authenticateSchema, authenticate);
@@ -49,16 +48,5 @@ router.delete('/:id', authorize(), _delete);
 
 
 export default router
-/* router.post('/face-authenticate', faceAuthenticate); */
-router.post('/compare-faces', async (req, res) => {
-    try {
-        const { userImage, frontEndImage } = req.body; // Assurez-vous que ces propriétés sont envoyées depuis le front-end
-        const result = await compareFaces(userImage, frontEndImage);
-        res.json(result);
-    } catch (error) {
-        console.error('Error comparing faces:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
 
-import { compareFaces } from '../controllers/face.controller.js';
+
