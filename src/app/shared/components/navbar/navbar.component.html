@@ -36,6 +36,9 @@
             <li class="nav-item">
               <a routerLink="event" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Events</a>
             </li>
+            <li class="nav-item">
+              <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Blog</a>
+            </li>
           </ul>
     
           <div class="search-container ms-3 mb-2" (click)="stopPropagation($event)">
@@ -121,10 +124,10 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" routerLink="event/myevents">
                   <span>
                     <i class="bi bi-gear-fill me-2"></i>
-                    <span class="fs-7">Settings & Privacy</span>
+                    <span class="fs-7">My Events</span>
                   </span>
                 </a>
               </li>
@@ -199,6 +202,9 @@
           </li>
           <li class="nav-item">
             <a routerLink="event" class="nav-link d-flex align-items-center styled-link" >Events</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" >Blog</a>
           </li>
         </ul>
 
@@ -280,10 +286,10 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" routerLink="event/myevents">
                   <span>
                     <i class="bi bi-gear-fill me-2"></i>
-                    <span class="fs-7">Settings & Privacy</span>
+                    <span class="fs-7">My Events</span>
                   </span>
                 </a>
               </li>
