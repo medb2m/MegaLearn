@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { Event, Meeting } from '@app/_models';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-    private apiUrl = `${environment.apiUrl}/events`;
+  private apiUrl = `${environment.apiUrl}/events`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http.get<Event[]>(this.apiUrl);
@@ -18,6 +19,10 @@ export class EventService {
 
   getById(id: string): Observable<Event> {
     return this.http.get<Event>(`${this.apiUrl}/${id}`);
+  }
+
+  getByUser(){
+    return this.http.get<any[]>(`${this.apiUrl}/user`);
   }
 
   create(event: Event): Observable<Event> {
@@ -36,6 +41,10 @@ export class EventService {
     return this.http.post<Event>(`${this.apiUrl}/addparticipant/${eventId}/${participantId}`, {});
   }
 
+  join(eventId: string): Observable<Event> {
+    return this.http.post<Event>(`${this.apiUrl}/${eventId}/join`, {});
+  }
+
   approveParticipant(eventId: string, participantId: string): Observable<Event> {
     return this.http.put<Event>(`${this.apiUrl}/${eventId}/participants/${participantId}/approve`, {});
   }
@@ -46,5 +55,9 @@ export class EventService {
 
   createMeeting(eventId: string, meeting: any): Observable<Meeting> {
     return this.http.post<Meeting>(`${this.apiUrl}/${eventId}/meeting`, meeting);
+  }
+
+  getPendingParticipants(eventId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${eventId}/participants/pending`);
   }
 }
