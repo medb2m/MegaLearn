@@ -14,9 +14,10 @@ import { HomeComponent } from '@features/home';
 import { SharedModule } from '@shared/shared.module';
 import { BackButtonComponent } from './shared/components/back-button';
 import { NgxMaskModule } from 'ngx-mask'
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
-
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { NgxMaskModule } from 'ngx-mask'
         FormsModule,
         AppRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        SocketIoModule.forRoot(config)
         //PlyrModule
     ],
     declarations: [

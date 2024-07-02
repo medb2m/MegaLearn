@@ -10,7 +10,6 @@
                 <input type="checkbox" (change)="toggleAll($event)" />
             </th>
             <th style="width:25%">title</th>
-            <th style="width:25%">content</th>
             <th style="width:20%">created at</th>
             <th style="width:5%"></th>
         </tr>
@@ -21,7 +20,6 @@
                 <input type="checkbox" [(ngModel)]="post.selected" (change)="updateSelection()" />
             </td>
             <td class="align-middle">{{ post.title }}</td>
-            <td class="align-middle">{{ post.content }}</td>
             <td class="align-middle">{{ post.createdAt | date: 'short' }}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{ post._id }}" class="btn btn-sm btn-primary me-1">Edit</a>

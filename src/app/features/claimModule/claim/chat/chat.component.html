@@ -1,0 +1,11 @@
+<div class="chat-container">
+    <div class="messages"> <!-- [ngClass]="{'sent': message.senderID === this.socket.ioSocket.id, 'received': message.senderID !== this.socket.ioSocket.id}" -->
+      <div *ngFor="let message of messages" class="message" >
+        <p>{{ message.content }}</p>
+      </div>
+    </div>
+    <div class="message-input">
+      <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Type your message here..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>

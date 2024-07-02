@@ -36,10 +36,12 @@ export const getPostById = async (req, res) => {
 
 // Update a post by id
 export const updatePostById = async (req, res) => {
+  console.log('content here ' + req.body.title)
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
   if (!post) {
     return res.status(404).json({ message: 'Post not found' })
   }
+  console.log(post)
   res.json(post)
 }
 

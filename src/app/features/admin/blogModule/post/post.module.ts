@@ -15,7 +15,7 @@ import { PostRoutingModule } from './post-routing.module';
         ReactiveFormsModule,
         PostRoutingModule,
         FormsModule,
-        SharedModule
+        SharedModule,
     ],
     declarations: [
         ListPostsComponent,

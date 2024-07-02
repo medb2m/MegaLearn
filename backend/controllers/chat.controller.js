@@ -4,9 +4,7 @@ import Chat from '../models/chat.model.js'
 export function addMessage (req, res) {
     const messageData = {
         senderID: req.user.id,
-        senderName: req.user.firstName,
-        receiverID: req.body.receiverID,
-        claimID: req.body.claimID, // send claimID in the request
+        senderName: req.user.username,
         message: req.body.message
     };
 

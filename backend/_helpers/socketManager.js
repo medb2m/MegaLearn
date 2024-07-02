@@ -7,6 +7,7 @@ const { secret } = config;
 export function handleSocketEvents(io) {
     io.use(async (socket, next) => {
         const token = socket.handshake.auth.token;
+        console.log('Token received:', token);
         if (!token) {
             console.error('Authentication error: No token provided');
             return next(new Error('Authentication error'));
@@ -35,6 +36,18 @@ export function handleSocketEvents(io) {
             socket.join(roomId);
             console.log(`User ${socket.user.email} joined room ${roomId}`);
             socket.to(roomId).emit('user-joined', socket.user.id);
+        });
+
+        socket.on('sendMessage', async (message) => {
+            const messageData = {
+                senderID: socket.user._id,
+                senderName: socket.user.username,
+                message: message.content,
+            };
+
+            const newMsg = await Chat.create(messageData);
+
+            io.to(message.roomId).emit('message', newMsg);
         });
 
         socket.on('offer', (payload) => {

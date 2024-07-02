@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/posts', authorize(), uploadImage, createPost);
 router.get('/posts', getAllPosts); 
 router.get('/posts/:id', getPostById);
-router.put('/posts/:id', authorize(), updatePostById);
+router.put('/posts/:id', authorize(), uploadImage, updatePostById);
 router.delete('/posts/:id', authorize(Role.Admin), deletePostById);
 
 // Routes pour les commentaires

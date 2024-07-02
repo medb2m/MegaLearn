@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { Comment } from '@app/_models/comment';
+import { Post } from '@app/_models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class PostService {
     return this.http.post(`${this.apiUrl}`, post);
   }
 
-  updatePost(id: string, post: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, post);
+  updatePost(id: string, post: FormData): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, post);
   }
 
   deletePost(id: string): Observable<any> {
