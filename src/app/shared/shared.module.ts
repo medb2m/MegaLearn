@@ -7,6 +7,7 @@ import { AlertComponent, FooterComponent, NavbarComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './components/list';
 import { BreadcrumbComponent } from './components/breadcrumb';
+import { SocketService } from '@app/_services/socket.service';
 
 @NgModule({
   declarations: [

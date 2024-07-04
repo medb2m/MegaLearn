@@ -54,17 +54,20 @@ export class SectionsComponent {
 
   onSubmit() {
     this.submitted = true
-
+    //console.log('1')
     if (this.videoForm.invalid || !this.selectedFile) {
       return;
     }
+    //console.log('12')
 
     this.submitting = true
+    //console.log('13')
 
     const formData = new FormData()
     formData.append('url', this.selectedFile)
     formData.append('title',this.videoForm.value.title)
     formData.append('vidDescription',this.videoForm.value.vidDescription)
+    //console.log('14 ')
 
     this.videoService.uploadVideo(formData).subscribe({
       next: (response) => {
@@ -80,19 +83,20 @@ export class SectionsComponent {
         this.submitted = false;
         this.videoForm.reset()
         this.selectedFile = null
-        
+        //console.log('1233')
         this.close()
+        //console.log('1234')
       },
       error: (error) => {
         // Handle error
         this.submitting = false;
         this.close()
         this.alertService.error(error)
-        console.log('err ',error)
+        //console.log('err ',error)
       }
     });
   }
-
+  // Dont close HERE !!!!!!!!!!
   close() {
     // Logic to close the modal, if needed
     const modal = document.getElementById('videoModal');

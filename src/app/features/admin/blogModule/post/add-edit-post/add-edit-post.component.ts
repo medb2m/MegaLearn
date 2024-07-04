@@ -72,13 +72,14 @@ export class AddEditPostComponent implements OnInit {
     // Handle file selection
     onFileSelected(event: any): void {
         this.selectedFile = event.target.files[0];
+        console.log('target ', event.target.files[0])
     
         if (this.selectedFile) {
-          const reader = new FileReader();
+          const reader = new FileReader()
           reader.onload = () => {
-            this.previewUrl = reader.result;
+            this.previewUrl = reader.result
           };
-          reader.readAsDataURL(this.selectedFile);
+          reader.readAsDataURL(this.selectedFile)
         }
       }
 
@@ -100,7 +101,7 @@ export class AddEditPostComponent implements OnInit {
         formData.append('title', this.form.get('title')?.value)
         formData.append('content', this.form.get('content')?.value)
         console.log('formdata ' + formData.get('title') )
-
+        console.log('this seleced ', this.selectedFile)
         // add image if selected
         if (this.selectedFile){
             formData.append('image', this.selectedFile)

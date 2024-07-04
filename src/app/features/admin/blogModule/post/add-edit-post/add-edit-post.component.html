@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label for="image">Image</label>
                 <div *ngIf="previewUrl">
-                    <img [src]="previewUrl || 'https://picsum.photos/id/1005/800/450'" alt="Image preview" class="img-thumbnail mt-2" style="width: 200px; height: 150px;" />
+                    <img [src]="previewUrl" alt="Image preview" class="img-thumbnail mt-2" style="width: 200px; height: 150px;" />
                 </div>
                 <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" />
             </div>

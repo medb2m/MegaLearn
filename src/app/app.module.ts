@@ -17,7 +17,11 @@ import { NgxMaskModule } from 'ngx-mask'
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
-const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+//const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+export function socketIoConfigFactory(accountService: AccountService): SocketIoConfig {
+    const token = accountService.accountValue?.jwtToken;
+    return { url: 'http://localhost:4000', options: { auth: { token } } };
+  }
 
 @NgModule({
     imports: [
@@ -28,7 +32,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
         AppRoutingModule,
         SharedModule,
         NgxMaskModule.forRoot(),
-        SocketIoModule.forRoot(config)
+        SocketIoModule.forRoot({ url: 'http://localhost:4000', options: {} })  // Dummy config to be replaced
+        //SocketIoModule.forRoot(config)
         //PlyrModule
     ],
     declarations: [
@@ -40,6 +45,11 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        {
+      provide: 'SocketIoConfig',
+      useFactory: socketIoConfigFactory,
+      deps: [AccountService]
+    }
     ],
     bootstrap: [AppComponent]
 })

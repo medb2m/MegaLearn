@@ -22,7 +22,7 @@ export class EventService {
   }
 
   getByUser(){
-    return this.http.get<any[]>(`${this.apiUrl}/user`);
+    return this.http.get<Event[]>(`${this.apiUrl}/user`);
   }
 
   create(event: Event): Observable<Event> {
@@ -33,8 +33,8 @@ export class EventService {
     return this.http.put<Event>(`${this.apiUrl}/${id}`, event);
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(id: string) : Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   addParticipant(eventId: string, participantId: string): Observable<Event> {

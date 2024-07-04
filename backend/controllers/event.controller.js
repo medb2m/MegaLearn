@@ -31,6 +31,21 @@ export const getAllEvents = async (req, res) => {
   }
 }
 
+// Get an event by user
+export const getEventByUser = async (req, res) => {
+  try {
+    console.log('helloooooo')
+    const event = await Event.find(); //{'participants.user' : req.user.id}
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    res.status(200).json(event);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving event', error: error.message });
+  }
+}
+
+
 // Get an event by id
 export const getEventById = async (req, res) => {
   try {
@@ -44,19 +59,6 @@ export const getEventById = async (req, res) => {
   }
 }
 
-// Get an event by user
-export const getEventByUser = async (req, res) => {
-  try {
-    console.log('helloooooo')
-    const event = await Event.find({'participants.user' : req.user.id});
-    if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
-    }
-    res.status(200).json(event);
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving event', error: error.message });
-  }
-}
 
 // Update an event
 export const updateEvent = async (req, res) => {

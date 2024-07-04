@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:fronthost\"",
     "start:backend": "nodemon ./backend/server.js",
     "start:frontend": "ng serve",
+    "start:fronthost": "ng serve --host 0.0.0.0 --disable-host-check",
     "build": "ng build"
   },
   "private": true,

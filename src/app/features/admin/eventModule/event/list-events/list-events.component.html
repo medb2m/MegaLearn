@@ -1,4 +1,4 @@
-<h1>Events</h1>
+<h1>Events H</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Create Event</a>
 <div>
   <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
@@ -10,7 +10,6 @@
         <input type="checkbox" (change)="toggleAll($event)" />
       </th>
       <th style="width:25%">Title</th>
-      <th style="width:25%">Description</th>
       <th style="width:25%">Date</th>
       <th style="width:15%">Duration (mins)</th>
       <th style="width:15%">Meeting</th>
@@ -23,13 +22,12 @@
         <input type="checkbox" [(ngModel)]="event.selected" (change)="updateSelection()" />
       </td>
       <td class="align-middle">{{ event.title }}</td>
-      <td class="align-middle">{{ event.description }}</td>
       <td class="align-middle">{{ event.date | date: 'short'}}</td>
       <td class="align-middle">{{ event.duration }}</td>
       <td class="align-middle"><a (click)="openMeetingModal(event._id)" class="btn btn-sm btn-primary">Add</a></td>
       <td style="white-space: nowrap">
         <a routerLink="edit/{{ event._id }}" class="btn btn-sm btn-primary me-1">Edit</a>
-        <button (click)="deleteEvent(event.id)" class="btn btn-sm btn-danger" [disabled]="event.isDeleting">
+        <button (click)="deleteEvent(event._id)" class="btn btn-sm btn-danger" [disabled]="event.isDeleting">
           <span *ngIf="event.isDeleting" class="spinner-border spinner-border-sm"></span>
           <span *ngIf="!event.isDeleting">Delete</span>
         </button>

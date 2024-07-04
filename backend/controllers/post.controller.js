@@ -36,14 +36,28 @@ export const getPostById = async (req, res) => {
 
 // Update a post by id
 export const updatePostById = async (req, res) => {
-  console.log('content here ' + req.body.title)
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' })
+  try {
+    const { title, content } =
+      req.body;
+
+    const postData = {
+      title,
+      content
+    };
+
+    if (req.file) {
+      postData.image = `${req.protocol}://${req.get("host")}/img/${req.file.filename}`;
+    }
+
+    const post = await Post.findByIdAndUpdate(req.params.id, postData, { new: true });
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+    res.status(204).json(post);
+  } catch (error) {
+    res.status(500).json({ message: "Error Updating post", error: error.message });
   }
-  console.log(post)
-  res.json(post)
-}
+};
 
 // Delete a category by id
 export const deletePostById = async (req, res) => {

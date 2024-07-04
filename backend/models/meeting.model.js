@@ -8,7 +8,6 @@ const MeetingSchema = new Schema({
   endTime: { type: Date, required: true },
   meetingLink: { type: String, required: true }
 },
-{ timestamps: true }
-);
+{ timestamps: true })
 
-export default model('Meeting', MeetingSchema);
+export default model('Meeting', MeetingSchema)

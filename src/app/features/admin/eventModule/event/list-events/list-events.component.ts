@@ -21,21 +21,20 @@ export class ListEventsComponent {
   ) {}
 
   ngOnInit() {
-    this.loadEvents();
-  }
-
-  loadEvents() {
     this.eventService.getAll().pipe(first()).subscribe(events => {
+      console.log('events')
+      console.log(events)
       this.events = events;
     });
   }
 
   deleteEvent(id: string) {
-    const event = this.events.find(x => x.id === id);
+    console.log('id del ' + id)
+    const event = this.events.find(x => x._id === id);
     if (!event) return;
     event.isDeleting = true;
     this.eventService.delete(id).subscribe(() => {
-      this.events = this.events.filter(x => x.id !== id);
+      this.events = this.events.filter(x => x._id !== id);
     });
   }
 

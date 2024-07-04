@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EntityService } from '@app/_services';
-import { Entity } from '@app/_models';
+import { ActivatedRoute } from '@angular/router';
 import { PostService } from '@app/_services/post.service';
 import { CommentService } from '@app/_services/comment.service';
 
@@ -25,6 +23,7 @@ export class DetailsComponent {
     const postId = this.route.snapshot.paramMap.get('id') || 'noID'
     this.postService.getPostById(postId).subscribe((data) => {
       this.post = data;
+      console.log('pic '+ data.image)
     });
 
     this.postService.getAllComments(postId).subscribe((data) => {

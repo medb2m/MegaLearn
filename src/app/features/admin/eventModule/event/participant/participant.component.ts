@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Event } from '@app/_models';
+import { Event, Participant } from '@app/_models';
 import { EventService } from '@app/_services';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
@@ -29,8 +29,10 @@ export class ParticipantComponent {
     this.eventService.getById(this.eventId).pipe(first()).subscribe(
       (event: Event) => {
         console.log('all '+ this.eventId )
-        this.allParticipants = event.participants;
-        this.pendingParticipants = event.participants.filter(participant => participant.status === 'pending');
+        if (event.participants){
+          this.allParticipants = event.participants;
+          this.pendingParticipants = event.participants.filter(participant => participant.status === 'pending');
+        }
       },
       error => {
         console.error('Error fetching event participants:', error);

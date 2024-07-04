@@ -7,6 +7,7 @@ import { EventRoutingModule } from './event-routing.module';
 import { EventListComponent } from './list';
 import { EventdetailsComponent } from './details';
 import { VideoChatComponent } from './video-chat/video-chat.component';
+import { MyeventsComponent } from './myevents/myevents.component';
 
 
 
@@ -15,7 +16,8 @@ import { VideoChatComponent } from './video-chat/video-chat.component';
     LayoutComponent,
     EventListComponent,
     EventdetailsComponent,
-    VideoChatComponent
+    VideoChatComponent,
+    MyeventsComponent
   
     
   ],

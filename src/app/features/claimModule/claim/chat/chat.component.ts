@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AccountService } from '@app/_services';
-import {  Socket,io } from 'socket.io-client';
+import { SocketService } from '@app/_services/socket.service';
+import { Socket } from 'ngx-socket-io';
 
 
 interface Message {
@@ -23,43 +23,46 @@ interface ChatMessage {
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-  messages: ChatMessage[] = [];
-  newMessage: string = '';
-  roomId: string = 'defaultRoom'; // Example room ID, adjust as needed
+    message : string = ''
+    messages : any[] = []
 
-  constructor(public socket: Socket, private http: HttpClient, private accountService : AccountService) {}
+    constructor(private socket: SocketService, private accountService : AccountService, private so : Socket) {}
 
-  ngOnInit() {
-
-    const token = this.accountService.accountValue?.jwtToken;
-    console.log('token ' + token)
-
-    if (!token) {
-      console.error('No token found. User might not be authenticated.');
-      return;
+    ngOnInit() {
+      this.socket.on('connect', () => {
+        console.log('Connected to WebSocket server');
+      });
+  
+      this.socket.on('disconnect', (reason : any) => {
+        console.log('Disconnected from WebSocket server:', reason);
+      }); 
+  
+      this.socket.on('wallah', (message: string) => {
+        this.messages.push(message);
+      });
+      this.socket.on("connect_error", (err : any) => {
+        // the reason of the error, for example "xhr poll error"
+        console.log(err.message);
+      
+        // some additional description, for example the status code of the initial HTTP response
+        console.log(err.description);
+      
+        // some additional context, for example the XMLHttpRequest object
+        console.log(err.context);
+      });
+  
+      // Reconnect with the token
+      //this.socket.reconnectWithToken();
     }
-
-    this.socket = io('http://localhost:4000', {
-      auth: {
-        token
+    test : string = 'hello'
+    sendMessage():void {
+      if (this.message.trim() !== ''){
+        this.socket.emit('wallah', this.test);
+        this.message = ''
       }
-    }); 
-    this.socket.connect();
+    } 
 
-    // Join a room
-    this.socket.emit('join', this.roomId);
-
-    // Listen for messages from the server
-    this.socket.on('message', (message: ChatMessage) => {
-      this.messages.push({ content: message.content, roomId: message.roomId });
-    });
-  }
-
-  sendMessage() {
-    if (this.newMessage.trim() !== '') {
-      const message: ChatMessage = { content: this.newMessage, roomId: this.roomId };
-      this.socket.emit('sendMessage', message);
-      this.newMessage = '';
+    ngOnDestroy() {
+      this.socket.disconnect(); // Disconnect socket
     }
-  }
 }

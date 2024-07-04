@@ -26,7 +26,7 @@ export class PostService {
   }
 
   updatePost(id: string, post: FormData): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, post);
+    return this.http.put(`${this.apiUrl}/${id}`, post);
   }
 
   deletePost(id: string): Observable<any> {
