@@ -55,12 +55,8 @@ export const getQuizbyCourseID = async (req, res) => {
 // Update a quiz by id
 export const updateQuizById = async (req, res) => {
   try {
-<<<<<<< Updated upstream
-    const quiz = await Quiz.findById(req.params.quizId);
-=======
     console.log(req.params.id);
     const quiz = await Quiz.findById(req.params.id);
->>>>>>> Stashed changes
     if (!quiz) {
       return res.status(404).json({ message: 'Quiz not found' });
     }
@@ -72,7 +68,8 @@ export const updateQuizById = async (req, res) => {
       return res.status(403).json({ message: 'User not authorized to update this quiz' });
     }
 
-    Object.assign(quiz, req.body);
+    //Object.assign(quiz, req.body);
+    quiz.title = req.body.title
     await quiz.save();
 
     res.status(200).json(quiz);

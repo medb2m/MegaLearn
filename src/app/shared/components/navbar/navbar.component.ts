@@ -1,24 +1,38 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account, Course, Role } from '@app/_models';
-import { AccountService, CoursesService } from '@app/_services';
+import { AccountService, CoursesService, DiscountTimerService, ScreenSizeService } from '@app/_services';
+import { Observable } from 'rxjs';
 
 
 @Component({ selector: 'app-navbar', templateUrl: 'navbar.component.html', styleUrls : ['navbar.component.css']})
 export class NavbarComponent {
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('navbarCollapse') navbarCollapse!: ElementRef;
+
     Role = Role;
     account?: Account | null;
     searchResults: Course[] = [];
     showSuggestions: boolean = false;
+    isSmallScreen : boolean = false
+
+    timeLeft$: Observable<number>;
     
     constructor(
         private accountService: AccountService,
         private router: Router,
-        private coursesService: CoursesService 
-    ) { }
+        private coursesService: CoursesService,
+        private screenSizeService : ScreenSizeService,
+        private discountTimerService: DiscountTimerService 
+    ) {this.timeLeft$ = this.discountTimerService.timeLeft; }
 
     ngOnInit() {
+      
         this.accountService.account.subscribe(x => this.account = x);
+        this.screenSizeService.isSmallScreen().subscribe(isSmall => {
+          this.isSmallScreen = isSmall
+          console.log(isSmall)
+        })
     }
 
     logout() {
@@ -26,9 +40,10 @@ export class NavbarComponent {
     }
 
     onSearch(searchTerm: string) {
-      
-        this.router.navigate(['/courses/'], { queryParams: { search: searchTerm } });
+      console.log('hello ' + searchTerm)
+        this.router.navigate(['/courses'], { queryParams: { search: searchTerm } });
         this.showSuggestions = false
+        this.closeNavbar()
       }
 
       onSearchInput(searchTerm: string) {
@@ -46,11 +61,11 @@ export class NavbarComponent {
       }
 
       selectSuggestion(course: Course) {
+        this.closeNavbar()
         this.router.navigate([`/courses/details/${course._id}`]);
         this.showSuggestions = false; // Hide suggestions after selecting one
+        
       }
-<<<<<<< Updated upstream
-=======
 
     @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
@@ -66,19 +81,18 @@ export class NavbarComponent {
   }
 
   closeNavbar() {
-    if (this.navbarCollapse) {
-      const navbar = this.navbarCollapse.nativeElement;
-      if (navbar.classList.contains('show')) {
-        navbar.classList.remove('show');
-      }
+    //MODIF NAVBAR
+    const navbar = this.navbarCollapse?.nativeElement;
+    if (navbar?.classList?.contains('show')) {
+      navbar?.classList?.remove('show');
     }
-    
   }
 
   // Method to clear the search input
   clearSearchInput() {
+    //MODIF NAVBAR
     if (this.searchInput)
-    this.searchInput.nativeElement.value = '';
+      this.searchInput.nativeElement.value = '';
   }
 
   // Method to stop propagation of click events inside the search container
@@ -93,5 +107,4 @@ export class NavbarComponent {
     const seconds = totalSeconds % 60;
     return `${hours}h ${minutes}m ${seconds}s`;
   }
->>>>>>> Stashed changes
 }
