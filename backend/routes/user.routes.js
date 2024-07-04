@@ -26,6 +26,7 @@ import {
     update,
     _delete
 } from '../controllers/user.controller.js'
+import { uploadImage } from '../_middleware/multerConfig.js'
 
 
 
@@ -42,7 +43,22 @@ router.post('/reset-password', resetPasswordSchema, resetPassword);
 router.get('/', authorize(Role.Admin), getAll);
 router.get('/:id', authorize(), getById);
 router.post('/', authorize(Role.Admin), createSchema, create);
-router.put('/:id', authorize(), updateSchema, update);
+router.put('/:id', authorize(), uploadImage, updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
+
+
 export default router
+/* router.post('/face-authenticate', faceAuthenticate); */
+router.post('/compare-faces', async (req, res) => {
+    try {
+        const { userImage, frontEndImage } = req.body; // Assurez-vous que ces propriétés sont envoyées depuis le front-end
+        const result = await compareFaces(userImage, frontEndImage);
+        res.json(result);
+    } catch (error) {
+        console.error('Error comparing faces:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+import { compareFaces } from '../controllers/face.controller.js';

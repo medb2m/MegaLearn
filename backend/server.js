@@ -22,6 +22,8 @@ import chatRoutes from './routes/chat.routes.js'
 import quizRoutes from './routes/quiz.routes.js'
 import certificateRoutes from './routes/certificate.routes.js'
 import eventRoutes from './routes/event.routes.js'
+import meetingRoutes from './routes/meeting.routes.js'
+import entityRouter from './routes/entity.routes.js'
 
 
 // Express Init
@@ -31,7 +33,7 @@ const httpServer = createServer(app)
 // Init Socket.io with the HTTP Server
 const io = new Server(httpServer, {
     cors: {
-        origin: '*', 
+        origin: '*', // Update this with your client's origin if needed
         methods: ['GET', 'POST']
     }
 });
@@ -46,7 +48,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan("dev"))
@@ -77,18 +79,18 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 app.use("/img" ,express.static("public/images"))
 // Videos Routes
 app.use("/vid" ,express.static("public/videos"))
-// PDF Storage
-app.use("/pdf" ,express.static("public/pdfs"))
+// Pdfs Routes
+app.use("/pdf" ,express.static("public/pdf"))
 
 
 // auth routes
-app.use('/user', userRoutes);
+app.use('/accounts', userRoutes);
 // course routes
-app.use('/course', courseRoutes);
+app.use('/courses', courseRoutes);
 // video routes
-app.use('/video', videoRoutes);
+app.use('/videos', videoRoutes);
 // category routes
-app.use('/category', categoryRoutes);
+app.use('/categories', categoryRoutes);
 // api Blog 
 app.use('/blog', blogRoutes);
 // Claim Routers 
@@ -101,6 +103,10 @@ app.use('/quiz', quizRoutes);
 app.use('/certificate', certificateRoutes);
 // Events Routers 
 app.use('/event', eventRoutes);
+app.use('/meeting', meetingRoutes);
+
+// Entity Router
+app.use('/entity', entityRouter)
 
 
 
@@ -108,7 +114,7 @@ app.use('/event', eventRoutes);
 app.use(errorHandler);
 
 // start server
-const port = 3030
+const port = 4000;
 httpServer.listen(port, () => {
     console.log('Server listening on port ' + port);
 });

@@ -7,10 +7,10 @@ import { UpdateComponent } from './update';
 
 const routes: Routes = [
     {
-        path: '', component: LayoutComponent,
+        path: '', component: LayoutComponent, data: { skipBreadcrumb: true },
         children: [
-            { path: '', component: DetailsComponent },
-            { path: 'update', component: UpdateComponent }
+            { path: '', component: DetailsComponent , data : { breadcrumb : 'Details', title: 'Profile Details' } },
+            { path: 'update', component: UpdateComponent , data : { breadcrumb : 'Settings', title: 'Profile Settings' } }
         ]
     }
 ];

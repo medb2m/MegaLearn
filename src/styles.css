@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --plyr-color-main: #f09333;
+    --plyr-color-main: rgb(104, 85, 224);
   }
 
 .app-container {

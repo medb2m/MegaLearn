@@ -61,10 +61,10 @@
        <div *ngIf="!loading">
          <div class="form-group">
            <label for="title">Title</label>
-           <input type="text" id="title" formControlName="title" class="form-control">
-           <!-- <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+           <input id="title" formControlName="title" class="form-control">
+           <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
              <div *ngIf="f['title'].errors['required']">Title is required</div>
-           </div> -->
+           </div>
          </div>
      
          <div *ngIf="title !== 'Create Quiz'" class="form-group">
@@ -86,9 +86,9 @@
                <div [formGroupName]="i" class="form-group">
                  <label for="questionText-{{i}}">Question</label>
                  <input id="questionText-{{i}}" formControlName="questionText" class="form-control">
-                 <!-- <div *ngIf="submitted && question.get('questionText')?.errors" class="invalid-feedback">
+                 <div *ngIf="submitted && question.get('questionText')?.errors" class="invalid-feedback">
                    <div *ngIf="question.get('questionText')?.errors">Question is required</div>
-                 </div> -->
+                 </div>
        
                  <div formArrayName="options" class="form-group">
                    <div *ngFor="let option of getOptions(i); let j = index" [formGroupName]="j" class="form-group">
@@ -98,9 +98,9 @@
                        <label for="isCorrect-{{i}}-{{j}}" class="form-check-label">Correct</label>
                        <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect" class="form-check-input">
                      </div>
-                     <!-- <div *ngIf="submitted && option.get('optionText')?.errors" class="invalid-feedback">
+                     <div *ngIf="submitted && option.get('optionText')?.errors" class="invalid-feedback">
                        <div *ngIf="option.get('optionText')?.errors">Option is required</div>
-                     </div> -->
+                     </div>
                    </div>
                  </div>
                  <button type="button" (click)="addOption(i)" class="btn btn-secondary">Add Option</button>

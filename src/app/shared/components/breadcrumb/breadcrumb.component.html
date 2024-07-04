@@ -1,0 +1,28 @@
+﻿<!-- Header Start -->
+<div class="container-fluid page-header" *ngIf="showBreadcrumbs">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3 text-white animated slideInDown">{{ pageTitle }}</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/'" class="text-white">Home</a>
+            </li>
+            <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last" [class.active]="last">
+              <ng-container *ngIf="!last">
+                <a [routerLink]="breadcrumb.url" class="text-white">{{ breadcrumb.label }}</a>
+              </ng-container>
+              <ng-container *ngIf="last">
+                <span class="text-white">{{ breadcrumb.label }}</span>
+              </ng-container>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header End -->
+

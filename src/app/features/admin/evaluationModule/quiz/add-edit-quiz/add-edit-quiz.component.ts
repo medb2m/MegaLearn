@@ -12,6 +12,87 @@ import { first } from 'rxjs/operators';
   styleUrls : ['./add-edit-quiz.component.css']
 })
 export class AddEditQuizComponent  implements OnInit{
+  /* form!: FormGroup;
+  
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    
+    
+  ) { }
+
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      questions: this.formBuilder.array([
+        this.createQuestionFormGroup()
+      ])
+    });
+
+    this.title = 'Create Quiz';
+    if (this.id) {
+      this.title = 'Edit Quiz';
+      this.loading = true;
+      this.quizService.getById(this.id)
+        .pipe(first())
+        .subscribe(quiz => {
+          this.form.patchValue({
+            name: quiz.name
+          });
+          quiz.questions.forEach(question => this.addQuestion(question));
+          this.loading = false;
+        });
+    }
+  }
+
+  createQuestionFormGroup(): FormGroup {
+    return this.formBuilder.group({
+        question: ['', Validators.required],
+        options: this.formBuilder.array([
+            this.createOptionFormGroup()
+        ]),
+        answer: ['', Validators.required]
+    });
+}
+
+createOptionFormGroup(): FormGroup {
+    return this.formBuilder.group({
+        option: ['', Validators.required]
+    });
+}
+
+  get f() { return this.form.controls; }
+  get questions() { return this.form.get('questions') as FormArray; }
+
+  addQuestion(question: any = { question: '', options: [''], answer: '' }) {
+    const options = this.formBuilder.array(
+      question.options.map((opt: string) => this.formBuilder.control(opt, Validators.required))
+    );
+    const questionGroup = this.formBuilder.group({
+      question: [question.question, Validators.required],
+      options: options,
+      answer: [question.answer, Validators.required]
+    });
+    this.questions.push(questionGroup);
+  }
+
+  removeQuestion(index: number) {
+    this.questions.removeAt(index);
+  }
+
+  addOption(questionIndex: number) {
+    const options = this.questions.at(questionIndex).get('options') as FormArray;
+    options.push(this.formBuilder.control('', Validators.required));
+  }
+
+  removeOption(questionIndex: number, optionIndex: number) {
+    const options = this.questions.at(questionIndex).get('options') as FormArray;
+    options.removeAt(optionIndex);
+  }
+
+   */
 
     form!: FormGroup;
 
@@ -46,7 +127,7 @@ export class AddEditQuizComponent  implements OnInit{
       this.title = 'Edit Quiz';
       this.loading = true;
       this.form = this.fb.group({
-        title: [''],
+        title: ['', Validators.required],
         course: [''],
         creator: [''],
         questions: this.fb.array([])
@@ -80,7 +161,7 @@ export class AddEditQuizComponent  implements OnInit{
     } else {
         this.title = 'Create Quiz';
         this.form = this.fb.group({
-        title: [''],
+        title: ['', Validators.required],
         questions: this.fb.array([])
       });
 
@@ -92,8 +173,6 @@ get f() { return this.form.controls; }
   get questions() {
     return this.form.get('questions') as FormArray;
   }
-
-  // get options from questions
   getOptions(questionIndex: number) {
     const question = this.questions.at(questionIndex);
     const options = question.get('options') as FormArray;
@@ -104,7 +183,7 @@ get f() { return this.form.controls; }
 
   addQuestion() {
     const questionForm = this.fb.group({
-      questionText: [''],
+      questionText: ['', Validators.required],
       options: this.fb.array([])
     });
     this.questions.push(questionForm);
@@ -113,8 +192,8 @@ get f() { return this.form.controls; }
   addOption(questionIndex: number) {
     const options = this.questions.at(questionIndex).get('options') as FormArray;
     const optionForm = this.fb.group({
-      optionText: [''],
-      isCorrect: [false]
+      optionText: ['', Validators.required],
+      isCorrect: [false, Validators.required]
     });
     options.push(optionForm);
   }
@@ -128,34 +207,19 @@ get f() { return this.form.controls; }
   isOpen(index: number) {
     return this.openAccordionIndex === index;
   }
- 
+
   onSubmit() {
     console.log('Form:', this.form.value);
     this.submitted = true;
-<<<<<<< Updated upstream
     if (this.form.invalid) {
       console.log('Form is invalid');
       return;
     }
-
-    // hellloooooo 
-    const formData = new FormData();
-        formData.append('title', this.form.get('title')?.value)
-        formData.append('course', this.form.get('course')?.value)
-        formData.append('questions', this.form.get('Question')?.value)
-        formData.append('creator', this.form.get('creator')?.value)
-    console.log('title : ' + formData.get('title'))
-=======
-    // if (this.form.invalid) {
-    //   console.log('Form is invalid');
-    //   return;
-    // }
->>>>>>> Stashed changes
     console.log('Form is valid');
     this.submitting = true;
     const quizData = this.form.value;
     const saveQuiz = this.id
-      ? this.quizService.update(this.id, formData)
+      ? this.quizService.update(this.id, quizData)
       : this.quizService.create(this.courseId, quizData);
       console.log('1')
     saveQuiz.pipe(first()).subscribe({
@@ -203,4 +267,3 @@ get f() { return this.form.controls; }
     console.log('1')
   }
  */}}
-

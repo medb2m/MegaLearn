@@ -1,4 +1,4 @@
-import Joi from 'joi';
+﻿import Joi from 'joi';
 import validateRequest from '../_middleware/validate-request.js'
 import UserService from './user.service.js'
 import Role from '../_helpers/role.js';
@@ -61,6 +61,7 @@ export function revokeToken(req, res, next) {
 export function registerSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
+        username: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email().required(),
@@ -72,6 +73,9 @@ export function registerSchema(req, res, next) {
 }
 
 export function register(req, res, next) {
+    if (req.file){
+        req.body.image = `${req.protocol}://${req.get('host')}/img/${req.file.filename}`
+    }
     UserService.register(req.body, req.get('origin'))
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
@@ -106,7 +110,7 @@ export function forgotPassword(req, res, next) {
 export function validateResetTokenSchema(req, res, next) {
     const schema = Joi.object({
         token: Joi.string().required()
-    });
+    })
     validateRequest(req, next, schema);
 }
 
@@ -151,6 +155,7 @@ export function getById(req, res, next) {
 export function createSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
+        username: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email().required(),
@@ -170,6 +175,7 @@ export function create(req, res, next) {
 export function updateSchema(req, res, next) {
     const schemaRules = {
         title: Joi.string().empty(''),
+        username: Joi.string().empty(''),
         firstName: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
         email: Joi.string().email().empty(''),
@@ -187,6 +193,9 @@ export function updateSchema(req, res, next) {
 }
 
 export function update(req, res, next) {
+    if (req.file) {
+        req.body.image = `${req.protocol}://${req.get('host')}/img/${req.file.filename}`;
+    }
     // users can update their own User and admins can update any User
     if (req.params.id !== req.user.id && req.user.role !== Role.Admin) {
         return res.status(401).json({ message: 'Unauthorized' });

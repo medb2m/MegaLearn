@@ -1,10 +1,10 @@
 import Certificate from '../models/certificate.model.js';
-import { templateGenerator } from '../assets/tmp/templateCreator.js';
+import { templateGenerator } from './templateCreator.js';
 import { v4 as uuidv4 } from 'uuid';
 
-export const generateCertificate = async (userId, courseId, quizId, score, firstName, lastName, courseTitle, req) => {
+export const generateCertificate = async (userId, courseId, quizId, score, courseTitle , req) => {
     const certificateId = uuidv4()
-    await templateGenerator(firstName, lastName, courseTitle, certificateId)
+    await templateGenerator(req.user.firstName,req.user.lastName, courseTitle,  certificateId)
     // Save the certificate details to the database
     const certificate = new Certificate({
         user: userId,

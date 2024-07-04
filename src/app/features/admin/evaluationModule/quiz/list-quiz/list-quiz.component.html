@@ -11,10 +11,10 @@
         <th style="width:20%">Creator</th>
         <th style="width:15%"></th>
       </tr>
-    </thead> 
+    </thead>
     <tbody>
       <tr *ngFor="let quiz of quizz | search:searchText">
-        <td class="align-middle">{{quiz.name}}</td>
+        <td class="align-middle">{{quiz.title}}</td>
         <td class="align-middle">{{quiz.course.title}}</td>
         <td class="align-middle">{{quiz.creator.firstName}} {{quiz.creator.lastName}}</td>
         <td style="white-space: nowrap">

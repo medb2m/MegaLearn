@@ -23,7 +23,6 @@ export class TakeQuizComponent implements OnInit {
   score?: number;
   certificate?: string;
   quiz : any
- 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -99,6 +98,7 @@ export class TakeQuizComponent implements OnInit {
   });
     console.log('5')
 
+    //const answers = this.form.value.questions.map((q: any) => q.options.findIndex((o: any) => o));
     console.log('4')
     this.quizService.takeQuiz(this.courseId, { answers })
       .pipe(first())
@@ -107,7 +107,7 @@ export class TakeQuizComponent implements OnInit {
           console.log('3')
           this.score = result.percentage;
           this.certificate = result.certificate;
-          this.alertService.success('You succed with '+(result.percentage) +' %' , { keepAfterRouteChange: true });
+          this.alertService.success('You succed with '+(result.percentage).toFixed(2) +' %' , { keepAfterRouteChange: true });
           this.router.navigate(['/quizzes']);
         },
         error: (error: any) => {

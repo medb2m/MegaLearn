@@ -34,7 +34,7 @@ export class ListQuizComponent {
           this.alertService.error(error);
           this.loading = false;
         }
-      }); 
+      });
   }
 
   deleteQuiz(Q: Quiz) {

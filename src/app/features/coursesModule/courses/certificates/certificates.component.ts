@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '@app/_services/courses.service';
+import { Course } from '@app/_models/course';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService, QuizService } from '@app/_services';
+import { first } from 'rxjs';
+import { Question } from '@app/_models';
+import { Option } from '@app/_models/option';
 import { CertificatesService } from '@app/_services/certificates.service';
 
 @Component({

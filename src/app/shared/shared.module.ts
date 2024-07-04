@@ -6,12 +6,14 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { AlertComponent, FooterComponent, NavbarComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './components/list';
+import { BreadcrumbComponent } from './components/breadcrumb';
 
 @NgModule({
   declarations: [
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+    BreadcrumbComponent,
     ListComponent,
     SearchPipe,
     TruncatePipe
@@ -27,6 +29,7 @@ import { ListComponent } from './components/list';
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+    BreadcrumbComponent,
     ListComponent,
     SearchPipe,
     TruncatePipe

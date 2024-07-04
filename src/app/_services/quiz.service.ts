@@ -28,7 +28,7 @@ export class QuizService {
     return this.http.post<Quiz>(`${this.apiUrl}/${id}`, quiz);
   }
 
-  update(id: string, quiz: FormData) {
+  update(id: string, quiz: FormData): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, quiz);
   }
 

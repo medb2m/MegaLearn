@@ -1,4 +1,3 @@
-import { Account } from './account';
 import { Course } from './course';
 import { Question } from './question';
 
@@ -7,5 +6,5 @@ export class Quiz {
   title!: string;
   course!: Course; // Course ID
   questions!: Question[]; // model Question
-  creator!: Account; // User ID
+  creator!: any; // User ID
 }

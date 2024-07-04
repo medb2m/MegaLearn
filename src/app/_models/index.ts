@@ -4,4 +4,6 @@ export * from './role';
 export * from './course';
 export * from './quiz';
 export * from './question';
+export * from './event';
+export * from './meeting';
 export * from './entity';

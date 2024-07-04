@@ -20,7 +20,6 @@
             <td class="align-middle">{{course.creator.firstName +" "+ course.creator.lastName}}</td>
             <td class="align-middle">{{getCat(course.category)}}</td>
             <td class="align-middle">{{course.price}} TND</td>
-            <!-- fonction create quiz -->
             <td class="align-middle"><a (click)="createQuiz(course._id)" class="btn btn-sm btn-primary">Add</a></td>
             <td class="align-middle" style="white-space: nowrap"> <!-- (click)="goto(course._id)" -->
                 <a routerLink="edit/{{course._id}}" class="btn btn-sm btn-primary me-1">Edit</a>

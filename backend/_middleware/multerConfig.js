@@ -36,7 +36,7 @@ const videoStorage = diskStorage({
 const uploadVideo = multer({
     storage: videoStorage,
     // Limite de taille maximale pour les vidéos (10 Mo par exemple)
-    limits: { fileSize: 10 * 1024 * 1024 }, // Taille max des vidéos : 10 Mo
+    limits: { fileSize: 50 * 1024 * 1024 }, // Taille max des vidéos : 10 Mo
     // Filtre pour les types MIME autorisés pour les vidéos
     fileFilter: (req, file, callback) => {
         if (VIDEO_MIME_TYPES[file.mimetype]) {

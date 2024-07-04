@@ -9,7 +9,7 @@ import { ListQuizComponent } from './list-quiz';
 
 import { SharedModule } from '@app/shared';
 
-@NgModule({ 
+@NgModule({
   declarations: [
     AddEditQuizComponent,
     ListQuizComponent

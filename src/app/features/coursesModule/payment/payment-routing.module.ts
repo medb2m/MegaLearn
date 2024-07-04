@@ -8,7 +8,7 @@ import { PaymentMethodComponent } from './payment-method/payment-method.componen
 const routes: Routes = [
   
   {
-    path: '', component: LayoutComponent,
+    path: '', component: LayoutComponent,data: { skipBreadcrumb: true },
     children: [
         { path: 'method', component: PaymentMethodComponent },
         { path: 'card/:id', component: CardMethodComponent },

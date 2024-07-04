@@ -1,5 +1,12 @@
 import Certificate from '../models/certificate.model.js';
 import Course from '../models/course.model.js';
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+
 // Get a single certificate by id
 export const getCertificateById = async (req, res) => {
   try {
@@ -12,7 +19,7 @@ export const getCertificateById = async (req, res) => {
       return res.status(403).json({ message: 'Unauthorized' });
     }
 
-    res.json(certificate);
+    res.status(200).json(certificate);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving certificate', error: error.message });
   }
@@ -40,10 +47,9 @@ export const getCertificatesByCourse = async (req, res) => {
       return res.status(404).json({ message: 'Course not found' });
     }
 
-    // check if the user is an admin or the creator of the course
-    /* if (req.user.role !== 'Admin' && course.creator.toString() !== userId) {
+    if (req.user.role !== 'Admin' && course.creator.toString() !== userId) {
       return res.status(403).json({ message: 'Unauthorized' });
-    }  */
+    } 
 
     const certificates = await Certificate.find({ course: courseId }).populate('user');
     res.status(200).json(certificates);
@@ -52,6 +58,15 @@ export const getCertificatesByCourse = async (req, res) => {
   }
 };
 
+export const getAllCertificateByUserId = async (req, res) => {
+  try {
+    const certificates = await Certificate.find({user : req.user.id}).populate('user').populate('course')
+    res.status(200).json(certificates)
+  } catch (error){
+    res.status(500).json({ message: 'Error fetching certificates', error: error.message });
+  }
+}
+
 
 export const  deleteOnce = async (req, res) =>{
   try {
@@ -59,10 +74,28 @@ export const  deleteOnce = async (req, res) =>{
     if (!certificate) {
     return res.status(404).json({ message: 'certificate not found' })
   }
-  
   res.status(203).json({ message: 'certificate deleted' })
   } catch (error) {
     res.status(500).json({ message: 'Error while deleting certificate', error: error.message });
   }
+}
 
+
+export const downloadCertificate = async (req, res) =>{
+  try{
+    const certificate = await Certificate.findOne({certificateId : req.params.id}).populate('user')
+    if (!certificate) {
+      return res.status(404).json({ message: 'Certificate not found' });
+  } 
+  const firstName = certificate.user.firstName
+  console.log('firstName : ' + firstName)
+  const location = path.join(__dirname, '..', 'public', 'pdf', `${firstName}_certificate.pdf`)
+  res.download(location, (err) =>{
+    if (err) {
+      return res.status(500).json({ message: 'Error downloading certificate', error: err.message });
+    }
+  })
+  }catch (error) {
+    res.status(500).json({ message: 'Error while downloading certificate', error: error.message });
+  }
 }

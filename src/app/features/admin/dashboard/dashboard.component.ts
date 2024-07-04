@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DashboardService } from '@app/_services/dashboard.service';
 import { Chart, registerables, LinearScale, CategoryScale, BarElement, BarController} from 'chart.js';
 
 @Component({
@@ -7,17 +8,19 @@ import { Chart, registerables, LinearScale, CategoryScale, BarElement, BarContro
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  earningsMonthly: string = '$40';
-  earningsAnnual: string = '$215,000';
-  tasksCompletion: number = 50;
-  pendingRequests: number = 18;
+ 
 
-  constructor() {
+  dashboardData: any;
+
+  constructor(private dashboardService: DashboardService) {
     // Registering necessary components for the bar chart
     Chart.register(...registerables, LinearScale, CategoryScale, BarElement, BarController);
   }
 
 ngOnInit(){
+  this.dashboardService.getDashboardData().subscribe(data => {
+    this.dashboardData = data;
+  });
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
     new Chart(ctx, {
         type: 'bar',
@@ -38,4 +41,6 @@ ngOnInit(){
         }
       });
 }
+
+
 }

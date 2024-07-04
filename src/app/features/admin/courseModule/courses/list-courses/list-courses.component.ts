@@ -62,7 +62,6 @@ export class ListCourseComponent {
     })
     return aux || "No Category"
   }
-  // qqq
   createQuiz(courseId: string) {
     console.log('courseId '+courseId)
       this.router.navigate(['/admin/quiz/add'], { queryParams: { courseId: courseId } });

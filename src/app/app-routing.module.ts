@@ -11,16 +11,18 @@ const adminModule = () => import('@features/admin/admin.module').then(x => x.Adm
 const coursesModule = () => import('@features/coursesModule').then(x => x.CoursesModule);
 const PM = () => import('@features/accountsModule/profile/profile.module').then(x => x.ProfileModule);
 const PaymentModule = () => import('@features/coursesModule/payment').then(x => x.PaymentModule);
+const EventModule = () => import('@features/eventsModule').then(x => x.EventModule);
 const FM = () => import('@features/featuresModule/feature/features.module').then(x => x.FeatureModule);
 
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [RedirectAdminGuard]},
+    { path: '', component: HomeComponent, canActivate: [RedirectAdminGuard] , data : { breadcrumb : 'Home'  }},
     { path: 'account', loadChildren: accountModule },
-    { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin], breadcrumb : 'admin' } },
-    { path: 'courses', loadChildren: coursesModule , canActivate : [AuthGuard] , data : { breadcrumb : 'courses' }},
-    { path: 'profile', loadChildren: PM , canActivate : [AuthGuard]},
-    { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard]},
+    { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
+    { path: 'courses', loadChildren: coursesModule , data : { breadcrumb : 'Courses' , title : 'Courses' }},
+    { path: 'profile', loadChildren: PM , canActivate : [AuthGuard] , data : { breadcrumb : 'Profile' , title : 'Profile'}},
+    { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard], data : { breadcrumb : 'Payment', title : 'Payment' }},
+    { path: 'event', loadChildren: EventModule , data : { breadcrumb : 'Event', title : 'Events' }},
     { path: 'hello', loadChildren: FM , canActivate : [AuthGuard]},
 
     // otherwise redirect to home

@@ -2,18 +2,21 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
+const OptionsSchema = new Schema({
+  optionText: { type: String, required: true },
+  isCorrect: { type: Boolean, required: true },
+});
+
 const QuestionSchema = new Schema({
-  question: { type: String, required: true },  // qu'est ce python
-  options: [{ type: String, required: true }],  // [ "un jeu video", "un language de programmation", "les deux" ]
-  answer: { type: Number, required: true }   // 1   =====> [1,0,3]
+  questionText: { type: String, required: true },
+  options: [OptionsSchema],
 });
 
 const QuizSchema = new Schema({
-  name : String,
+  title : { type : String, required : true},
   course: {
     type: Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true
+    ref: 'Course'
   },
   questions: [QuestionSchema],
   creator : { 
