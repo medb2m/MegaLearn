@@ -13,7 +13,7 @@ export const generateCertificate = async (userId, courseId, quizId, score, cours
         date: new Date(),
         score: score,
         certificateId: certificateId,    
-        certificateLink : `${req.protocol}://${req.get('host')}/pdf/${req.user.firstName}_certificate.pdf`
+        certificateLink : `${req.protocol}://${req.get('host')}/pdfs/${req.user.firstName}_certificate.pdf`
         // certificateLink : `http://localhost:4000/pdf/${firstName}_certificate.pdf`
     });
 

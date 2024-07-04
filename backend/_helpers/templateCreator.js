@@ -23,7 +23,7 @@ export const templateGenerator = async (firstName, lastName, courseTitle, certif
         }
       }
 
-      const outputPath = path.join(__dirname, '..', 'public', 'pdf', `${firstName}_certificate.pdf`);
+      const outputPath = path.join(__dirname, '..', 'public', 'pdfs', `${firstName}_certificate.pdf`);
       const writeStream = fs.createWriteStream(outputPath);
       doc.pipe(writeStream);
 

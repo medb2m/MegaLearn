@@ -117,13 +117,15 @@ export const takeQuiz = async (req, res) => {
 
     let score = 0;
 
-    for (let i = 0 ; i<quiz.questions?.length; i++) {
+    for (let i = 0 ; i < quiz?.questions?.length ; i++) {
       const userAnswer = answers[i];
-      const correctOption = question?.options?.find(option => option?.isCorrect && option?.optionText === userAnswer);
+      const correctOption = quiz?.questions[i]?.options?.find(option => option?.isCorrect && option?.optionText == userAnswer);
       if (correctOption) {
         score += 1;
       }
     }
+
+    console.log('score' + score )
 
     const percentage = (score / quiz?.questions?.length) * 100;
 
@@ -135,7 +137,7 @@ export const takeQuiz = async (req, res) => {
       const certificate = await generateCertificate(userId, courseId, quiz._id, percentage, course.title, req);
       
       return res.status(200).json({
-        message: `Quiz passed, certificate generated you can find at http://localhost:4000/pdf/${userName}_certificate.pdf`,
+        message: `Quiz passed, certificate generated you can find at http://localhost:4000/pdfs/${userName}_certificate.pdf`,
         percentage
       })
     } else { 

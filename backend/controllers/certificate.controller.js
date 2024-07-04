@@ -89,7 +89,7 @@ export const downloadCertificate = async (req, res) =>{
   } 
   const firstName = certificate.user.firstName
   console.log('firstName : ' + firstName)
-  const location = path.join(__dirname, '..', 'public', 'pdf', `${firstName}_certificate.pdf`)
+  const location = path.join(__dirname, '..', 'public', 'pdfs', `${firstName}_certificate.pdf`)
   res.download(location, (err) =>{
     if (err) {
       return res.status(500).json({ message: 'Error downloading certificate', error: err.message });

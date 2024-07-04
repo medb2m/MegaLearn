@@ -56,7 +56,7 @@ export class TakeQuizComponent implements OnInit {
       options: this.fb.array([])
     });
 
-    if (question && question.options) {
+    if (question && question?.options) {
       question.options.forEach((option: any) => {
         (questionForm.get('options') as FormArray).push(this.fb.group({
           optionText: [option.optionText, Validators.required],
@@ -83,38 +83,32 @@ export class TakeQuizComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('7')
     this.submitted = true;
-    console.log('6')
     /* if (this.form.invalid) {
       return;
     } */
     
     // Préparer les réponses
-    const answers = this.form.value.questions.map((question: any) => {
-    const selectedOption = question.options.find((option: any) => option.isCorrect);
-    console.log(' prep ' + selectedOption)
-    return selectedOption ? selectedOption.optionText : null;
+    const answers = this.form.value.questions?.map((question: any) => {
+    const selectedOption = question?.options?.find((option: any) => option?.isCorrect);
+    return selectedOption ? selectedOption?.optionText : null;
   });
-    console.log('5')
-
     //const answers = this.form.value.questions.map((q: any) => q.options.findIndex((o: any) => o));
-    console.log('4')
     this.quizService.takeQuiz(this.courseId, { answers })
       .pipe(first())
       .subscribe({
         next: (result: any) => {
-          console.log('3')
           this.score = result.percentage;
           this.certificate = result.certificate;
-          this.alertService.success('You succed with '+(result.percentage).toFixed(2) +' %' , { keepAfterRouteChange: true });
+          this.alertService.success('You succed with '+(result.percentage)?.toFixed(2) +' %' , { keepAfterRouteChange: true });
           this.router.navigate(['/quizzes']);
         },
         error: (error: any) => {
-          console.log('2')
           this.alertService.error(error);
         }
       });
-      console.log('1')
   }
+
+
+
 }
