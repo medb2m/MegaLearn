@@ -62,11 +62,12 @@ export const updateQuizById = async (req, res) => {
     if (quiz.creator.toString() !== req.user.id) {
       return res.status(403).json({ message: 'User not authorized to update this quiz' });
     }
-
+   
     //Object.assign(quiz, req.body);
-    quiz.title = req.body.title
+    quiz.title = req.body?.title;
+    quiz.questions = req.body?.questions;
+    
     await quiz.save();
-
     res.status(200).json(quiz);
   } catch (error) {
     res.status(500).json({ message: 'Error updating quiz', error: error.message });
@@ -116,17 +117,17 @@ export const takeQuiz = async (req, res) => {
 
     let score = 0;
 
-    quiz.questions.forEach((question, index) => {
-      const userAnswer = answers[index];
-      const correctOption = question.options.find(option => option.isCorrect && option.optionText === userAnswer);
+    for (let i = 0 ; i<quiz.questions?.length; i++) {
+      const userAnswer = answers[i];
+      const correctOption = question?.options?.find(option => option?.isCorrect && option?.optionText === userAnswer);
       if (correctOption) {
         score += 1;
       }
-    });
+    }
 
-    const percentage = (score / quiz.questions.length) * 100;
+    const percentage = (score / quiz?.questions?.length) * 100;
 
-    const course = await Course.findById(courseId)
+    const course = await Course.findById(courseId);
     if (percentage >= 65) {
       const userName = req.user.firstName +"_"+ req.user.lastName
       console.log('username here ' + userName )
