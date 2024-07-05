@@ -8,7 +8,6 @@ import { LayoutComponent } from './layout';
 import { SharedModule } from '@app/shared';
 import { ClaimRoutingModule } from './claim-routing.module';
 import { ChatComponent } from './chat/chat.component';
-import { ChatAppComponent } from './chat copy/chatapp.component';
 
 
 
@@ -18,7 +17,6 @@ import { ChatAppComponent } from './chat copy/chatapp.component';
     DetailsComponent,
     LayoutComponent,
     ChatComponent,
-    ChatAppComponent,
   
     
   ],

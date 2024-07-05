@@ -1,4 +1,33 @@
 import Claim from '../models/claim.model.js';
+import Chat from '../models/chat.model.js'
+
+// add Message to chat
+export const addMessage = async (req, res) => {
+
+    try {
+        const newMsg = new Chat({
+            senderID: req.body.senderID,
+            senderName: req.body.senderName,
+            message: req.body.message,
+            time: req.body.time,
+        });
+    
+        await newMsg.save()
+        res.status(201).json(newMsg)
+      } catch (error){
+        res.status(500).json({message : 'Error while saving the message.'})
+      }
+}
+
+export const getMessages = async (req, res) => {
+  try {
+    //const claimerId = req.params.id
+    const messages = await Chat.find().populate('senderID')
+    res.json(messages)
+  }catch(error){
+    res.status(500).json({message : 'Error while retrieving messages.'})
+  }
+}
 
 export const createClaim = async (req, res) => {
   const claim = new Claim(req.body);

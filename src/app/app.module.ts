@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from '@core/interceptors';
 import { AccountService } from '@app/_services';
@@ -18,10 +17,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
 //const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
-/* export function socketIoConfigFactory(accountService: AccountService): SocketIoConfig {
-    const token = accountService.accountValue?.jwtToken;
-    return { url: 'ws://localhost:4000', options: { auth: { token }, transports : ['websocket'] } };
-  } */
+
 
 @NgModule({
     imports: [
@@ -45,11 +41,6 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        /* {
-      provide: 'SocketIoConfig',
-      useFactory: socketIoConfigFactory,
-      deps: [AccountService]
-    } */
     ],
     bootstrap: [AppComponent]
 })

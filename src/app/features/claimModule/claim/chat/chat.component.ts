@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { AccountService } from '@app/_services';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Chat } from '@app/_models';
+import { AccountService, ClaimService } from '@app/_services';
 import { SocketService } from '@app/_services/socket.service';
 import { Socket } from 'ngx-socket-io';
-import { Message  } from '@app/_models';
+
 
 interface ChatMessage {
   content: string;
@@ -23,20 +24,33 @@ export class ChatComponent {
     roomId: string = 'defaultRoom'; // Example room ID, adjust as needed
     token?:string
     pdp?:string
+    username!:string
+    userID!:string
     incomingMsg : any
+    outGoingMsg : any
+
+    @ViewChild('chatMessages') private chatMessagesContainer!: ElementRef;
     
-    constructor(private socket: SocketService, private accountService : AccountService, private so : Socket) {
-      this.token = this.accountService.accountValue?.jwtToken;
+    constructor(
+      private socket: SocketService, 
+      private accountService : AccountService, 
+      private claimService : ClaimService) {
+      this.token = this.accountService.accountValue!.jwtToken;
       this.pdp = this.accountService.accountValue?.image;
+      this.username = this.accountService.accountValue!.username;
+      this.userID = this.accountService.accountValue!.id;
     }
 
     ngOnInit() {
       console.log('pic link ' + this.pdp)
+      console.log('USER ID ' + this.userID)
+      this.loadMessages();
       
 
-      this.socket.on('message', (message : string, pdp : string, time : any) => {
+      this.socket.on('message', (message : string, pdp : string, time : any, senderName: string) => {
         this.incomingMsg = {};
         this.incomingMsg.message = message
+        this.incomingMsg.senderName = senderName
         this.incomingMsg.pdp = pdp
         this.incomingMsg.time = time
         this.messages.push(this.incomingMsg);
@@ -65,12 +79,38 @@ export class ChatComponent {
       // Reconnect with the token
       //this.socket.reconnectWithToken();
     }
+
+    loadMessages() {
+      this.claimService.getMessages().subscribe(
+          (data: any[]) => {
+              this.messages = data.map((message) => {
+                  // Assuming `message.senderID` is an object with an `image` property
+                  return {
+                      ...message,
+                      pdp: message.senderID.image,
+                  };
+              });
+          },
+          (error) => {
+              console.error('Error fetching messages', error);
+          }
+      );
+  }
+  
     
     
     sendMessage():void {
       if(this.token){
-        if (this.message.trim() !== '') {
-          let time = this.getCurrentTime()
+        let time = this.getCurrentTime()
+        const formData = new FormData();
+        formData.append('senderID', this.userID)
+        formData.append('senderName', this.username)
+        formData.append('message', this.message)
+        formData.append('time', time)
+        this.claimService.addMessage(formData).subscribe(() => {
+          console.log(' message evoyer au backend')
+        })
+        if(this.message.trim() !== ''){
           this.socket.emit('message',this.token, this.message, time, this.pdp);
           this.message = ''
         }
@@ -92,6 +132,14 @@ export class ChatComponent {
   
       let formattedTime = hours + ":" + minutes;
       return formattedTime;
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.chatMessagesContainer.nativeElement.scrollTop = this.chatMessagesContainer.nativeElement.scrollHeight;
+    } catch(err) {
+      console.error('Scroll to bottom error:', err);
+    }
   }
     
 

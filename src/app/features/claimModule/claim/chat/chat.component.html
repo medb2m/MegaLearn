@@ -1,8 +1,8 @@
-<div class="chat-container">
-  <div class="chat-messages">
+<!-- <div class="chat-container">
+  <div class="chat-messages" #chatMessages>
     <div *ngFor="let msg of messages" class="message"> 
       <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" width="45" height="45" class="rounded-circle"
-      style="object-fit: cover;">{{ msg.message }} <span class="text-muted">{{ msg.time }}</span>
+      style="object-fit: cover;">{{ msg.senderName }} : {{ msg.message }} <span class="text-muted">{{ msg.time }}</span>
     </div>
   </div>
   <div class="chat-input">
@@ -11,6 +11,19 @@
       (keyup.enter)="sendMessage()"
       placeholder="Type your message..."
     />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div> -->
+
+<div class="chat-container">
+  <div class="chat-messages" #chatMessages>
+    <div *ngFor="let msg of messages" class="message"> 
+      <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" class="rounded-circle" style="object-fit: cover;">
+      {{ msg.senderName }} : {{ msg.message }} <span class="text-muted">{{ msg.timestamp }}</span>
+    </div>
+  </div>
+  <div class="chat-input">
+    <input [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>

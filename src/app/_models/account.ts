@@ -3,7 +3,7 @@
 export class Account {
     id: string = "";
     title?: string;
-    username?: string;
+    username!: string;
     firstName?: string;
     lastName?: string;
     email?: string;

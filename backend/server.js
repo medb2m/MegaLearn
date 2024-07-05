@@ -23,7 +23,6 @@ import videoRoutes from './routes/video.routes.js'
 import categoryRoutes from './routes/category.routes.js'
 import blogRoutes from './routes/post.routes.js'
 import claimRoutes from './routes/claim.routes.js'
-import chatRoutes from './routes/chat.routes.js'
 import quizRoutes from './routes/quiz.routes.js'
 import certificateRoutes from './routes/certificate.routes.js'
 import eventRoutes from './routes/event.routes.js'
@@ -104,8 +103,6 @@ app.use('/categories', categoryRoutes);
 app.use('/blog', blogRoutes);
 // Claim Routers 
 app.use('/claim', claimRoutes);
-// Chat Routers 
-app.use('/chat', chatRoutes);
 // Quiz Routers 
 app.use('/quiz', quizRoutes);
 // Certificate Routers 

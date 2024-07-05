@@ -52,9 +52,8 @@ io.on('connection', (socket) => {
             }
       //console.log(token);
       //console.log('token');
-      message = `${socket.user.username}: ${message}`
       console.log('token222');
-      io.emit('message', message ,pdp, time );
+      io.emit('message', message ,pdp, time, socket.user.username );
       console.log('token333');
     });
   
