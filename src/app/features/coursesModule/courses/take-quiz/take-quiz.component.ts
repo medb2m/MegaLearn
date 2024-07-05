@@ -7,6 +7,7 @@ import { AlertService, QuizService } from '@app/_services';
 import { first } from 'rxjs';
 import { Question } from '@app/_models';
 import { Option } from '@app/_models/option';
+import { CertificatesService } from '@app/_services/certificates.service';
 
 @Component({
     selector: 'app-my-courses',
@@ -21,14 +22,15 @@ export class TakeQuizComponent implements OnInit {
   loading = false;
   submitted = false;
   score?: number;
-  certificate?: string;
+  certificate?: any;
   quiz : any
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private quizService: QuizService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private certificatesService: CertificatesService
   ) {}
 
   ngOnInit(): void {
@@ -101,7 +103,11 @@ export class TakeQuizComponent implements OnInit {
           this.score = result.percentage;
           this.certificate = result.certificate;
           this.alertService.success('You succed with '+(result.percentage)?.toFixed(2) +' %' , { keepAfterRouteChange: true });
-          this.router.navigate(['/quizzes']);
+          // simulate a 1second delay for better user experience (enough time to read the success message)
+          setTimeout(()=>{
+            this.downloadCertificate(this.certificate?.certificateId);
+            this.router.navigate(['/quizzes']);
+          }, 1000);  
         },
         error: (error: any) => {
           this.alertService.error(error);
@@ -109,6 +115,24 @@ export class TakeQuizComponent implements OnInit {
       });
   }
 
+  downloadCertificate(certificateId: string) {
+  this.certificatesService.downloadCertificate(certificateId)
+      .subscribe(blob => {
+        const fileURL = window.URL.createObjectURL(blob);
+        this.certificatesService.getCertificatesById(certificateId).subscribe(certificate => {
+          const newWindow = window.open(fileURL);
+          if (newWindow) {
+            newWindow.onload = () => {
+              newWindow.document.title = certificate.certificateLink;
+            };
+          } else {
+            console.error('Failed to open new window');
+          }
+        });
+      }, error => {
+        console.error('Error downloading certificate', error);
+      });
+    }
 
 
 }

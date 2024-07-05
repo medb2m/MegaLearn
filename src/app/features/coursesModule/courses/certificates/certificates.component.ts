@@ -49,7 +49,6 @@ export class certificatesComponent implements OnInit {
  */
 
   downloadCertificate(certificateId: string) {
-    console.log('hello');
     this.certificatesService.downloadCertificate(certificateId)
       .subscribe(blob => {
         const fileURL = window.URL.createObjectURL(blob);

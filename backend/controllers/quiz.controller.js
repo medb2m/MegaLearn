@@ -105,7 +105,7 @@ export const takeQuiz = async (req, res) => {
     const { answers } = req.body
 
     // Check if the user has already passed the quiz for this course
-    /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });
+   /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });
     if (existingCertificate) {
       return res.status(400).json({ message: 'You have already passed the quiz for this course' });
     } */
@@ -138,6 +138,7 @@ export const takeQuiz = async (req, res) => {
       
       return res.status(200).json({
         message: `Quiz passed, certificate generated you can find at http://localhost:4000/pdfs/${userName}_certificate.pdf`,
+        certificate: certificate,
         percentage
       })
     } else { 
