@@ -65,7 +65,7 @@ async function sendVerificationEmail(user, origin) {
     await sendEmail({
         to: user.email,
         subject: 'MegaLearn - Verify Email',
-        html: `<h4>Verify Email</h4>
+        htmlContent: `<h4>Verify Email</h4>
                <p>Thanks for registering!</p>
                ${message}`
     });
