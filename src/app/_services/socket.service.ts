@@ -10,7 +10,7 @@ import { io } from 'socket.io-client';
 })
 export class SocketService extends Socket {
   constructor(private accountService: AccountService) {
-    super({ url: environment.apiUrl, options: { autoConnect: false } });
+    super({ url: 'ws://localhost:4000', options: { autoConnect: false } });
     this.initializeSocket();
   }
 
@@ -18,13 +18,17 @@ export class SocketService extends Socket {
     const token = this.accountService.accountValue?.jwtToken;
 
     if (token) {
-      io('http://localhost:4000', {
+      const sok = io('http://localhost:4000/', {
         auth: {
           token
-        } ,
-        transports: ['websocket'] 
+        }/* ,
+        query : {
+            token
+        },
+        transports: ['websocket']  */
       });
-      this.connect();
+      sok.connect();
+      this.connect()
     } 
       
   }
@@ -32,15 +36,18 @@ export class SocketService extends Socket {
   public reconnectWithToken(): void {
     const token = this.accountService.accountValue?.jwtToken;
     if (token) {
-        io('ws://localhost:4000', {
+      const sok = io('ws://localhost:4000', {
             auth: {
               token
             },
+            query : {
+                token
+            },
             transports: ['websocket'] 
           });
-      this.disconnect();
+      sok.disconnect();
       console.log('sar discont')
-      this.connect();
+      sok.connect();
     }
   }
 }

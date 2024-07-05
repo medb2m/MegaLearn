@@ -44,7 +44,7 @@ const io = new Server(httpServer, {
     }
 });
 
-io.engine.on("initial_headers", (headers, req) => {
+/* io.engine.on("initial_headers", (headers, req) => {
     headers["test"] = "123";
     headers["set-cookie"] = "mycookie=456";
   });
@@ -53,9 +53,12 @@ io.engine.on("initial_headers", (headers, req) => {
   io.engine.on("headers", (headers, req) => {
     headers["test2"] = "789";
     
-  });
+  }); */
+
 // Socket Event Management
 handleSocketEvents(io)
+
+
 
 io.engine.on("connection_error", (err) => {
     console.log(err.req);      // the request object

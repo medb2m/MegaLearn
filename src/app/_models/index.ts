@@ -7,4 +7,5 @@ export * from './question';
 export * from './event';
 export * from './meeting';
 export * from './participant';
+export * from './message';
 export * from './entity';

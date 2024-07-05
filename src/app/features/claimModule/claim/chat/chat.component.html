@@ -1,6 +1,9 @@
 <div class="chat-container">
   <div class="chat-messages">
-    <div *ngFor="let msg of messages" class="message">{{ msg }}</div>
+    <div *ngFor="let msg of messages" class="message"> 
+      <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" width="45" height="45" class="rounded-circle"
+      style="object-fit: cover;">{{ msg.message }} <span class="text-muted">{{ msg.time }}</span>
+    </div>
   </div>
   <div class="chat-input">
     <input

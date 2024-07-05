@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { AccountService } from '@app/_services';
 import { SocketService } from '@app/_services/socket.service';
 import { Socket } from 'ngx-socket-io';
-
-
-interface Message {
-  content: string;
-  isSent: boolean;
-}
+import { Message  } from '@app/_models';
 
 interface ChatMessage {
   content: string;
@@ -25,10 +20,28 @@ interface ChatMessage {
 export class ChatComponent {
     message : string = ''
     messages : any[] = []
-
-    constructor(private socket: SocketService, private accountService : AccountService, private so : Socket) {}
+    roomId: string = 'defaultRoom'; // Example room ID, adjust as needed
+    token?:string
+    pdp?:string
+    incomingMsg : any
+    
+    constructor(private socket: SocketService, private accountService : AccountService, private so : Socket) {
+      this.token = this.accountService.accountValue?.jwtToken;
+      this.pdp = this.accountService.accountValue?.image;
+    }
 
     ngOnInit() {
+      console.log('pic link ' + this.pdp)
+      
+
+      this.socket.on('message', (message : string, pdp : string, time : any) => {
+        this.incomingMsg = {};
+        this.incomingMsg.message = message
+        this.incomingMsg.pdp = pdp
+        this.incomingMsg.time = time
+        this.messages.push(this.incomingMsg);
+      });
+
       this.socket.on('connect', () => {
         console.log('Connected to WebSocket server');
       });
@@ -36,10 +49,6 @@ export class ChatComponent {
       this.socket.on('disconnect', (reason : any) => {
         console.log('Disconnected from WebSocket server:', reason);
       }); 
-  
-      this.socket.on('wallah', (message: string) => {
-        this.messages.push(message);
-      });
       this.socket.on("connect_error", (err : any) => {
         // the reason of the error, for example "xhr poll error"
         console.log(err.message);
@@ -50,17 +59,41 @@ export class ChatComponent {
         // some additional context, for example the XMLHttpRequest object
         console.log(err.context);
       });
-  
+
+      let currentDate = this.getCurrentTime()
+      console.log(currentDate);
       // Reconnect with the token
       //this.socket.reconnectWithToken();
     }
-    test : string = 'hello'
+    
+    
     sendMessage():void {
-      if (this.message.trim() !== ''){
-        this.socket.emit('wallah', this.test);
-        this.message = ''
+      if(this.token){
+        if (this.message.trim() !== '') {
+          let time = this.getCurrentTime()
+          this.socket.emit('message',this.token, this.message, time, this.pdp);
+          this.message = ''
+        }
+      } else {
+        console.log('user not connected ')
       }
-    } 
+    }
+
+    getCurrentTime() {
+      let currentDate = new Date();
+      let hours = currentDate.getHours();
+      let minutes = currentDate.getMinutes();
+      let chminutes : string
+  
+      // Ajoute un zéro devant les minutes si elles sont inférieures à 10
+      if (minutes < 10) {
+          chminutes = "0" + minutes;
+      }
+  
+      let formattedTime = hours + ":" + minutes;
+      return formattedTime;
+  }
+    
 
     ngOnDestroy() {
       this.socket.disconnect(); // Disconnect socket

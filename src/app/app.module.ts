@@ -18,10 +18,10 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
 //const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
-export function socketIoConfigFactory(accountService: AccountService): SocketIoConfig {
+/* export function socketIoConfigFactory(accountService: AccountService): SocketIoConfig {
     const token = accountService.accountValue?.jwtToken;
-    return { url: 'http://localhost:4000', options: { auth: { token } } };
-  }
+    return { url: 'ws://localhost:4000', options: { auth: { token }, transports : ['websocket'] } };
+  } */
 
 @NgModule({
     imports: [
@@ -32,7 +32,7 @@ export function socketIoConfigFactory(accountService: AccountService): SocketIoC
         AppRoutingModule,
         SharedModule,
         NgxMaskModule.forRoot(),
-        SocketIoModule.forRoot({ url: 'http://localhost:4000', options: {} })  // Dummy config to be replaced
+        SocketIoModule.forRoot({ url: 'ws://localhost:4000', options: {transports : ['websocket']} })  // Dummy config to be replaced
         //SocketIoModule.forRoot(config)
         //PlyrModule
     ],
@@ -45,11 +45,11 @@ export function socketIoConfigFactory(accountService: AccountService): SocketIoC
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        {
+        /* {
       provide: 'SocketIoConfig',
       useFactory: socketIoConfigFactory,
       deps: [AccountService]
-    }
+    } */
     ],
     bootstrap: [AppComponent]
 })
