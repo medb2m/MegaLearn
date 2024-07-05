@@ -1,0 +1,27 @@
+<div class="post-detail" *ngIf="post">
+  <div class="blog-card">
+    <img class="blog-img" [src]="post.image" [alt]="post.title" />
+    <div class="text-overlay">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.createdAt | date:'short'}}</p>
+      <p>{{ post.content }}</p>
+      
+    </div>
+  </div>
+
+  <div class="comments-section">
+    <h2>Comments</h2>
+    <div *ngFor="let comment of comments" class="comment">
+      <div class="comment-author">
+        <img [src]="comment.author.image || 'assets/img/pdp.jpg'" alt="{{ comment.author.username }}" class="author-avatar" />
+        <h5>{{ comment.author.username }}</h5>
+      </div>
+      <p>{{ comment.content }}</p>
+    </div>
+
+    <div class="add-comment">
+      <textarea [(ngModel)]="newComment" placeholder="Add a comment"></textarea>
+      <button (click)="addComment()">Submit</button>
+    </div>
+  </div>
+</div>

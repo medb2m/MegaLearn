@@ -1,26 +1,31 @@
-import { AbstractControl } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-// custom validator to check that two fields match
-export function MustMatch(controlName: string, matchingControlName: string) {
-    return (group: AbstractControl) => {
-        const control = group.get(controlName);
-        const matchingControl = group.get(matchingControlName);
+import { AccountService } from '@app/_services';
 
-        if (!control || !matchingControl) {
-            return null;
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanActivate {
+    constructor(
+        private router: Router,
+        private accountService: AccountService
+    ) { }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const account = this.accountService.accountValue;
+        if (account) {
+            // check if route is restricted by role
+            if (route.data['roles'] && !route.data['roles'].includes(account.role)) {
+                // role not authorized so redirect to home page
+                this.router.navigate(['/']);
+                return false;
+            }
+
+            // authorized so return true
+            return true;
         }
 
-        // return if another validator has already found an error on the matchingControl
-        if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
-            return null;
-        }
-
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
-        return null;
+        // not logged in so redirect to login page with the return url 
+        this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url } });
+        return false;
     }
 }

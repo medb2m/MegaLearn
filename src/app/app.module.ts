@@ -13,12 +13,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from '@features/home';
 import { SharedModule } from '@shared/shared.module';
 import { BackButtonComponent } from './shared/components/back-button';
-import { NgxMaskModule } from 'ngx-mask';
-import { UserBlogComponent } from './components/user-blog/user-blog.component';
-import { AdminBlogComponent } from './components/admin-blog/admin-blog.component'
+import { NgxMaskModule } from 'ngx-mask'
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
-
+//const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+/* export function socketIoConfigFactory(accountService: AccountService): SocketIoConfig {
+    const token = accountService.accountValue?.jwtToken;
+    return { url: 'ws://localhost:4000', options: { auth: { token }, transports : ['websocket'] } };
+  } */
 
 @NgModule({
     imports: [
@@ -28,20 +31,25 @@ import { AdminBlogComponent } from './components/admin-blog/admin-blog.component
         FormsModule,
         AppRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        SocketIoModule.forRoot({ url: 'ws://localhost:4000', options: {transports : ['websocket']} })  // Dummy config to be replaced
+        //SocketIoModule.forRoot(config)
         //PlyrModule
     ],
     declarations: [
         AppComponent,
         HomeComponent,
         BackButtonComponent,
-        UserBlogComponent,
-        AdminBlogComponent,
     ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        /* {
+      provide: 'SocketIoConfig',
+      useFactory: socketIoConfigFactory,
+      deps: [AccountService]
+    } */
     ],
     bootstrap: [AppComponent]
 })
