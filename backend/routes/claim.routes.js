@@ -7,12 +7,12 @@ import { uploadImage } from '../_middleware/multerConfig.js';
 const router = express.Router();
 
 router.post('/msg', authorize(), uploadImage, addMessage)
-router.get('/msg', authorize(), getMessages)
-router.post('/', authorize(), createClaim);
+router.get('/msg/:claimId', authorize(), getMessages)
+router.post('/', authorize(), uploadImage, createClaim);
 router.get('/', authorize(), getAllClaims);
 router.get('/:id', authorize(), getClaimById);
-router.put('/:id', authorize(), updateClaimById);
-router.delete('/:id', authorize(Role.Admin), deleteClaimById);
+router.put('/:id', authorize(), uploadImage,updateClaimById);
+router.delete('/:id', authorize(), deleteClaimById);
 
 
 export default router;

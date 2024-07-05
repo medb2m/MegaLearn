@@ -5,6 +5,7 @@ import Chat from '../models/chat.model.js'
 export const addMessage = async (req, res) => {
 
     try {
+        const claimId = req.body.claimId
         const newMsg = new Chat({
             senderID: req.body.senderID,
             senderName: req.body.senderName,
@@ -13,6 +14,9 @@ export const addMessage = async (req, res) => {
         });
     
         await newMsg.save()
+
+        // Find the claim and push the new message to its chat array
+        await Claim.findByIdAndUpdate(claimId, { $push: { chat: newMsg._id } });
         res.status(201).json(newMsg)
       } catch (error){
         res.status(500).json({message : 'Error while saving the message.'})
@@ -21,18 +25,35 @@ export const addMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
-    //const claimerId = req.params.id
-    const messages = await Chat.find().populate('senderID')
-    res.json(messages)
+    const claimId = req.params.claimId;
+    //const messages = await Chat.find().populate('senderID')
+    const claim = await Claim.findById(claimId).populate({
+      path: 'chat',
+      populate: { path: 'senderID' }
+    });
+
+    if (!claim) {
+      return res.status(404).json({ message: 'Claim not found' });
+    }
+    res.json(claim.chat);
+    //res.json(messages)
   }catch(error){
     res.status(500).json({message : 'Error while retrieving messages.'})
   }
 }
 
 export const createClaim = async (req, res) => {
-  const claim = new Claim(req.body);
-  await claim.save();
-  res.status(201).json(claim);
+  try {
+    const claim = new Claim({
+      title : req.body.title,
+      description : req.body.description,
+      author: req.user._id,
+    })
+    await claim.save()
+    res.status(201).json(claim)
+  } catch (error){
+    res.status(500).json({message : 'Error while creating the claim.'})
+  }
 };
 
 export const getAllClaims = async (req, res) => {

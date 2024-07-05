@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListComponent } from './list/list.component';
+import { ClaimComponent } from './list/claim.component';
 import { LayoutComponent } from './layout';
-import { DetailsComponent } from './details/details.component';
-import { AuthGuard } from '@core/guards';
 import { ChatComponent } from './chat/chat.component';
 
 
@@ -12,12 +10,11 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children: [
-        { path: '', component: ListComponent },
+        { path: '', component: ClaimComponent },
         { path: 'chat', component: ChatComponent },
-        { path: 'details/:id', component: DetailsComponent },
     ]
 }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

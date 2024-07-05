@@ -1,0 +1,48 @@
+<section class="claims-container">
+  <div class="table-container">
+    <header>Claims List</header>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:45%">Title</th>
+          <th style="width:10%">Status</th>
+          <th style="width:30%" class="text-center">Actions</th>
+          <th style="width:15%">Chat</th> <!-- Nouvelle colonne pour le bouton Chat -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of claims">
+          <td>{{ claim.title }}</td>
+          <td>{{ claim.status }}</td>
+          <td>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary" (click)="editClaim(claim)"> Edit
+              </button>
+              <button class="btn btn-danger" (click)="deleteClaim(claim._id)"> Delete
+              </button>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-outline-dark" (click)="openChatModal(claim._id)">Chat</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <section class="form-container">
+    <header>Your Claim</header>
+    <form [formGroup]="claimForm" (ngSubmit)="onSubmit()">
+      <div class="input-box">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Enter your claim title" />
+      </div>
+      <div class="input-box">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" placeholder="Enter your claim description"></textarea>
+      </div>
+      <div class="input-box">
+        <button class="btn-submit" type="submit" [disabled]="claimForm.invalid">Send</button>
+      </div>
+    </form>
+  </section>
+</section>

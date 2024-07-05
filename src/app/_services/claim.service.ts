@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Chat } from '@app/_models';
+import { Chat, Claim } from '@app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,31 +16,26 @@ export class ClaimService {
     return this.http.post(`${this.apiUrl}/msg`, msg);
   }
 
-  getMessages(): Observable<Chat[]> {
-    return this.http.get<Chat[]>(`${this.apiUrl}/msg`);
+  getMessages(claimId : string): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${this.apiUrl}/msg/${claimId}`);
   }
+  create(claim: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, claim);
+}
 
-  getPostById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
-  }
+getAll(): Observable<Claim[]> {
+    return this.http.get<Claim[]>(this.apiUrl);
+}
 
-  createPost(post: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, post);
-  }
+getById(claimId: string): Observable<Claim> {
+    return this.http.get<Claim>(`${this.apiUrl}/${claimId}`);
+}
 
-  updatePost(id: string, post: FormData): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, post);
-  }
+update(claimId: string, claim: FormData): Observable<Claim> {
+    return this.http.put<Claim>(`${this.apiUrl}/${claimId}`, claim);
+}
 
-  deletePost(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
-  }
-
-  createComment(postId: string, comment : any) {
-    return this.http.post(`${this.apiUrl}/comments/${postId}`, comment);
-  }
-
-  getAllComments(postId : string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/comments/${postId}`);
-  }
+delete(claimId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${claimId}`);
+}
 }

@@ -1,17 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Chat } from '@app/_models';
 import { AccountService, ClaimService } from '@app/_services';
 import { SocketService } from '@app/_services/socket.service';
-import { Socket } from 'ngx-socket-io';
 
-
-interface ChatMessage {
-  content: string;
-  roomId: string;
-  senderID?: string;  // Optional, if you want to use it later
-  senderName?: string;  // Optional, if you want to use it later
-  timestamp?: Date;  // Optional, if you want to use it later
-}
 
 @Component({
   selector: 'app-chat',
@@ -19,15 +10,14 @@ interface ChatMessage {
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+  @Input() claimId!: string;
     message : string = ''
     messages : any[] = []
-    roomId: string = 'defaultRoom'; // Example room ID, adjust as needed
     token?:string
     pdp?:string
     username!:string
     userID!:string
     incomingMsg : any
-    outGoingMsg : any
 
     @ViewChild('chatMessages') private chatMessagesContainer!: ElementRef;
     
@@ -80,8 +70,12 @@ export class ChatComponent {
       //this.socket.reconnectWithToken();
     }
 
+    ngAfterViewChecked() {
+      this.scrollToBottom();
+    }
+
     loadMessages() {
-      this.claimService.getMessages().subscribe(
+      this.claimService.getMessages(this.claimId).subscribe(
           (data: any[]) => {
               this.messages = data.map((message) => {
                   // Assuming `message.senderID` is an object with an `image` property
@@ -107,6 +101,7 @@ export class ChatComponent {
         formData.append('senderName', this.username)
         formData.append('message', this.message)
         formData.append('time', time)
+        formData.append('claimId', this.claimId)
         this.claimService.addMessage(formData).subscribe(() => {
           console.log(' message evoyer au backend')
         })
@@ -123,14 +118,16 @@ export class ChatComponent {
       let currentDate = new Date();
       let hours = currentDate.getHours();
       let minutes = currentDate.getMinutes();
-      let chminutes : string
+      let chminutes : string = '0'
   
       // Ajoute un zéro devant les minutes si elles sont inférieures à 10
       if (minutes < 10) {
-          chminutes = "0" + minutes;
+        chminutes += minutes.toString()
+      }else {
+        chminutes = minutes.toString()
       }
   
-      let formattedTime = hours + ":" + minutes;
+      let formattedTime = hours + ":" + chminutes;
       return formattedTime;
   }
 
@@ -141,8 +138,6 @@ export class ChatComponent {
       console.error('Scroll to bottom error:', err);
     }
   }
-    
-
     ngOnDestroy() {
       this.socket.disconnect(); // Disconnect socket
     }

@@ -8,4 +8,5 @@ export * from './event';
 export * from './meeting';
 export * from './participant';
 export * from './chat';
+export * from './claim';
 export * from './entity';
