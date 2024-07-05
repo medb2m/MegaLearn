@@ -5,4 +5,5 @@ export class Claim {
     status?: 'Open' | 'In Progress' | 'Closed';
     author?: string;
     chat?: [];
+    createdAt !: Date;
 }

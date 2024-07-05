@@ -42,11 +42,7 @@ nav {
 
 
 
-.search-box{
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-}
+
 .input-search{
   height: 50px;
   width: 50px; 
@@ -60,6 +56,12 @@ nav {
   background-color: #67676720;
   padding-right: 40px;
   color:rgb(104, 85, 224);
+}
+
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
 }
 
 .input-search-small{

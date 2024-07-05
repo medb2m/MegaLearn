@@ -1,0 +1,1 @@
+export * from './claim-modal.component'
