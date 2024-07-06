@@ -6,7 +6,7 @@ import checkEnrollment from '../_middleware/checkEnrollement.js';
 
 const router = express.Router();
 
-router.post('/:id', authorize(), createQuiz);
+router.post('/:id/:AI', authorize(), createQuiz);
 router.get('/', getAllQuizzes);
 router.get('/:id', authorize(), getQuizById);
 router.get('/course/:courseId', authorize(), getQuizbyCourseID);

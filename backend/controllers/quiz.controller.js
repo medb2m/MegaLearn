@@ -1,6 +1,5 @@
 import Quiz from '../models/quiz.model.js';
 import { generateCertificate } from '../_helpers/certificateGenerator.js';
-import Certificate from '../models/certificate.model.js';
 import Course from '../models/course.model.js';
 
 import { OpenAI } from 'openai';
@@ -15,31 +14,48 @@ export const createQuiz = async (req, res) => {
   try {
 
     const topic = req.body?.title;
+    const AI = (req.params?.AI === 'true');
+    let quiz = {};
 
-    const quizAI = await generateQuizContent(nbQuestions, nbAnswers, topic)
-    /* generateQuiz(topic).then((quiz) => {
-      console.log("Formatted Quiz:");
-      console.log(formatQuiz(quiz));
-    }); */
+    if (AI) {
+      const quizAI = await generateQuizContent(nbQuestions, nbAnswers, topic)
+      /* generateQuiz(topic).then((quiz) => {
+        console.log("Formatted Quiz:");
+        console.log(formatQuiz(quiz));
+      }); */
 
-    console.log(quizAI.candidates[0]?.content?.parts[0]?.text);
-      //?.text);
+      const generated_quiz = formatQuizResponse(quizAI.candidates[0]?.content?.parts[0]?.text);
 
-    const quiz = new Quiz({
-     ...req.body,
-      course : req.params.id,
-      creator: req.user.id
-    });
+      quiz = new Quiz({
+        title: req.body?.title,
+        questions: generated_quiz?.questions,
+        course: req.params.id,
+        creator: req.user.id
+      });
+    }
+
+    else {
+      quiz = new Quiz({
+        ...req.body,
+        course: req.params.id,
+        creator: req.user.id
+      });
+    }
+
+
     await quiz.save();
     res.status(201).json(quiz);
+
+
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'Error creating quiz', error: error.message });
   }
 }
 
 export const getQuizbyCourseID = async (req, res) => {
   try {
-    const quiz = await Quiz.findOne({course : req.params.courseId}).populate('questions')
+    const quiz = await Quiz.findOne({ course: req.params.courseId }).populate('questions')
     res.json(quiz)
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving Quiz', error: error.message });
@@ -81,11 +97,11 @@ export const updateQuizById = async (req, res) => {
     if (quiz.creator.toString() !== req.user.id) {
       return res.status(403).json({ message: 'User not authorized to update this quiz' });
     }
-   
+
     //Object.assign(quiz, req.body);
     quiz.title = req.body?.title;
     quiz.questions = req.body?.questions;
-    
+
     await quiz.save();
     res.status(200).json(quiz);
   } catch (error) {
@@ -124,10 +140,10 @@ export const takeQuiz = async (req, res) => {
     const answers = req.body
 
     // Check if the user has already passed the quiz for this course
-   /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });
-    if (existingCertificate) {
-      return res.status(400).json({ message: 'You have already passed the quiz for this course' });
-    } */
+    /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });
+     if (existingCertificate) {
+       return res.status(400).json({ message: 'You have already passed the quiz for this course' });
+     } */
 
     const quiz = await Quiz.findOne({ course: courseId });
     if (!quiz) {
@@ -136,7 +152,7 @@ export const takeQuiz = async (req, res) => {
 
     let score = 0;
 
-    for (let i = 0 ; i < quiz?.questions?.length ; i++) {
+    for (let i = 0; i < quiz?.questions?.length; i++) {
       const userAnswer = answers[i];
       const correctOption = quiz?.questions[i]?.options?.find(option => option?.isCorrect && option?.optionText == userAnswer);
       if (correctOption) {
@@ -144,23 +160,23 @@ export const takeQuiz = async (req, res) => {
       }
     }
 
-    console.log('score' + score )
+    console.log('score' + score)
 
     const percentage = (score / quiz?.questions?.length) * 100;
 
     const course = await Course.findById(courseId);
     if (percentage >= 65) {
-      const userName = req.user.firstName +"_"+ req.user.lastName
-      console.log('username here ' + userName )
-      console.log('title here '+quiz.title)
+      const userName = req.user.firstName + "_" + req.user.lastName
+      console.log('username here ' + userName)
+      console.log('title here ' + quiz.title)
       const certificate = await generateCertificate(userId, courseId, quiz._id, percentage, course.title, req);
-      
+
       return res.status(200).json({
         message: `Quiz passed, certificate generated you can find at http://localhost:4000/pdfs/${userName}_certificate.pdf`,
         certificate: certificate,
         percentage
       })
-    } else { 
+    } else {
 
       return res.status(200).json({
         message: 'Quiz completed, but score is score isn\'t enough'
@@ -176,55 +192,59 @@ export const takeQuiz = async (req, res) => {
 
 function initialize_vertex() {
   // Initialize Vertex with your Cloud project and location
-const vertex_ai = new VertexAI({project: 'applied-range-428600-v9', location: 'us-central1'});
-const model = 'gemini-1.5-flash-001';
+  const vertex_ai = new VertexAI({ project: 'applied-range-428600-v9', location: 'us-central1' });
+  const model = 'gemini-1.5-flash-001';
 
-// Instantiate the models
-const generativeModel = vertex_ai.preview.getGenerativeModel({
-  model: model,
-  generationConfig: {
-    'maxOutputTokens': 8192,
-    'temperature': 1,
-    'topP': 0.95,
-  },
-  safetySettings: [
-    {
+  // Instantiate the models
+  const generativeModel = vertex_ai.preview.getGenerativeModel({
+    model: model,
+    generationConfig: {
+      'maxOutputTokens': 8192,
+      'temperature': 1,
+      'topP': 0.95,
+    },
+    safetySettings: [
+      {
         'category': 'HARM_CATEGORY_HATE_SPEECH',
         'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
-    },
-    {
+      },
+      {
         'category': 'HARM_CATEGORY_DANGEROUS_CONTENT',
         'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
-    },
-    {
+      },
+      {
         'category': 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
         'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
-    },
-    {
+      },
+      {
         'category': 'HARM_CATEGORY_HARASSMENT',
         'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
-    }
-  ],
-});
-return generativeModel;
+      }
+    ],
+  });
+  return generativeModel;
 }
 
 function formatQuizResponse(text) {
-  const questions = text?.strip("` \n");
-  let formattedQuiz = "";
+  //console.log(text?.trim());
+  const questions = JSON.parse(text?.substring(7, text?.length - 4)?.replace(/\n/g, ''));
+
+  /* let formattedQuiz = "";
   questions?.forEach((question, index) => {
     formattedQuiz += `Q${index + 1}: ${question.trim()}\n\n`;
-  });
-  return formattedQuiz;
+  }); */
+  return questions;
 }
 
 async function generateQuizContent(numQuestions, numAnswers, topic) {
   const generativeModel = initialize_vertex();
   const req = {
     contents: [
-        { role: 'user', 
-          parts: [
-          { text: `Generate a quiz in french with ${numQuestions} questions on the topic ${topic}. 
+      {
+        role: 'user',
+        parts: [
+          {
+            text: `Generate a quiz in french with ${numQuestions} questions on the topic ${topic}. 
             Each question should have ${numAnswers} answer choices and one correct answer indicated.
 
            input: Quiz de programmation Python
@@ -254,23 +274,24 @@ async function generateQuizContent(numQuestions, numAnswers, topic) {
                   }
            `
           }
-        ]}
+        ]
+      }
     ]
   };
-try {
-  const streamingResp = await generativeModel.generateContentStream(req);
+  try {
+    const streamingResp = await generativeModel.generateContentStream(req);
 
-  /* for await (const item of streamingResp.stream) {
-    process.stdout.write('stream chunk: ' + JSON.stringify(item) + '\n');
-  } */
+    /* for await (const item of streamingResp.stream) {
+      process.stdout.write('stream chunk: ' + JSON.stringify(item) + '\n');
+    } */
 
-  return await streamingResp.response;
-  /* ) */
-}
-catch (error) {
-  console.log(error);
-}
-  
+    return await streamingResp.response;
+    /* ) */
+  }
+  catch (error) {
+    console.log(error);
+  }
+
 }
 
 
@@ -280,9 +301,9 @@ catch (error) {
 async function generateQuiz(topic, numQuestions = 5) {
   // Set up OpenAI configuration
   // removed Open AI API key for Github Security concerns (key is stored locally)
-  const openai = new OpenAI({apiKey: 'sk-proj-yehwfg8ojcmGC2BaNaGdT3BlbkFJj4Vpz4lngsY4KpkFDX4r'});
+  const openai = new OpenAI({ apiKey: 'sk-proj-yehwfg8ojcmGC2BaNaGdT3BlbkFJj4Vpz4lngsY4KpkFDX4r' });
   const prompt = `Generate a quiz with ${numQuestions} questions on the topic '${topic}'. Each question should have 4 answer choices and one correct answer indicated.`;
-  
+
   try {
     const response = await openai.completions.create({
       model: "gpt-3.5-turbo-instruct",

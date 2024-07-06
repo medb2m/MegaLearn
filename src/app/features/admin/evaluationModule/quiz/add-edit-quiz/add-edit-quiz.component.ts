@@ -208,7 +208,7 @@ get f() { return this.form.controls; }
     return this.openAccordionIndex === index;
   }
 
-  onSubmit() {
+  onSubmit(AI = false) {
     console.log('Form:', this.form.value);
     this.submitted = true;
     if (this.form.invalid) {
@@ -220,7 +220,7 @@ get f() { return this.form.controls; }
     const quizData = this.form.value;
     const saveQuiz = this.id
       ? this.quizService.update(this.id, quizData)
-      : this.quizService.create(this.courseId, quizData);
+      : this.quizService.create(this.courseId, quizData, AI?.toString());
       console.log('1')
     saveQuiz.pipe(first()).subscribe({
       next: () => {
@@ -266,4 +266,7 @@ get f() { return this.form.controls; }
     });
     console.log('1')
   }
- */}}
+ */}
+
+
+}

@@ -24,8 +24,8 @@ export class QuizService {
     return this.http.get<Quiz>(`${this.apiUrl}/course/${courseId}`);
   }
 
-  create(id: string , quiz: FormData): Observable<Quiz> {
-    return this.http.post<Quiz>(`${this.apiUrl}/${id}`, quiz);
+  create(id: string , quiz: FormData, AI: string): Observable<Quiz> {
+    return this.http.post<Quiz>(`${this.apiUrl}/${id}/${AI}`, quiz);
   }
 
   update(id: string, quiz: FormData): Observable<any> {

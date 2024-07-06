@@ -167,7 +167,6 @@ export class TakeQuizComponent implements OnInit {
     }
        
     isAnswered(index: number) {
-      console.log(this.answers ? this.answers[index] ? 'Answered' : 'Not Answered' : 'Not Answered' );
       return this.answers ? this.answers[index] ? 'Answered' : 'Not Answered' : 'Not Answered';
     }
 
