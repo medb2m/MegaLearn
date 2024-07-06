@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Chat } from '@app/_models';
 import { AccountService, ClaimService } from '@app/_services';
 import { SocketService } from '@app/_services/socket.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class ChatComponent {
     constructor(
       private socket: SocketService, 
       private accountService : AccountService, 
-      private claimService : ClaimService) {
+      private claimService : ClaimService,
+      public activeModal: NgbActiveModal,
+    ) {
       this.token = this.accountService.accountValue!.jwtToken;
       this.pdp = this.accountService.accountValue?.image;
       this.username = this.accountService.accountValue!.username;

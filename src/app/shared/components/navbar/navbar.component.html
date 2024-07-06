@@ -1,7 +1,5 @@
-﻿<div class="timer text-center">
-  <ng-container *ngIf="timeLeft$ | async as timeLeft">
-    <p class="mb-0">Special Offer 90% Discount Now !!! Ends in {{ formatTime(timeLeft) }}</p>
-  </ng-container>
+﻿<div class="timer text-center" *ngIf="timeLeft$ | async as timeLeft">
+  <p>Promo 70% Now <span>Ends in {{ formatTime(timeLeft) }} !!!</span></p>
 </div>
 <ng-container *ngIf="isSmallScreen; else normalScreen">
   <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm" >
@@ -29,9 +27,6 @@
             </li>
             <li class="nav-item">
               <a routerLink="courses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="courses/mycourses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">My Courses</a>
             </li>
             <li class="nav-item">
               <a routerLink="event" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Events</a>
@@ -89,13 +84,12 @@
                 <a routerLink="/profile" class="dropdown-item" aria-current="true">
                   <div class="row g-0 align-items-center">
                     <div class="col-3">
-                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="50" height="50" class="rounded-circle "
                         style="object-fit: cover;" alt="profile picture">
                     </div>
                     <div class="col-9">
                       <div class="ps-3">
-                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
-                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                        <div class="text-secondary mt-1 fs-10">{{ account.username }}</div>
                       </div>
                     </div>
                   </div>
@@ -121,12 +115,20 @@
                 </a>
               </li>
               <li>
+                <a class="dropdown-item" routerLink="courses/mycourses">
+                  <span>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    <span class="fs-7">My Courses</span>
+                  </span>
+                </a>
+              </li>
+              <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
                 <a class="dropdown-item" routerLink="event/myevents">
                   <span>
-                    <i class="bi bi-gear-fill me-2"></i>
+                    <i class="bi bi-calendar me-2"></i>
                     <span class="fs-7">My Events</span>
                   </span>
                 </a>
@@ -134,8 +136,8 @@
               <li>
                 <a class="dropdown-item" routerLink="claim">
                   <span>
-                    <i class="bi bi-question-circle-fill me-2"></i>
-                    <span class="fs-7">Help Center</span>
+                    <i class="bi bi-envelope me-2"></i>
+                    <span class="fs-7">Claim & Help</span>
                   </span>
                 </a>
               </li>
@@ -198,9 +200,6 @@
             <a routerLink="courses" class="nav-link align-items-center styled-link">Courses</a>
           </li>
           <li class="nav-item">
-            <a routerLink="courses/mycourses" class="nav-link align-items-center styled-link">My Learning</a>
-          </li>
-          <li class="nav-item">
             <a routerLink="event" class="nav-link d-flex align-items-center styled-link" >Events</a>
           </li>
           <li class="nav-item">
@@ -240,7 +239,7 @@
               <img [src]="account.image || 'assets/img/pdp.jpg'" width="45" height="45" class="rounded-circle"
                 style="object-fit: cover;" alt="Profile Pic">
             </a>
-            <ul class="dropdown-menu dropdown-menu-md-end bsb-dropdown-animation bsb-fadeIn custom-dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end w-100 custom-dropdown-menu">
               <li>
                 <h6 class="dropdown-header fs-7 text-center">Welcome, {{account.firstName}}</h6>
               </li>
@@ -250,14 +249,13 @@
               <li>
                 <a routerLink="/profile" class="dropdown-item" aria-current="true">
                   <div class="row g-0 align-items-center">
-                    <div class="col-4 ">
-                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                    <div class="col-3">
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="50" height="50" class="rounded-circle "
                         style="object-fit: cover;" alt="profile picture">
                     </div>
-                    <div class="col-8">
-                      <div class="ps-1">
-                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
-                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                    <div class="col-9">
+                      <div class="ps-3">
+                        <div class="text-secondary mt-1 fs-10">{{ account.username }}</div>
                       </div>
                     </div>
                   </div>
@@ -283,12 +281,20 @@
                 </a>
               </li>
               <li>
+                <a class="dropdown-item" routerLink="courses/mycourses">
+                  <span>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    <span class="fs-7">My Courses</span>
+                  </span>
+                </a>
+              </li>
+              <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
                 <a class="dropdown-item" routerLink="event/myevents">
                   <span>
-                    <i class="bi bi-gear-fill me-2"></i>
+                    <i class="bi bi-calendar me-2"></i>
                     <span class="fs-7">My Events</span>
                   </span>
                 </a>
@@ -296,8 +302,8 @@
               <li>
                 <a class="dropdown-item" routerLink="claim">
                   <span>
-                    <i class="bi bi-question-circle-fill me-2"></i>
-                    <span class="fs-7">Help Center</span>
+                    <i class="bi bi-envelope me-2"></i>
+                    <span class="fs-7">Claim & Help</span>
                   </span>
                 </a>
               </li>

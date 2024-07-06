@@ -1,11 +1,5 @@
 .ag-format-container {
-    width: 1142px;
     margin: 0 auto;
-  }
-  
-  
-  body {
-    background-color: #000;
   }
   .ag-courses_box {
     display: -webkit-box;
@@ -32,7 +26,8 @@
   .ag-courses-item_link {
     display: block;
     padding: 30px 20px;
-    background-color: #121212;
+    background-color: #ffffff80;
+    border: solid #212121;
   
     overflow: hidden;
   
@@ -56,21 +51,21 @@
   
     font-weight: bold;
     font-size: 30px;
-    color: #FFF;
+    color: #212121;
   
     z-index: 2;
     position: relative;
   }
   .ag-courses-item_date-box {
     font-size: 18px;
-    color: #FFF;
+    color: #212121;
   
     z-index: 2;
     position: relative;
   }
   .ag-courses-item_date {
     font-weight: bold;
-    color: #f9b234;
+    color: #f934f9;
   
     -webkit-transition: color .5s ease;
     -o-transition: color .5s ease;

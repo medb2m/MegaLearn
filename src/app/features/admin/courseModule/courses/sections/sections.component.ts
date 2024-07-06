@@ -96,7 +96,7 @@ export class SectionsComponent {
       }
     });
   }
-  // Dont close HERE !!!!!!!!!!
+  
   close() {
     // Logic to close the modal, if needed
     const modal = document.getElementById('videoModal');

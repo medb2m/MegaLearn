@@ -225,7 +225,7 @@ get f() { return this.form.controls; }
     saveQuiz.pipe(first()).subscribe({
       next: () => {
         console.log('Quiz saved successfully');
-        this.router.navigate([`admin/quiz/`])
+        this.router.navigate([`admin/quiz`])
       },
       error: error => {
         console.error('Error saving quiz:', error);

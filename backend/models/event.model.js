@@ -15,7 +15,8 @@ const EventSchema = new Schema(
     },
     host: { type: Schema.Types.ObjectId, ref: "User", required: true },
     participants: [ParticipantSchema],
-    meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' }
+    meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' },
+    image : String
   },
   { timestamps: true }
 );

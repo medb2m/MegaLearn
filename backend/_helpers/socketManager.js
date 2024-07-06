@@ -56,11 +56,9 @@ io.on('connection', (socket) => {
       io.emit('message', message ,pdp, time, socket.user.username );
       console.log('token333');
     });
-  
-    socket.on('disconnect', () => {
-      console.log('a user disconnected!');
-    });
   });
+
+  
 
     /* io.on('connection', (socket) => {
        // console.log('User connected:' + socket.user.username);

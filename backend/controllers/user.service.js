@@ -82,7 +82,7 @@ async function sendAlreadyRegisteredEmail(email, origin){
     await sendEmail({
         to: email,
         subject: 'MegaLearn - Email Already Registered',
-        html: `<h4>Email Already Registered</h4>
+        htmlContent: `<h4>Email Already Registered</h4>
                <p>Your email <strong>${email}</strong> is already registered.</p>
                ${message}`
     });
@@ -102,7 +102,7 @@ async function sendPasswordResetEmail(user, origin){
     await sendEmail({
         to: user.email,
         subject: 'MegaLearn - Reset Password',
-        html: `<h4>Reset Password Email</h4>
+        htmlContent: `<h4>Reset Password Email</h4>
                ${message}`
     });
 }

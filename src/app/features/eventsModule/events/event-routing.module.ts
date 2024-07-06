@@ -14,7 +14,7 @@ const routes: Routes = [
         { path: '', component: EventListComponent },
         { path: 'myevents', component: MyeventsComponent },
         { path: 'details/:id', component: EventdetailsComponent  },
-        { path: 'video/:id', component: VideoChatComponent  },
+        { path: 'meeting/:id', component: VideoChatComponent  },
     ]
 }
 ];

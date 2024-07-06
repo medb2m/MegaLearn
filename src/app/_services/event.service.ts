@@ -25,11 +25,11 @@ export class EventService {
     return this.http.get<Event[]>(`${this.apiUrl}/user`);
   }
 
-  create(event: Event): Observable<Event> {
+  create(event: FormData): Observable<Event> {
     return this.http.post<Event>(`${this.apiUrl}/create`, event);
   }
 
-  update(id: string, event: FormData): Observable<Event> {
+  update(id: any, event: FormData): Observable<Event> {
     return this.http.put<Event>(`${this.apiUrl}/${id}`, event);
   }
 
@@ -59,5 +59,9 @@ export class EventService {
 
   getPendingParticipants(eventId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/${eventId}/participants/pending`);
+  }
+
+  getUserStatus(eventId: string): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/events/${eventId}/user-status`);
   }
 }
