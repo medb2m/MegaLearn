@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+
+* {
+  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.blog-card {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  transition: all 450ms ease-out 0s;
+  overflow: hidden;
+  background: white;
+}
+
+.blog-img {
+  width: 100%;
+  height: auto;
+}
+
+.text-overlay {
+  padding: 20px;
+}
+
+.text-overlay h1 {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.text-overlay p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.comments-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h2 {
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 15px;
+}
+
+.comment {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment-author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment p {
+  color: #555;
+  margin-left: 50px;
+}
+
+.add-comment {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-comment textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+.add-comment button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: rgb(104, 85, 224);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-comment button:hover {
+  background-color: #c6c6c6;
+  color : #000;
+}

@@ -1,0 +1,18 @@
+﻿<!-- Navbar  -->
+<app-navbar *ngIf="account?.role !== Role.Admin "></app-navbar> 
+
+ 
+  <!-- global alert -->
+  <alert></alert>
+
+  <!-- Breadcrumb -->
+  <app-breadcrumb *ngIf="showBackButton"></app-breadcrumb> 
+
+  <!-- Back button -->
+  <app-back-button *ngIf="showBackButton"></app-back-button>
+
+  <!-- main router outlet -->
+  <router-outlet></router-outlet>
+
+<!-- Footer -->
+<app-footer></app-footer>

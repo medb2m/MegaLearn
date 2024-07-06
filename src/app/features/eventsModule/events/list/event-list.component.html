@@ -1,0 +1,20 @@
+<div class="ag-format-container">
+  <div class="ag-courses_box" >
+    <div class="ag-courses_item" *ngFor="let event of events">
+      <a routerLink="details/{{event._id}}" class="ag-courses-item_link">
+        <div class="ag-courses-item_bg"></div>
+
+        <div class="ag-courses-item_title">
+          {{ event.title }}
+        </div>
+
+        <div class="ag-courses-item_date-box">
+          Start:
+          <span class="ag-courses-item_date">
+            {{ event.date | date: 'short' }}
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

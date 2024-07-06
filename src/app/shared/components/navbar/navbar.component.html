@@ -1,0 +1,325 @@
+﻿<div class="timer text-center">
+  <ng-container *ngIf="timeLeft$ | async as timeLeft">
+    <p class="mb-0">Special Offer 90% Discount Now !!! Ends in {{ formatTime(timeLeft) }}</p>
+  </ng-container>
+</div>
+<ng-container *ngIf="isSmallScreen; else normalScreen">
+  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm" >
+    <div class="container-fluid">
+      <!--  Button -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bsbNavbar"
+        aria-controls="bsbNavbar" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- branding -->
+      <a class="navbar-brand" routerLink="/">
+        <div class="d-flex align-items-center">
+          <img [src]="'assets/styling/img/branding/megaLogo.png'" class="bsb-tpl-logo" alt="MegaLearnLogo">
+          <h1 class="navbar-brand-text">mega<span class="hide-on-small">Learn</span></h1>
+        </div>
+      </a>
+
+      <!-- links -->
+      <div class="collapse navbar-collapse justify-content-center" id="bsbNavbar" #navbarCollapse>
+        <div class="d-flex flex-column align-items-center w-100">
+          <ul class="navbar-nav bsb-dropdown-menu-responsive mb-2"> <!-- class="" -->
+            <li class="nav-item">
+              <a routerLink="home" class="nav-link align-items-center styled-link" (click)="closeNavbar()">Home</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="courses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="courses/mycourses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">My Courses</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="event" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Events</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Blog</a>
+            </li>
+          </ul>
+    
+          <div class="search-container ms-3 mb-2" (click)="stopPropagation($event)">
+            <!-- Search button-->
+         <div class="search-box">
+           <form (ngSubmit)="onSearch(searchInput.value)">
+             <button class="btn-search" type="submit"><i class="bi bi-search" ></i></button>
+             <input #searchInput type="search" class="input-search-small"  placeholder="Type to Search..." (input)="onSearchInput(searchInput.value)">
+           </form>
+         </div>
+  
+         <!-- Suggestions List -->
+         <div *ngIf="showSuggestions && searchResults.length" class="suggestions-list">
+           <ul class="list-group">
+             <li *ngFor="let course of searchResults" class="list-group-item" (click)="selectSuggestion(course)">
+               {{ course.title }}
+             </li>
+           </ul>
+         </div>
+         </div>
+
+         
+        </div>        
+
+        
+  
+      </div>
+
+      <!-- account Section -->
+      <div class="navbar-profile" > <!--  -->
+        
+        <ng-container *ngIf="account; else guest">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle bsb-dropdown-toggle-caret-disable" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="account.image || 'assets/img/pdp.jpg'" width="45" height="45" class="rounded-circle"
+                style="object-fit: cover;" alt="Profile Pic">
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end w-100 custom-dropdown-menu">
+              <li>
+                <h6 class="dropdown-header fs-7 text-center">Welcome, {{account.firstName}}</h6>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a routerLink="/profile" class="dropdown-item" aria-current="true">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-3">
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                        style="object-fit: cover;" alt="profile picture">
+                    </div>
+                    <div class="col-9">
+                      <div class="ps-3">
+                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
+                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/profile">
+                  <span>
+                    <i class="bi bi-person-fill me-2"></i>
+                    <span class="fs-7">View Profile</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="courses/certificate">
+                  <span>
+                    <i class="bi bi-award me-2"></i>
+                    <span class="fs-7">Certificates</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="event/myevents">
+                  <span>
+                    <i class="bi bi-gear-fill me-2"></i>
+                    <span class="fs-7">My Events</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="!">
+                  <span>
+                    <i class="bi bi-question-circle-fill me-2"></i>
+                    <span class="fs-7">Help Center</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item text-center" (click)="logout()">
+                  <span>
+                    <span class="fs-7">Log Out</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            
+          </div>
+
+          
+
+        </ng-container>
+        <ng-template #guest>
+          <div class="wrap">
+            <button class="button" routerLink="/account/login">Sign Up</button>
+          </div>
+        </ng-template>
+      </div>
+
+
+
+    </div>
+  </nav>
+</ng-container>
+<ng-template #normalScreen>
+  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm">
+    <div class="container-fluid">
+        <!--  Button -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bsbNavbar"
+          aria-controls="bsbNavbar" aria-label="Toggle Navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+  
+        <!-- branding -->
+        <a class="navbar-brand" routerLink="/">
+          <div class="d-flex align-items-center">
+            <img [src]="'assets/styling/img/branding/megaLogo.png'" class="bsb-tpl-logo" alt="MegaLearnLogo">
+            <h1 class="navbar-brand-text">mega<span class="hide-on-small">Learn</span></h1>
+          </div>
+        </a>
+  
+        
+  
+      <!-- Links -->
+      <div class="collapse navbar-collapse justify-content-center" id="bsbNavbar">
+        <ul class="navbar-nav bsb-dropdown-menu-responsive"> 
+          <li class="nav-item">
+            <a routerLink="home" class="nav-link align-items-center styled-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="courses" class="nav-link align-items-center styled-link">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="courses/mycourses" class="nav-link align-items-center styled-link">My Learning</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="event" class="nav-link d-flex align-items-center styled-link" >Events</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" >Blog</a>
+          </li>
+        </ul>
+
+        <div class="search-container ms-3 mb-2" (click)="stopPropagation($event)">
+           <!-- Search button-->
+        <div class="search-box" *ngIf="!isSmallScreen">
+          <form (ngSubmit)="onSearch(searchInput.value)">
+            <button class="btn-search" type="submit"><i class="bi bi-search" ></i></button>
+            <input #searchInput type="search" class="input-search"  placeholder="Type to Search..." (input)="onSearchInput(searchInput.value)">
+          </form>
+        </div>
+
+        <!-- Suggestions List -->
+        <div *ngIf="showSuggestions && searchResults.length" class="suggestions-list">
+          <ul class="list-group">
+            <li *ngFor="let course of searchResults" class="list-group-item" (click)="selectSuggestion(course)">
+              {{ course.title }}
+            </li>
+          </ul>
+        </div>
+        </div>
+       
+  
+      </div>
+
+      <!-- account Section -->
+      <div class="navbar-profile"> 
+        
+        <ng-container *ngIf="account; else guest">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle bsb-dropdown-toggle-caret-disable" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="account.image || 'assets/img/pdp.jpg'" width="45" height="45" class="rounded-circle"
+                style="object-fit: cover;" alt="Profile Pic">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-md-end bsb-dropdown-animation bsb-fadeIn custom-dropdown-menu">
+              <li>
+                <h6 class="dropdown-header fs-7 text-center">Welcome, {{account.firstName}}</h6>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a routerLink="/profile" class="dropdown-item" aria-current="true">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-4 ">
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                        style="object-fit: cover;" alt="profile picture">
+                    </div>
+                    <div class="col-8">
+                      <div class="ps-1">
+                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
+                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/profile">
+                  <span>
+                    <i class="bi bi-person-fill me-2"></i>
+                    <span class="fs-7">View Profile</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="courses/certificate">
+                  <span>
+                    <i class="bi bi-award me-2"></i>
+                    <span class="fs-7">Certificates</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="event/myevents">
+                  <span>
+                    <i class="bi bi-gear-fill me-2"></i>
+                    <span class="fs-7">My Events</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="!">
+                  <span>
+                    <i class="bi bi-question-circle-fill me-2"></i>
+                    <span class="fs-7">Help Center</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item text-center" (click)="logout()">
+                  <span>
+                    <span class="fs-7">Log Out</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+        <ng-template #guest>
+          <div class="wrap">
+            <button class="button" routerLink="/account/login">Sign Up</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+</ng-template>

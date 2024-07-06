@@ -1,0 +1,33 @@
+.course-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  height: 100%;
+  overflow: hidden; /* pour ne pas sortir du cadre */
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  height: 150px; /* Fixed height for all images */
+  object-fit: cover; /* Ensures images cover the area and don't distort */
+  transition: transform 0.3s ease-in-out;
+}
+
+.course-card:hover .card-img-top {
+  transform: scale(1.1); /* Zooms in slightly on hover */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.card-text {
+  text-align: left; /* Description from left */
+}
