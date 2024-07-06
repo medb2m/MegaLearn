@@ -4,6 +4,8 @@ export * from './courses.service';
 export * from './categories.service';
 export * from './video.service';
 export * from './quiz.service'
+<<<<<<< HEAD
+=======
 export * from './breakPointObserver.service'
 export * from './event.service'
 export * from './meeting.service'

@@ -1,11 +1,79 @@
+<<<<<<< HEAD
+
+   /* Search Styles */
+/*    .search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .suggestions-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #f1f1f1;
+  } */
+
+
+/* Lien stylisé */
+/* .styled-link {
+  position: relative;
+  text-decoration: none;
+  color: rgb(104, 85, 224);
+  font-weight: 600;
+  transition: color 0.4s;
+  padding: 5px 0; 
+}
+
+.styled-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0; 
+  background-color: rgb(104, 85, 224);
+  transition: all 0.4s ease-in-out;
+}
+
+.styled-link:hover::after {
+  width: 0; 
+} */
+
+=======
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 h1 {
   font-family: "Josefin Sans", sans-serif;
 }
 
+<<<<<<< HEAD
+=======
 nav {
   padding: 0;
 }
 
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 /* Lien stylisé */
 .styled-link {
   position: relative;
@@ -45,7 +113,11 @@ nav {
 
 .input-search{
   height: 50px;
+<<<<<<< HEAD
+  width: 50px;
+=======
   width: 50px; 
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
   border-style: none;
   padding: 10px;
   font-size: 18px;
@@ -57,6 +129,8 @@ nav {
   padding-right: 40px;
   color:rgb(104, 85, 224);
 }
+<<<<<<< HEAD
+=======
 
 .search-box{
   width: fit-content;
@@ -78,6 +152,7 @@ nav {
   color:rgb(104, 85, 224);
   width: 300px;
 }
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 .input-search::placeholder{
   color:rgb(104, 85, 224);
   font-size: 18px;
@@ -150,6 +225,7 @@ nav {
   }
 }
 
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 /* test navbar brand */
 
 .navbar-brand-text {
@@ -202,7 +278,10 @@ nav {
 .navbar-profile {
   order: 1;
   margin-left: auto;
+<<<<<<< HEAD
+=======
   
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 }
 
 .navbar-profile .nav-item {
@@ -227,8 +306,13 @@ nav {
   }
 
   .navbar-profile .nav-item .nav-link img {
+<<<<<<< HEAD
+    width: 25px;
+    height: 25px;
+=======
     width: 35px;
     height: 35px;
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
   }
 
   .navbar-toggler {
@@ -238,6 +322,11 @@ nav {
 
 @media (max-width: 575.98px) {
   .navbar-profile .nav-item .nav-link img {
+<<<<<<< HEAD
+    width: 20px;
+    height: 20px;
+  }
+=======
     width: 30px;
     height: 30px;
   }
@@ -304,4 +393,5 @@ nav {
 
 .suggestions-list li:hover {
   background-color: #f1f1f1;
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
 }

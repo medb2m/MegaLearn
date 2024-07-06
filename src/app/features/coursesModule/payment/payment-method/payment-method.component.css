@@ -37,7 +37,11 @@
   }
   
   .payment-details {
+<<<<<<< HEAD
+    margin-top: 40px;
+=======
     margin: 0;
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
   }
   
   .payment-details h2 {

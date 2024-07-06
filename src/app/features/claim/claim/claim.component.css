@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .claims-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .table-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-container header {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  .form-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container header {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form {
+    margin-top: 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+  }
+  
+  .input-box label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .input-box input, 
+  .input-box textarea {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+  }
+  
+  .input-box input:focus, 
+  .input-box textarea:focus {
+    background-color: #fff;
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  .btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-submit:hover {
+    background-color: #0056b3;
+  }
+  .edit-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .claims-container {
+      flex-direction: column;
+    }
+  }

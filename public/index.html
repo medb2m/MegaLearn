@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .chat-container { width: 300px; margin: auto; }
+    .messages { height: 300px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
+    .input-box { display: flex; }
+    .input-box input { flex: 1; padding: 10px; }
+    .input-box button { padding: 10px; }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="messages" id="messages"></div>
+    <div class="input-box">
+      <input type="text" id="messageInput" placeholder="Type a message">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+      socket.emit('send name', 'your_username'); // Replace with actual username
+    });
+
+    socket.on('receive message', (message) => {
+      const messages = document.getElementById('messages');
+      const messageElement = document.createElement('div');
+      messageElement.textContent = `${message.sender}: ${message.message} (Sent at: ${new Date(message.timestamp).toLocaleTimeString()})`;
+      messages.appendChild(messageElement);
+      messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
+    });
+
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      const reclamationId = 'your_reclamation_id'; // Replace with actual reclamation ID
+      const senderId = 'your_sender_id'; // Replace with actual sender ID
+      const timestamp = new Date(); // Capture the current time
+      if (message.trim()) {
+        socket.emit('send message', { 
+          message, 
+          reclamationId, 
+          sender: senderId, 
+          timestamp,
+          isRead: false 
+        });
+        messageInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>

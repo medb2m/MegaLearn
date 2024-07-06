@@ -6,6 +6,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { AlertComponent, FooterComponent, NavbarComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './components/list';
+<<<<<<< HEAD
+=======
 import { BreadcrumbComponent } from './components/breadcrumb';
 import { SocketService } from '@app/_services/socket.service';
 
@@ -14,7 +16,10 @@ import { SocketService } from '@app/_services/socket.service';
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+<<<<<<< HEAD
+=======
     BreadcrumbComponent,
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     ListComponent,
     SearchPipe,
     TruncatePipe
@@ -30,7 +35,10 @@ import { SocketService } from '@app/_services/socket.service';
     AlertComponent,
     NavbarComponent,
     FooterComponent,
+<<<<<<< HEAD
+=======
     BreadcrumbComponent,
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     ListComponent,
     SearchPipe,
     TruncatePipe

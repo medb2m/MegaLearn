@@ -10,6 +10,19 @@ import { Entity } from '@app/_models'
 export class AddEditEntityComponent implements OnInit {
 
     // Form decla
+<<<<<<< HEAD
+    form!: FormGroup;
+
+    // Image_Attribut 
+    selectedFile: File | null = null;
+    previewUrl: string | ArrayBuffer | null | undefined = null;
+
+    id?: string;
+    title!: string;
+    loading = false;
+    submitting = false;
+    submitted = false;
+=======
     form!: FormGroup
 
     // Image_Attribut 
@@ -21,6 +34,7 @@ export class AddEditEntityComponent implements OnInit {
     loading = false
     submitting = false
     submitted = false
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     attributType = ''
     entityId ?: any
 
@@ -46,7 +60,11 @@ export class AddEditEntityComponent implements OnInit {
         });
 
 
+<<<<<<< HEAD
+        this.title = 'Create Entity';
+=======
         this.title = 'Create Entity'
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
         if (this.id) {
             // edit mode
             

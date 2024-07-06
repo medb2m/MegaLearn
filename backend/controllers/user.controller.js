@@ -13,6 +13,10 @@ export function authenticateSchema(req, res, next) {
 }
 
 export function authenticate(req, res, next) {
+<<<<<<< HEAD
+    console.log(req.body)
+=======
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
     const { email, password } = req.body;
     const ipAddress = req.ip;
     UserService.authenticate({ email, password, ipAddress })

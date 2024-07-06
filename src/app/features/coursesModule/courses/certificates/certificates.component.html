@@ -9,7 +9,11 @@
         <div class="card-body">
           <h5 class="card-title">{{ certificate.course.title }}</h5>
           <p class="card-text">Certificate ID: {{ certificate.certificateId }}</p>
+<<<<<<< HEAD
+          <p class="card-text">Score: {{ certificate.score }}%</p>
+=======
           <p class="card-text">Score: {{ (certificate.score).toFixed(2) }}%</p>
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
           <button (click)="downloadCertificate(certificate.certificateId)" class="btn btn-primary btn-block">Download Certificate</button>
         </div>
       </div>

@@ -12,6 +12,8 @@ const CoursesModule = () => import('@features/admin').then(x => x.CoursesModule)
 const DashboardModule = () => import('@features/admin').then(x => x.DashboardModule);
 const CategoriesModule = () => import('@features/admin').then(x => x.CategoriesModule);
 const QuizModule = () => import('@features/admin').then(x => x.QuizModule);
+<<<<<<< HEAD
+=======
 const ProfileModule = () => import('@features/accountsModule/profile').then(x => x.ProfileModule);
 const eventModule = () => import('@features/admin/eventModule').then(x => x.EventModule);
 const blogModule = () => import('@features/admin/blogModule').then(x => x.PostModule);
@@ -30,6 +32,9 @@ const routes: Routes = [
             { path: 'categories', loadChildren: CategoriesModule },
             { path: 'feature', loadChildren: FeatureModule },
             { path: 'quiz', loadChildren: QuizModule },
+<<<<<<< HEAD
+            
+=======
             { path: 'profile', loadChildren: ProfileModule },
             { path: 'event', loadChildren: eventModule },
             { path: 'blog', loadChildren: blogModule },

@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+<<<<<<< HEAD
+    --plyr-color-main: #f09333;
+=======
     --plyr-color-main: rgb(104, 85, 224);
+>>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
   }
 
 .app-container {
     min-height: 320px;
+<<<<<<< HEAD
 }
 
 
