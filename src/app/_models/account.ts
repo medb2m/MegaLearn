@@ -3,11 +3,7 @@
 export class Account {
     id: string = "";
     title?: string;
-<<<<<<< HEAD
     username!: string;
-=======
-    username?: string;
->>>>>>> siwarMerge
     firstName?: string;
     lastName?: string;
     email?: string;

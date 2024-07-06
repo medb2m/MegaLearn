@@ -1,5 +1,4 @@
 import Claim from '../models/claim.model.js';
-<<<<<<< HEAD
 import Chat from '../models/chat.model.js'
 
 // add Message to chat
@@ -55,13 +54,6 @@ export const createClaim = async (req, res) => {
   } catch (error){
     res.status(500).json({message : 'Error while creating the claim.'})
   }
-=======
-
-export const createClaim = async (req, res) => {
-  const claim = new Claim(req.body);
-  await claim.save();
-  res.status(201).json(claim);
->>>>>>> siwarMerge
 };
 
 export const getAllClaims = async (req, res) => {

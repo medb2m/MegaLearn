@@ -1,5 +1,4 @@
 <div class="chat-container">
-<<<<<<< HEAD
   <h1>Chat about your claim</h1>
   <div class="chat-messages" #chatMessages>
     <div *ngFor="let msg of messages" class="message"> 
@@ -18,20 +17,3 @@
     <input class="input-search-small" [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
   </div>
 </div>
-=======
-  <div class="chat-messages">
-    <div *ngFor="let msg of messages" class="message"> 
-      <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" width="45" height="45" class="rounded-circle"
-      style="object-fit: cover;">{{ msg.message }} <span class="text-muted">{{ msg.time }}</span>
-    </div>
-  </div>
-  <div class="chat-input">
-    <input
-      [(ngModel)]="message"
-      (keyup.enter)="sendMessage()"
-      placeholder="Type your message..."
-    />
-    <button (click)="sendMessage()">Send</button>
-  </div>
-</div>
->>>>>>> siwarMerge

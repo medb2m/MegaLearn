@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-<<<<<<< HEAD
 import { AlertService, EventService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ParticipantComponent } from '../participant/participant.component';
@@ -13,17 +12,6 @@ import { first } from 'rxjs';
 export class AddEditEventComponent {
 
     form!: FormGroup;
-=======
-import { EventService } from '@app/_services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ParticipantComponent } from '../participant/participant.component';
-import { MeetingComponent } from '../meetings';
-
-@Component({templateUrl: 'add-edit-event.component.html' , styleUrls: ['add-edit-event.component.css']})
-export class AddEditEventComponent implements OnInit {
-
-    form: FormGroup;
->>>>>>> siwarMerge
   loading = false;
   submitted = false;
   title = 'Create Event';
@@ -32,46 +20,30 @@ export class AddEditEventComponent implements OnInit {
   participantId: string = '';
   meetingLink : string = ''
 
-<<<<<<< HEAD
   // Image_Attribut 
   selectedFile: File | null = null
   previewUrl: string | ArrayBuffer | null | undefined = null
 
-=======
->>>>>>> siwarMerge
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
-<<<<<<< HEAD
     private modalService: NgbModal,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
-=======
-    private modalService: NgbModal
-  ) {
->>>>>>> siwarMerge
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required],
       duration: [0, Validators.required],
       type: ['', Validators.required],
-<<<<<<< HEAD
       meeting : [''],
       image : ['']
     });
 
-=======
-      meeting : ['']
-    });
-  }
-
-  ngOnInit(): void {
->>>>>>> siwarMerge
     this.eventId = this.route.snapshot.paramMap.get('id') || undefined;
     if (this.eventId) {
       this.title = 'Edit Event';
@@ -91,7 +63,6 @@ export class AddEditEventComponent implements OnInit {
     return this.form.controls;
   }
 
-<<<<<<< HEAD
   // Handle file selection
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -103,34 +74,6 @@ export class AddEditEventComponent implements OnInit {
         this.previewUrl = reader.result
       };
       reader.readAsDataURL(this.selectedFile)
-=======
-  onSubmit() {
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.loading = true;
-
-    if (this.eventId) {
-      this.eventService.update(this.eventId, this.form.value).subscribe(
-        () => {
-          this.router.navigate(['admin/event']);
-        },
-        (error) => {
-          this.loading = false;
-        }
-      );
-    } else {
-      this.eventService.create(this.form.value).subscribe(
-        () => {
-          this.router.navigate(['admin/event']);
-        },
-        (error) => {
-          this.loading = false;
-        }
-      );
->>>>>>> siwarMerge
     }
   }
   openParticipantModal() {
@@ -143,7 +86,6 @@ export class AddEditEventComponent implements OnInit {
     console.log(' add eddit '+ this.eventId)
     modalRef.componentInstance.eventId = this.eventId;
   }
-<<<<<<< HEAD
   submitting = false
   onSubmit() {
     this.submitted = true;
@@ -197,6 +139,4 @@ export class AddEditEventComponent implements OnInit {
             }
         });
 }
-=======
->>>>>>> siwarMerge
 }
