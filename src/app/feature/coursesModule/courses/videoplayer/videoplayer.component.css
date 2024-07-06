@@ -1,0 +1,29 @@
+.video-player-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .video-section {
+    flex: 3;
+    margin-right: 20px;
+  }
+  
+  .sections-list {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .sections-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sections-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sections-list li:hover {
+    background-color: #f0f0f0;
+  }
+  

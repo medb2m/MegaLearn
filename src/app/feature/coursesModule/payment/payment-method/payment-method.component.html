@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Choose Payment Method</h2>
+      <div class="form-group">
+        <label>Payment Method:</label>
+        <div class="payment-method-options">
+          <div *ngFor="let method of paymentMethods" class="payment-method-option">
+            <label>
+            <div>
+                <strong>{{ method.name }} : </strong>
+            </div>
+            
+            <div >
+                <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" [value]="method.value">
+                <img [src]="method.image" alt="{{ method.name }}">
+            </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+  
+    <div class="payment-details" *ngIf="selectedPaymentMethod">
+      <h2>Payment Details : {{selectedPaymentMethod}}</h2>
+      <app-card-method *ngIf="selectedPaymentMethod === 'creditCard'"></app-card-method>
+      <!-- <app-paypal *ngIf="selectedPaymentMethod === 'paypal'"></app-paypal>
+      <app-bank-transfer *ngIf="selectedPaymentMethod === 'd17'"></app-bank-transfer> -->
+    </div>
+  </div>
