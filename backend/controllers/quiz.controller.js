@@ -280,7 +280,7 @@ catch (error) {
 async function generateQuiz(topic, numQuestions = 5) {
   // Set up OpenAI configuration
   // removed Open AI API key for Github Security concerns (key is stored locally)
-  const openai = new OpenAI({apiKey: ''});
+  const openai = new OpenAI({apiKey: 'sk-proj-yehwfg8ojcmGC2BaNaGdT3BlbkFJj4Vpz4lngsY4KpkFDX4r'});
   const prompt = `Generate a quiz with ${numQuestions} questions on the topic '${topic}'. Each question should have 4 answer choices and one correct answer indicated.`;
   
   try {
