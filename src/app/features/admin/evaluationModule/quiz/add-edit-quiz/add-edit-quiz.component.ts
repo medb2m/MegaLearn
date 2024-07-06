@@ -217,10 +217,17 @@ get f() { return this.form.controls; }
     }
     console.log('Form is valid');
     this.submitting = true;
-    const quizData = this.form.value;
+    let quizData = this.form.value;
+    if (AI) {
+      quizData = {
+        ...quizData,
+        AI: AI
+      }
+    }
+    console.log(quizData)
     const saveQuiz = this.id
       ? this.quizService.update(this.id, quizData)
-      : this.quizService.create(this.courseId, quizData, AI?.toString());
+      : this.quizService.create(this.courseId, quizData);
       console.log('1')
     saveQuiz.pipe(first()).subscribe({
       next: () => {

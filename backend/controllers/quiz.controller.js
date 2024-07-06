@@ -14,8 +14,9 @@ export const createQuiz = async (req, res) => {
   try {
 
     const topic = req.body?.title;
-    const AI = (req.params?.AI === 'true');
+    const AI = (req.body?.AI);
     let quiz = {};
+    console.log(AI)
 
     if (AI) {
       const quizAI = await generateQuizContent(nbQuestions, nbAnswers, topic)
@@ -139,6 +140,8 @@ export const takeQuiz = async (req, res) => {
     const userId = req.user.id
     const answers = req.body
 
+    console.log(answers);
+
     // Check if the user has already passed the quiz for this course
     /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });
      if (existingCertificate) {
@@ -225,17 +228,6 @@ function initialize_vertex() {
   return generativeModel;
 }
 
-function formatQuizResponse(text) {
-  //console.log(text?.trim());
-  const questions = JSON.parse(text?.substring(7, text?.length - 4)?.replace(/\n/g, ''));
-
-  /* let formattedQuiz = "";
-  questions?.forEach((question, index) => {
-    formattedQuiz += `Q${index + 1}: ${question.trim()}\n\n`;
-  }); */
-  return questions;
-}
-
 async function generateQuizContent(numQuestions, numAnswers, topic) {
   const generativeModel = initialize_vertex();
   const req = {
@@ -280,19 +272,27 @@ async function generateQuizContent(numQuestions, numAnswers, topic) {
   };
   try {
     const streamingResp = await generativeModel.generateContentStream(req);
-
-    /* for await (const item of streamingResp.stream) {
-      process.stdout.write('stream chunk: ' + JSON.stringify(item) + '\n');
-    } */
-
     return await streamingResp.response;
-    /* ) */
+    
   }
   catch (error) {
     console.log(error);
   }
 
 }
+
+function formatQuizResponse(text) {
+  //console.log(text?.trim());
+  const questions = JSON.parse(text?.substring(7, text?.length - 4)?.replace(/\n/g, ''));
+
+  /* let formattedQuiz = "";
+  questions?.forEach((question, index) => {
+    formattedQuiz += `Q${index + 1}: ${question.trim()}\n\n`;
+  }); */
+  return questions;
+}
+
+
 
 
 

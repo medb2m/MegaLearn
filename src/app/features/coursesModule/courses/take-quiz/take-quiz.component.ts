@@ -107,7 +107,7 @@ export class TakeQuizComponent implements OnInit {
     this.submitted = true;
     //console.log(this.form)
     
-    if (this.form.invalid) {
+    if (this.answers?.find ((x: any) => !x)) {
       alert("Please answer all quiz questions !");
       return;
     }
