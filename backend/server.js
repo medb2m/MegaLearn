@@ -23,10 +23,7 @@ import videoRoutes from './routes/video.routes.js'
 import categoryRoutes from './routes/category.routes.js'
 import blogRoutes from './routes/post.routes.js'
 import claimRoutes from './routes/claim.routes.js'
-<<<<<<< HEAD
-=======
 import chatRoutes from './routes/chat.routes.js'
->>>>>>> siwarMerge
 import quizRoutes from './routes/quiz.routes.js'
 import certificateRoutes from './routes/certificate.routes.js'
 import eventRoutes from './routes/event.routes.js'
@@ -42,12 +39,7 @@ const httpServer = createServer(app)
 // Init Socket.io with the HTTP Server
 const io = new Server(httpServer, {
     cors: {
-<<<<<<< HEAD
-        origin: '*',
-        //origin: ['http://localhost:4200', 'http://172.20.10.2:4200'],
-=======
         origin: 'http://localhost:4200', // Update this with your client's origin if needed
->>>>>>> siwarMerge
         methods: ['GET', 'POST']
     }
 });
@@ -63,74 +55,8 @@ const io = new Server(httpServer, {
     
   }); */
 
-<<<<<<< HEAD
-  import User from './models/user.model.js';
-  import jwt from 'jsonwebtoken';
-  import { config } from './_helpers/config.js';
-  
-  const { secret } = config;
-
-// Socket Event Management
-//handleSocketEvents(io)
-io.on('connection', (socket) => {
-  console.log('a user connected ');
-
-  socket.on('message', async (token,message,time,pdp) => {
-      const decoded = jwt.verify(token, secret);
-          const user = await User.findById(decoded.id);
-          if (!user) {
-              console.error('Authentication error: User not found');
-              return next(new Error('User not found'));
-          }else {
-              socket.user = user;
-              pdp = user.image
-          }
-    console.log('token222');
-    io.emit('message', message ,pdp, time, socket.user.username );
-    console.log('token333');
-  }); 
-
-  socket.on('join', (roomId) => {
-    socket.join(roomId);
-    socket.to(roomId).emit('user-joined', socket.id);
-    console.log(`User ${socket.id} joined room ${roomId}`);
-  });
-  
-  socket.on('offer', (data) => {
-    console.log('Offer received:', data)
-    socket.to(data.target).emit('offer', {
-      sdp: data.sdp,
-      sender: socket.id
-    })
-  })
-  
-  socket.on('answer', (data) => {
-    console.log('Answer received:', data);
-    socket.to(data.target).emit('answer', {
-      sdp: data.sdp,
-      sender: socket.id
-    })
-  });
-  
-  socket.on('ice-candidate', (data) => {
-    console.log('ICE candidate received:', data);
-    socket.to(data.target).emit('ice-candidate', {
-      candidate: data.candidate,
-      sender: socket.id
-    });
-  });
-  
-  socket.on('disconnection', () => {
-    console.log('a user disconnected!')
-  })
-
-})
-
-
-=======
 // Socket Event Management
 handleSocketEvents(io)
->>>>>>> siwarMerge
 
 
 
@@ -178,11 +104,8 @@ app.use('/categories', categoryRoutes);
 app.use('/blog', blogRoutes);
 // Claim Routers 
 app.use('/claim', claimRoutes);
-<<<<<<< HEAD
-=======
 // Chat Routers 
 app.use('/chat', chatRoutes);
->>>>>>> siwarMerge
 // Quiz Routers 
 app.use('/quiz', quizRoutes);
 // Certificate Routers 
