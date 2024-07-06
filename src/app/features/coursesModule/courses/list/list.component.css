@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #filterSortControls {
   transition: height 0.3s ease;
 }
@@ -25,12 +26,18 @@ a.text-primary:hover {
 }
 
 
+=======
+>>>>>>> siwarMerge
 .course-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     height: 100%;
+<<<<<<< HEAD
     overflow: hidden;
+=======
+    overflow: hidden; /* pour ne pas sortir du cadre */
+>>>>>>> siwarMerge
   }
   
   .course-card:hover {
@@ -39,13 +46,22 @@ a.text-primary:hover {
   }
   
   .card-img-top {
+<<<<<<< HEAD
     height: 150px; 
     object-fit: cover;
+=======
+    height: 150px; /* Fixed height for all images */
+    object-fit: cover; /* Ensures images cover the area and don't distort */
+>>>>>>> siwarMerge
     transition: transform 0.3s ease-in-out;
   }
   
   .course-card:hover .card-img-top {
+<<<<<<< HEAD
     transform: scale(1.1); 
+=======
+    transform: scale(1.1); /* Zooms in slightly on hover */
+>>>>>>> siwarMerge
   }
 
   .card-title {
@@ -56,6 +72,7 @@ a.text-primary:hover {
   }
   
   .card-text {
+<<<<<<< HEAD
     text-align: left; 
   } 
 
@@ -142,3 +159,7 @@ a.text-primary:hover {
   font-size: 22px;
 }
   
+=======
+    text-align: left; /* Description from left */
+  }
+>>>>>>> siwarMerge

@@ -42,7 +42,15 @@ nav {
 
 
 
+<<<<<<< HEAD
 
+=======
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+>>>>>>> siwarMerge
 .input-search{
   height: 50px;
   width: 50px; 
@@ -58,12 +66,15 @@ nav {
   color:rgb(104, 85, 224);
 }
 
+<<<<<<< HEAD
 .search-box{
   width: fit-content;
   height: fit-content;
   position: relative;
 }
 
+=======
+>>>>>>> siwarMerge
 .input-search-small{
   height: 50px;
   border-style: none;
@@ -103,7 +114,11 @@ nav {
   width: 300px;
   border-radius: 0px;
   background-color: transparent;
+<<<<<<< HEAD
   border-bottom:1px solid #ffffff80;
+=======
+  border-bottom:1px solid rgba(255,255,255,.5);
+>>>>>>> siwarMerge
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
 .input-search:focus{
@@ -115,13 +130,17 @@ nav {
 }
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> siwarMerge
 .timer {
   background-color: #292929;
   color: #fff;
   padding: 0.5rem 1rem;
   font-size: 1rem;
+<<<<<<< HEAD
   font-weight: 500;
 }
 
@@ -148,6 +167,9 @@ nav {
   .timer {
     font-size: 0.7rem; /* Masquer le texte à l'intérieur du span */
   }
+=======
+  font-weight: bold;
+>>>>>>> siwarMerge
 }
 
 /* test navbar brand */

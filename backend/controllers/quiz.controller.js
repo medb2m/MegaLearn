@@ -63,6 +63,7 @@ export const updateQuizById = async (req, res) => {
       return res.status(403).json({ message: 'User not authorized to update this quiz' });
     }
 
+<<<<<<< HEAD
     const { title, questions } = req.body
     const quizData = {
       title,
@@ -70,6 +71,9 @@ export const updateQuizById = async (req, res) => {
     }
 
     Object.assign(quiz, quizData);
+=======
+    Object.assign(quiz, req.body);
+>>>>>>> siwarMerge
     await quiz.save();
 
     res.json(quiz);

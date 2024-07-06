@@ -1,4 +1,5 @@
 import Post from '../models/post.model.js'
+<<<<<<< HEAD
 import User from '../models/user.model.js'
 import sendEmail from '../_helpers/send-email.js'
 
@@ -7,6 +8,8 @@ import { dirname } from 'path';
 
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
+=======
+>>>>>>> siwarMerge
 
 // Create a new post
 export const createPost = async (req, res) => {
@@ -21,6 +24,7 @@ export const createPost = async (req, res) => {
       image : `${req.protocol}://${req.get('host')}/img/${req.file.filename}`
     })
     await post.save()
+<<<<<<< HEAD
 
     // Notify all users
     const imagePath = path.join(__dirname, '..' ,'public', 'images', `${req.file.filename}`);
@@ -45,6 +49,11 @@ export const createPost = async (req, res) => {
     res.status(201).json(post)
   } catch (error){
     res.status(500).json({message : 'Error while creating the post.', error})
+=======
+    res.status(201).json(post)
+  } catch (error){
+    res.status(500).json({message : 'Error while creating the post.'})
+>>>>>>> siwarMerge
   }
 }
 

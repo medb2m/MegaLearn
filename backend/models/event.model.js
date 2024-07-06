@@ -15,8 +15,12 @@ const EventSchema = new Schema(
     },
     host: { type: Schema.Types.ObjectId, ref: "User", required: true },
     participants: [ParticipantSchema],
+<<<<<<< HEAD
     meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' },
     image : String
+=======
+    meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' }
+>>>>>>> siwarMerge
   },
   { timestamps: true }
 );
