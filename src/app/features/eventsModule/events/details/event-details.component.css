@@ -1,0 +1,135 @@
+.ag-format-container {
+    margin: 0 auto;
+  }
+  
+  .ag-event-detail {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #121212;
+    border-radius: 28px;
+    overflow: hidden;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .ag-event-detail_image {
+    flex-basis: 40%;
+    margin-right: 30px;
+  }
+  
+  .ag-event-detail_image img {
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+  .ag-event-detail_body {
+    flex-basis: 60%;
+    color: #fff;
+  }
+  
+  .ag-event-detail_title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  
+  .ag-event-detail_description,
+  .ag-event-detail_date,
+  .ag-event-detail_duration,
+  .ag-event-detail_type {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .ag-event-detail_subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .ag-event-detail_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ag-event-detail_list li {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .ag-event-detail_list li a {
+    color: #f9b234;
+    text-decoration: none;
+  }
+  
+  .ag-event-detail_list li a:hover {
+    text-decoration: underline;
+  }
+  
+  @media only screen and (max-width: 979px) {
+    .ag-event-detail {
+      flex-direction: column;
+    }
+  
+    .ag-event-detail_image {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .ag-event-detail_body {
+      flex-basis: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .ag-format-container {
+      width: 96%;
+    }
+  
+    .ag-event-detail_title {
+      font-size: 24px;
+    }
+  
+    .ag-event-detail_subtitle {
+      font-size: 20px;
+    }
+  
+    .ag-event-detail_description,
+    .ag-event-detail_date,
+    .ag-event-detail_duration,
+    .ag-event-detail_type {
+      font-size: 16px;
+    }
+  
+    .ag-event-detail_list li {
+      font-size: 16px;
+    }
+  }
+  
+  @media only screen and (max-width: 639px) {
+    .ag-event-detail {
+      padding: 20px;
+    }
+  
+    .ag-event-detail_title {
+      font-size: 20px;
+    }
+  
+    .ag-event-detail_subtitle {
+      font-size: 18px;
+    }
+  
+    .ag-event-detail_description,
+    .ag-event-detail_date,
+    .ag-event-detail_duration,
+    .ag-event-detail_type {
+      font-size: 14px;
+    }
+  
+    .ag-event-detail_list li {
+      font-size: 14px;
+    }
+  }
+  

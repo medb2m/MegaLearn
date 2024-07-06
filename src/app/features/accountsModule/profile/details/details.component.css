@@ -1,0 +1,47 @@
+
+
+/* Center the profile information */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Profile picture */
+  .profile-picture {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    /* Add any additional styling you'd like */
+  }
+  
+  /* Username */
+  .username {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Name and email */
+  .profile-details {
+    margin-top: 10px;
+  }
+  
+  /* Update button */
+  .update-button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .update-button:hover {
+    background-color: #0056b3;
+  }
+  

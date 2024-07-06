@@ -17,7 +17,8 @@ const PaymentModule = () => import('@features/coursesModule/payment').then(x => 
 <<<<<<< HEAD
 =======
 const EventModule = () => import('@features/eventsModule').then(x => x.EventModule);
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
+const BlogModule = () => import('@features/blogModule/blog').then(x => x.BlogModule);
+const claimModule = () => import('@features/claimModule').then(x => x.ClaimModule);
 const FM = () => import('@features/featuresModule/feature/features.module').then(x => x.FeatureModule);
 
 
@@ -40,6 +41,8 @@ const routes: Routes = [
     { path: 'profile', loadChildren: PM , canActivate : [AuthGuard] , data : { breadcrumb : 'Profile' , title : 'Profile'}},
     { path: 'pay', loadChildren: PaymentModule , canActivate : [AuthGuard], data : { breadcrumb : 'Payment', title : 'Payment' }},
     { path: 'event', loadChildren: EventModule , data : { breadcrumb : 'Event', title : 'Events' }},
+    { path: 'blog', loadChildren: BlogModule},
+    { path: 'claim', loadChildren: claimModule},
     { path: 'hello', loadChildren: FM , canActivate : [AuthGuard]},
 
     // otherwise redirect to home

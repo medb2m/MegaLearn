@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
-
+import { ParticipantSchema } from './participant.model.js'
 const { Schema, model } = mongoose;
-
-const ParticipantSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  status: { type: String, enum: ["pending", "approved"], default: "pending" },
-});
 
 const EventSchema = new Schema(
   {
@@ -15,12 +10,13 @@ const EventSchema = new Schema(
     duration: { type: Number, required: true },
     type: {
       type: String,
-      enum: ["webinar", "class", "private"],
+      enum: ["webinar", "private"],
       required: true
     },
     host: { type: Schema.Types.ObjectId, ref: "User", required: true },
     participants: [ParticipantSchema],
-    meetings: [{ type: Schema.Types.ObjectId, ref: 'Meeting' }]
+    meeting: { type: Schema.Types.ObjectId, ref: 'Meeting' },
+    image : String
   },
   { timestamps: true }
 );

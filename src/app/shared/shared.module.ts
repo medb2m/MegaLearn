@@ -9,7 +9,7 @@ import { ListComponent } from './components/list';
 <<<<<<< HEAD
 =======
 import { BreadcrumbComponent } from './components/breadcrumb';
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
+import { SocketService } from '@app/_services/socket.service';
 
 @NgModule({
   declarations: [

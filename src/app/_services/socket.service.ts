@@ -10,7 +10,6 @@ import { io } from 'socket.io-client';
 })
 export class SocketService extends Socket {
   constructor(private accountService: AccountService) {
-    
     super({ url: 'ws://localhost:4000', options: { autoConnect: false } });
     this.initializeSocket();
   }

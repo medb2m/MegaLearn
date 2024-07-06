@@ -1,17 +1,15 @@
-export class Participant {
-    user!: string;
-    status!: 'pending' | 'approved';
-  }
-  
+import { Participant } from "./participant";
+import { Meeting } from "./meeting";
   export class Event {
     _id!: string;
     title!: string;
     description!: string;
     date!: Date;
     duration!: number;
-    type!: 'webinar' | 'class' | 'private';
+    type!: 'webinar' | 'private';
     host!: string;
     participants!: Participant[];
-    meetings!: string[];
+    meeting!: Meeting;
+    image ?: string;
   }
   

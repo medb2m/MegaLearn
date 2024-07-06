@@ -100,7 +100,7 @@ export const getEnrolledCoursesByUser = async (req, res) => {
 
 // Get all courses
 export const getAllCourses = async (req, res) => {
-  const courses = await Course.find().populate("creator").populate("sections").populate('category');
+  const courses = await Course.find().populate('creator').populate('sections').populate('category');
   res.json(courses);
 };
 
@@ -258,7 +258,7 @@ export const searchCourses = async (req, res) => {
         { title: { $regex: regex } },
         { description: { $regex: regex } }
       ]
-    });
+    }).populate('creator').populate('category');
 
     res.json(courses);
   } catch (error) {

@@ -1,146 +1,8 @@
-<<<<<<< HEAD
-﻿<nav class="navbar navbar-expand-md bsb-navbar-3 sticky" data-bsb-sticky-target="#header" *ngIf="account?.role !== Role.Admin ">
-  <div class="container-fluid">
-
-    <!--  Button -->
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bsbNavbar"
-      aria-controls="bsbNavbar" aria-label="Toggle Navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- branding -->
-    <a class="navbar-brand" routerLink="/">
-      <div class="d-flex align-items-center">
-        <img [src]="'assets/styling/img/branding/megaLogo.png'" class="bsb-tpl-logo" alt="MegaLearnLogo">
-        <h1 class="navbar-brand-text">mega<span class="hide-on-small">Learn</span></h1>
-      </div>
-    </a>
-    
-    <!-- search -->
-    <div class="search-box">
-      <button class="btn-search"><i class="bi bi-search" (ngSubmit)="onSearch(searchInput.value)"></i></button>
-      <input #searchInput type="text" class="input-search" placeholder="Type to Search...">
-    </div>
-
-
-    <div class="collapse navbar-collapse" id="bsbNavbar">
-      <ul class="navbar-nav bsb-dropdown-menu-responsive ms-auto align-items-center">
-        <li class="nav-item">
-          <a routerLink="home" class="nav-link d-flex align-items-center styled-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="courses" class="nav-link d-flex align-items-center styled-link">Courses</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="courses/mycourses" class="nav-link d-flex align-items-center styled-link">My Learning</a>
-        </li>
-      </ul>
-        
-        <div class="navbar-profile">
-          <!-- account Section -->
-          <ng-container *ngIf="account; else guest">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle bsb-dropdown-toggle-caret-disable" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <img [src]="account.image || 'assets/img/pdp.jpg'" width="45" height="45" class="rounded-circle" style="object-fit: cover;" 
-                  alt="Profile Pic">
-              </a>
-              <ul class="dropdown-menu dropdown-menu-md-end bsb-dropdown-animation bsb-fadeIn">
-                <li>
-                  <h6 class="dropdown-header fs-7 text-center">Welcome, {{account.firstName}}</h6>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a routerLink="/profile" class="dropdown-item" aria-current="true">
-                    <div class="row g-0 align-items-center">
-                      <div class="col-3">
-                        <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle" style="object-fit: cover;"  alt="profile picture">
-                      </div>
-                      <div class="col-9">
-                        <div class="ps-3">
-                          <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
-                          <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" routerLink="/profile">
-                    <span>
-                      <i class="bi bi-person-fill me-2"></i>
-                      <span class="fs-7">View Profile</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" routerLink="courses/certificate">
-                    <span>
-                      <i class="bi bi-bell-fill me-2"></i>
-                      <span class="fs-7">Certificates</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#!">
-                    <span>
-                      <i class="bi bi-gear-fill me-2"></i>
-                      <span class="fs-7">Settings & Privacy</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="!">
-                    <span>
-                      <i class="bi bi-question-circle-fill me-2"></i>
-                      <span class="fs-7">Help Center</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item text-center" (click)="logout()">
-                    <span>
-                      <span class="fs-7">Log Out</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ng-container>
-          <ng-template #guest>
-    
-            <li class="nav-item">
-              <button class="btn btn-primary log" routerLink="/account/login">Login</button>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-secondary reg">Sign up</button>
-            </li>
-          </ng-template>
-        </div>
-        
-      
-    </div>
-  </div>
-</nav>
-=======
-﻿<div class="timer text-center">
-  <ng-container *ngIf="timeLeft$ | async as timeLeft">
-    <p class="mb-0">Special Offer 90% Discount Now !!! Ends in {{ formatTime(timeLeft) }}</p>
-  </ng-container>
+﻿<div class="timer text-center" *ngIf="timeLeft$ | async as timeLeft">
+  <p>Promo 70% Now <span>Ends in {{ formatTime(timeLeft) }} !!!</span></p>
 </div>
 <ng-container *ngIf="isSmallScreen; else normalScreen">
-  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm" *ngIf="account?.role !== Role.Admin ">
+  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm" >
     <div class="container-fluid">
       <!--  Button -->
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bsbNavbar"
@@ -167,10 +29,10 @@
               <a routerLink="courses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Courses</a>
             </li>
             <li class="nav-item">
-              <a routerLink="courses/mycourses" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">My Courses</a>
+              <a routerLink="event" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Events</a>
             </li>
             <li class="nav-item">
-              <a routerLink="event" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Events</a>
+              <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" (click)="closeNavbar()">Blog</a>
             </li>
           </ul>
     
@@ -222,13 +84,12 @@
                 <a routerLink="/profile" class="dropdown-item" aria-current="true">
                   <div class="row g-0 align-items-center">
                     <div class="col-3">
-                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="50" height="50" class="rounded-circle "
                         style="object-fit: cover;" alt="profile picture">
                     </div>
                     <div class="col-9">
                       <div class="ps-3">
-                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
-                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                        <div class="text-secondary mt-1 fs-10">{{ account.username }}</div>
                       </div>
                     </div>
                   </div>
@@ -248,8 +109,16 @@
               <li>
                 <a class="dropdown-item" routerLink="courses/certificate">
                   <span>
-                    <i class="bi bi-bell-fill me-2"></i>
+                    <i class="bi bi-award me-2"></i>
                     <span class="fs-7">Certificates</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="courses/mycourses">
+                  <span>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    <span class="fs-7">My Courses</span>
                   </span>
                 </a>
               </li>
@@ -257,18 +126,18 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" routerLink="event/myevents">
                   <span>
-                    <i class="bi bi-gear-fill me-2"></i>
-                    <span class="fs-7">Settings & Privacy</span>
+                    <i class="bi bi-calendar me-2"></i>
+                    <span class="fs-7">My Events</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="!">
+                <a class="dropdown-item" routerLink="claim">
                   <span>
-                    <i class="bi bi-question-circle-fill me-2"></i>
-                    <span class="fs-7">Help Center</span>
+                    <i class="bi bi-envelope me-2"></i>
+                    <span class="fs-7">Claim & Help</span>
                   </span>
                 </a>
               </li>
@@ -290,7 +159,9 @@
 
         </ng-container>
         <ng-template #guest>
-              <button class="btn btn-primary log" routerLink="/account/login">Sign Up</button>
+          <div class="wrap">
+            <button class="button" routerLink="/account/login">Sign Up</button>
+          </div>
         </ng-template>
       </div>
 
@@ -300,7 +171,7 @@
   </nav>
 </ng-container>
 <ng-template #normalScreen>
-  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm" *ngIf="account?.role !== Role.Admin ">
+  <nav class="navbar navbar-expand-md sticky-top bg-white shadow-sm">
     <div class="container-fluid">
         <!--  Button -->
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bsbNavbar"
@@ -329,10 +200,10 @@
             <a routerLink="courses" class="nav-link align-items-center styled-link">Courses</a>
           </li>
           <li class="nav-item">
-            <a routerLink="courses/mycourses" class="nav-link align-items-center styled-link">My Learning</a>
+            <a routerLink="event" class="nav-link d-flex align-items-center styled-link" >Events</a>
           </li>
           <li class="nav-item">
-            <a routerLink="event" class="nav-link d-flex align-items-center styled-link" >Events</a>
+            <a routerLink="blog" class="nav-link d-flex align-items-center styled-link" >Blog</a>
           </li>
         </ul>
 
@@ -368,7 +239,7 @@
               <img [src]="account.image || 'assets/img/pdp.jpg'" width="45" height="45" class="rounded-circle"
                 style="object-fit: cover;" alt="Profile Pic">
             </a>
-            <ul class="dropdown-menu dropdown-menu-md-end bsb-dropdown-animation bsb-fadeIn custom-dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end w-100 custom-dropdown-menu">
               <li>
                 <h6 class="dropdown-header fs-7 text-center">Welcome, {{account.firstName}}</h6>
               </li>
@@ -378,14 +249,13 @@
               <li>
                 <a routerLink="/profile" class="dropdown-item" aria-current="true">
                   <div class="row g-0 align-items-center">
-                    <div class="col-4 ">
-                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="55" height="55" class="rounded-circle"
+                    <div class="col-3">
+                      <img [src]="account.image || 'assets/img/pdp.jpg'" width="50" height="50" class="rounded-circle "
                         style="object-fit: cover;" alt="profile picture">
                     </div>
-                    <div class="col-8">
-                      <div class="ps-1">
-                        <div class="text-secondary mt-1 fs-7">{{ account.username }}</div>
-                        <div class="text-secondary mt-1 fs-7">{{ account.email}}</div>
+                    <div class="col-9">
+                      <div class="ps-3">
+                        <div class="text-secondary mt-1 fs-10">{{ account.username }}</div>
                       </div>
                     </div>
                   </div>
@@ -405,8 +275,16 @@
               <li>
                 <a class="dropdown-item" routerLink="courses/certificate">
                   <span>
-                    <i class="bi bi-bell-fill me-2"></i>
+                    <i class="bi bi-award me-2"></i>
                     <span class="fs-7">Certificates</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="courses/mycourses">
+                  <span>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    <span class="fs-7">My Courses</span>
                   </span>
                 </a>
               </li>
@@ -414,18 +292,18 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" routerLink="event/myevents">
                   <span>
-                    <i class="bi bi-gear-fill me-2"></i>
-                    <span class="fs-7">Settings & Privacy</span>
+                    <i class="bi bi-calendar me-2"></i>
+                    <span class="fs-7">My Events</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="!">
+                <a class="dropdown-item" routerLink="claim">
                   <span>
-                    <i class="bi bi-question-circle-fill me-2"></i>
-                    <span class="fs-7">Help Center</span>
+                    <i class="bi bi-envelope me-2"></i>
+                    <span class="fs-7">Claim & Help</span>
                   </span>
                 </a>
               </li>
@@ -443,7 +321,9 @@
           </div>
         </ng-container>
         <ng-template #guest>
-            <button class="btn btn-primary log" routerLink="/account/login">Login</button>
+          <div class="wrap">
+            <button class="button" routerLink="/account/login">Sign Up</button>
+          </div>
         </ng-template>
       </div>
     </div>

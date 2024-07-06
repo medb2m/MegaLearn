@@ -1,0 +1,45 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .payment-method-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .payment-method-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .payment-method-option input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  .payment-method-option img {
+    width: 80px; /* Adjust the width of the image */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .payment-details {
+    margin-top: 40px;
+  }
+  
+  .payment-details h2 {
+    margin-bottom: 20px;
+  }

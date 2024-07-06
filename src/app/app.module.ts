@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from '@core/interceptors';
 import { AccountService } from '@app/_services';
@@ -14,8 +13,10 @@ import { HomeComponent } from '@features/home';
 import { SharedModule } from '@shared/shared.module';
 import { BackButtonComponent } from './shared/components/back-button';
 import { NgxMaskModule } from 'ngx-mask'
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 //import { PlyrModule } from 'ngx-plyr';
 
+//const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { NgxMaskModule } from 'ngx-mask'
         FormsModule,
         AppRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        SocketIoModule.forRoot({ url: 'ws://localhost:4000', options: {transports : ['websocket']} })  // Dummy config to be replaced
+        //SocketIoModule.forRoot(config)
         //PlyrModule
     ],
     declarations: [

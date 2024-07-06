@@ -3,13 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-<<<<<<< HEAD
-    "start": "ng serve",
-=======
-    "start": "npm run start:backend",
-    "start:backend": "nodemon ./backend/server.js & npm run start:frontend",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:fronthost\"",
+    "start:backend": "nodemon ./backend/server.js",
     "start:frontend": "ng serve",
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
+    "start:fronthost": "ng serve --host 0.0.0.0 --disable-host-check",
     "build": "ng build"
   },
   "private": true,
@@ -23,14 +20,19 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^14.0.0",
     "apexcharts": "^3.49.1",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
     "ng-apexcharts": "^1.10.0",
     "ngx-mask": "^14.2.4",
     "ngx-plyr": "^4.0.1",
+    "ngx-quill": "^26.0.4",
+    "ngx-socket-io": "^4.4.0",
     "plyr": "^3.7.8",
+    "quill": "^2.0.2",
     "rxjs": "~7.8.0",
+    "socket.io-client": "^4.7.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
@@ -39,6 +41,7 @@
     "@angular/cli": "~15.2.10",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
+    "concurrently": "^8.2.2",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

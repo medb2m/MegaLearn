@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { Event, Meeting } from '@app/_models';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-    private apiUrl = `${environment.apiUrl}/events`;
+  private apiUrl = `${environment.apiUrl}/events`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http.get<Event[]>(this.apiUrl);
@@ -20,20 +21,28 @@ export class EventService {
     return this.http.get<Event>(`${this.apiUrl}/${id}`);
   }
 
-  create(event: FormData): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event);
+  getByUser(){
+    return this.http.get<Event[]>(`${this.apiUrl}/user`);
   }
 
-  update(id: string, event: FormData): Observable<Event> {
+  create(event: FormData): Observable<Event> {
+    return this.http.post<Event>(`${this.apiUrl}/create`, event);
+  }
+
+  update(id: any, event: FormData): Observable<Event> {
     return this.http.put<Event>(`${this.apiUrl}/${id}`, event);
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(id: string) : Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   addParticipant(eventId: string, participantId: string): Observable<Event> {
     return this.http.post<Event>(`${this.apiUrl}/addparticipant/${eventId}/${participantId}`, {});
+  }
+
+  join(eventId: string): Observable<Event> {
+    return this.http.post<Event>(`${this.apiUrl}/${eventId}/join`, {});
   }
 
   approveParticipant(eventId: string, participantId: string): Observable<Event> {
@@ -46,5 +55,13 @@ export class EventService {
 
   createMeeting(eventId: string, meeting: any): Observable<Meeting> {
     return this.http.post<Meeting>(`${this.apiUrl}/${eventId}/meeting`, meeting);
+  }
+
+  getPendingParticipants(eventId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${eventId}/participants/pending`);
+  }
+
+  getUserStatus(eventId: string): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/events/${eventId}/user-status`);
   }
 }

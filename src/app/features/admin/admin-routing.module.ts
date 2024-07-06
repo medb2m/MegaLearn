@@ -15,7 +15,9 @@ const QuizModule = () => import('@features/admin').then(x => x.QuizModule);
 <<<<<<< HEAD
 =======
 const ProfileModule = () => import('@features/accountsModule/profile').then(x => x.ProfileModule);
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
+const eventModule = () => import('@features/admin/eventModule').then(x => x.EventModule);
+const blogModule = () => import('@features/admin/blogModule').then(x => x.PostModule);
+const claimModule = () => import('@features/admin/claimModule/claim').then(x => x.ClaimModule);
 
 
 const routes: Routes = [
@@ -34,7 +36,9 @@ const routes: Routes = [
             
 =======
             { path: 'profile', loadChildren: ProfileModule },
->>>>>>> 6fc3a2271eb8225e1dccda0dac38ac604ab21559
+            { path: 'event', loadChildren: eventModule },
+            { path: 'blog', loadChildren: blogModule },
+            { path: 'claim', loadChildren: claimModule },
         ]
     }
 ];

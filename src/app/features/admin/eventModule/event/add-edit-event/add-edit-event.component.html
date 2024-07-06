@@ -1,0 +1,82 @@
+<h2>{{ title }}</h2>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <div *ngIf="!loading">
+      <!-- Existing form fields -->
+
+      <!-- Title -->
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" formControlName="title" class="form-control" />
+        <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+          <div *ngIf="f['title'].errors['required']">Title is required</div>
+        </div>
+      </div>
+      
+      <!-- Description -->
+      <div class="form-group">
+        <label>Description</label>
+        <textarea formControlName="description" class="form-control"></textarea>
+        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+          <div *ngIf="f['description'].errors['required']">Description is required</div>
+        </div>
+      </div>
+      
+      <!-- Date -->
+      <div class="form-group">
+        <label>Date</label>
+        <input type="datetime-local" formControlName="date" class="form-control" />
+        <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+          <div *ngIf="f['date'].errors['required']">Date is required</div>
+        </div>
+      </div>
+      <!-- Image -->
+      <div class="form-group">
+        <label for="image">Image</label>
+        <div *ngIf="previewUrl">
+            <img [src]="previewUrl" alt="Image preview" class="img-thumbnail mt-2" style="width: 200px; height: 150px;" />
+        </div>
+        <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" />
+      </div>
+      
+      <!-- Duration -->
+      <div class="form-group">
+        <label>Duration (mins)</label>
+        <input type="number" formControlName="duration" class="form-control" />
+        <div *ngIf="submitted && f['duration'].errors" class="invalid-feedback">
+          <div *ngIf="f['duration'].errors['required']">Duration is required</div>
+        </div>
+      </div>
+      
+      <!-- Type -->
+      <div class="form-group">
+        <label>Type</label>
+        <select formControlName="type" class="form-control">
+          <option value="webinar">Webinar</option>
+          <option value="private">Private</option>
+        </select>
+        <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+          <div *ngIf="f['type'].errors['required']">Type is required</div>
+        </div>
+      </div>
+
+      <!-- Meeting -->
+      <div class="form-group">
+        <label>Meeting</label>
+        <input value="{{ meetingLink }}" class="form-control" readonly>
+      </div>
+
+      <!-- Participant Management -->
+      <div class="form-group mb-2">
+        <button type="button" class="btn btn-outline-dark mt-2 me-2" (click)="openParticipantModal()">Manage Participants</button>
+      </div>
+
+      <!-- Submit and Cancel Buttons -->
+      <div class="form-group">
+        <button [disabled]="loading" type="submit" class="btn btn-primary">{{ buttonLabel }}</button>
+        <a [routerLink]="['/']" class="btn btn-link">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

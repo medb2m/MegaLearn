@@ -1,4 +1,12 @@
 import Post from '../models/post.model.js'
+import User from '../models/user.model.js'
+import sendEmail from '../_helpers/send-email.js'
+
+import path from 'path';
+import { dirname } from 'path';
+
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Create a new post
 export const createPost = async (req, res) => {
@@ -13,9 +21,30 @@ export const createPost = async (req, res) => {
       image : `${req.protocol}://${req.get('host')}/img/${req.file.filename}`
     })
     await post.save()
+
+    // Notify all users
+    const imagePath = path.join(__dirname, '..' ,'public', 'images', `${req.file.filename}`);
+    const users = await User.find();
+    const emailPromises = users.map(user => {
+      return sendEmail({
+        to: user.email,
+        subject: 'New Post Created',
+        htmlContent: `<p>A new post titled "${post.title}" has been created.</p><p>${post.content}</p>`,
+        imagePath : imagePath,
+        attachmentPaths: [
+          path.join(__dirname, '..' ,'assets', 'mail', 'images', 'image-1.png'), 
+          path.join(__dirname, '..' ,'assets', 'mail', 'images', 'image-2.png'),
+          path.join(__dirname, '..' ,'assets', 'mail', 'images', 'image-3.png'),
+          path.join(__dirname, '..' ,'assets', 'mail', 'images', 'image-4.png'),
+          path.join(__dirname, '..' ,'assets', 'mail', 'images', 'image-6.png')
+        ]
+      });
+    });
+    await Promise.all(emailPromises);
+
     res.status(201).json(post)
   } catch (error){
-    res.status(500).json({message : 'Error while creating the post.'})
+    res.status(500).json({message : 'Error while creating the post.', error})
   }
 }
 
@@ -36,12 +65,28 @@ export const getPostById = async (req, res) => {
 
 // Update a post by id
 export const updatePostById = async (req, res) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' })
+  try {
+    const { title, content } =
+      req.body;
+
+    const postData = {
+      title,
+      content
+    };
+
+    if (req.file) {
+      postData.image = `${req.protocol}://${req.get("host")}/img/${req.file.filename}`;
+    }
+
+    const post = await Post.findByIdAndUpdate(req.params.id, postData, { new: true });
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+    res.status(204).json(post);
+  } catch (error) {
+    res.status(500).json({ message: "Error Updating post", error: error.message });
   }
-  res.json(post)
-}
+};
 
 // Delete a category by id
 export const deletePostById = async (req, res) => {

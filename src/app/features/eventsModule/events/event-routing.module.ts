@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout';
 import { EventListComponent } from './list';
+import { EventdetailsComponent } from './details';
+import { VideoChatComponent } from './video-chat/video-chat.component';
+import { MyeventsComponent } from './myevents/myevents.component';
 
 const routes: Routes = [
   
@@ -9,7 +12,9 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
     children: [
         { path: '', component: EventListComponent },
-        { path: 'details/:id', component: EventListComponent  },
+        { path: 'myevents', component: MyeventsComponent },
+        { path: 'details/:id', component: EventdetailsComponent  },
+        { path: 'meeting/:id', component: VideoChatComponent  },
     ]
 }
 ];

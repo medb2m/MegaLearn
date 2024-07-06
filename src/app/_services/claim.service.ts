@@ -1,33 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Claim } from '@app/_models/claim';  // Assurez-vous que le chemin vers le modèle Claim est correct
-
 import { environment } from '@environments/environment';
+import { Chat, Claim } from '@app/_models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ClaimService {
-    private baseUrl = `${environment.apiUrl}/claim`;
+  private apiUrl = `${environment.apiUrl}/claim`;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    create(claim: FormData): Observable<any> {
-        return this.http.post(this.baseUrl, claim);
-    }
+  addMessage(msg : FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/msg`, msg);
+  }
 
-    getAll(): Observable<Claim[]> {
-        return this.http.get<Claim[]>(this.baseUrl);
-    }
+  getMessages(claimId : string): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${this.apiUrl}/msg/${claimId}`);
+  }
+  create(claim: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, claim);
+}
 
-    getById(claimId: string): Observable<Claim> {
-        return this.http.get<Claim>(`${this.baseUrl}/${claimId}`);
-    }
+getAll(): Observable<Claim[]> {
+    return this.http.get<Claim[]>(this.apiUrl);
+}
 
-    update(claimId: string, claim: FormData): Observable<Claim> {
-        return this.http.put<Claim>(`${this.baseUrl}/${claimId}`, claim);
-    }
+getById(claimId: string): Observable<Claim> {
+    return this.http.get<Claim>(`${this.apiUrl}/${claimId}`);
+}
 
-    delete(claimId: string): Observable<any> {
-        return this.http.delete(`${this.baseUrl}/${claimId}`);
-    }
+update(claimId: string, claim: FormData): Observable<Claim> {
+    return this.http.put<Claim>(`${this.apiUrl}/${claimId}`, claim);
+}
+
+delete(claimId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${claimId}`);
+}
 }
