@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoursesService } from '@app/_services/courses.service';
 import { Course } from '@app/_models/course';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { first } from 'rxjs';
 import { Question } from '@app/_models';
 import { Option } from '@app/_models/option';
 import { CertificatesService } from '@app/_services/certificates.service';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
     selector: 'app-my-courses',
@@ -16,7 +17,10 @@ import { CertificatesService } from '@app/_services/certificates.service';
 })
 export class TakeQuizComponent implements OnInit {
 
-    form!: FormGroup;
+  @ViewChild(WizardComponent)
+  public wizard!: WizardComponent;
+
+  form!: FormGroup;
   courseId!: string;
   quizTitle!: string;
   loading = false;
@@ -24,6 +28,7 @@ export class TakeQuizComponent implements OnInit {
   score?: number;
   certificate?: any;
   quiz : any
+  answers: any = [];
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -85,21 +90,30 @@ export class TakeQuizComponent implements OnInit {
       });
   }
 
+  prepareAnswers() {
+    // Préparer les réponses
+    //const answers = this.form.value.questions.map((q: any) => q.options.findIndex((o: any) => o));
+    this.answers = this.form.value.questions?.map((question: any) => {
+      const selectedOption = question?.options?.find((option: any) => option?.isCorrect);
+      return selectedOption ? selectedOption?.optionText : null;
+      });
+  }
+
+  prepareAnswer(index: number) {
+    this.answers?.push(this.form.value.questions[index]?.options?.find((option: any) => option?.isCorrect));
+  }
+
   onSubmit() {
     this.submitted = true;
     //console.log(this.form)
-    /*
+    
     if (this.form.invalid) {
+      alert("Please answer all quiz questions !");
       return;
     }
-    */
-    // Préparer les réponses
-    const answers = this.form.value.questions?.map((question: any) => {
-    const selectedOption = question?.options?.find((option: any) => option?.isCorrect);
-    return selectedOption ? selectedOption?.optionText : null;
-  });
-    //const answers = this.form.value.questions.map((q: any) => q.options.findIndex((o: any) => o));
-    this.quizService.takeQuiz(this.courseId, { answers })
+    
+   
+    this.quizService.takeQuiz(this.courseId, this.answers)
       .pipe(first())
       .subscribe({
         next: (result: any) => {
@@ -144,6 +158,17 @@ export class TakeQuizComponent implements OnInit {
 
     getStepTitle(i: any) {
       return 'Question ' + (i+1);
+    }
+
+    goTo(index: number) {
+        if (index >= 0 && index < this.questions?.controls?.length) {
+          this.wizard.goToStep(index);
+        }
+    }
+       
+    isAnswered(index: number) {
+      console.log(this.answers ? this.answers[index] ? 'Answered' : 'Not Answered' : 'Not Answered' );
+      return this.answers ? this.answers[index] ? 'Answered' : 'Not Answered' : 'Not Answered';
     }
 
 }

@@ -121,7 +121,7 @@ export const takeQuiz = async (req, res) => {
   try {
     const courseId = req.params.courseId
     const userId = req.user.id
-    const { answers } = req.body
+    const answers = req.body
 
     // Check if the user has already passed the quiz for this course
    /* const existingCertificate = await Certificate.findOne({ user: userId, course: courseId });

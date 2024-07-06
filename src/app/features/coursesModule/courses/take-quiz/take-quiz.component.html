@@ -28,38 +28,47 @@
                         <div class="col-8">
                           <div class="d-flex align-middle">
                             <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect"
-                              [value]="option.get('optionText')!.value" class="form-check-input col-6">
+                              [value]="option.get('optionText')!.value" class="form-check-input col-6" (change)="prepareAnswer(i)">
                             <p style="margin-left: 20px;" class="">{{ j+1 }}. {{ option.get('optionText')!.value }}</p>
-
-
                           </div>
                         </div>
                       </div>
                       <br>
-
-                      <div *ngIf="submitted && question?.get('selectedOption')?.errors" class="invalid-feedback">
-                        <label>Option is required</label>
-                      </div>
                     </div>
                   </div>
 
                   <br>
+
+                  <div class ="row" *ngIf="isAnswered(i) !== 'Answered'">
+                      <h6 style="color: red;">Option is required</h6>
+                  </div>
+
                   <br>
 
                   <div class="btn-group">
                     <button class="btn btn-secondary" awPreviousStep *ngIf="!first">Précédent</button>
                     &nbsp;
                     &nbsp;
-                    <button class="btn btn-secondary" awNextStep *ngIf="!last">Suivant</button>
+                    <button class="btn btn-secondary" awNextStep>Suivant</button>
                   </div>
                   &nbsp;
-                  <div class="btn-group">
 
-                    <button *ngIf="last" type="submit" (click)="onSubmit()" class="btn btn-primary">Submit Quiz</button>
-                  </div>
                 </div>
 
               </div>
+            </div>
+          </div>
+        </aw-wizard-step>
+
+        <aw-wizard-step [stepTitle]="'Review Quiz'" [navigationSymbol]="getStepSymbol(questions.controls.length)"
+        (stepEnter)="prepareAnswers()">
+          <div class="row text-center">
+            <div class="col-4 cursor-pointer" *ngFor="let question of questions.controls; let index = index;">
+              <div (click)="goTo(index)" class="p-3 mb-2 
+            {{ isAnswered(index)=='Answered' ? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(index) }}</div>
+            </div>
+            <div class="btn-group">
+              <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit Quiz</button>
             </div>
           </div>
         </aw-wizard-step>
