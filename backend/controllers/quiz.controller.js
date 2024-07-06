@@ -3,9 +3,28 @@ import { generateCertificate } from '../_helpers/certificateGenerator.js';
 import Certificate from '../models/certificate.model.js';
 import Course from '../models/course.model.js';
 
+import { OpenAI } from 'openai';
+import { VertexAI } from '@google-cloud/vertexai';
+
+
+const nbAnswers = 5;
+const nbQuestions = 10;
+
 // Create a new quiz
 export const createQuiz = async (req, res) => {
   try {
+
+    const topic = req.body?.title;
+
+    const quizAI = await generateQuizContent(nbQuestions, nbAnswers, topic)
+    /* generateQuiz(topic).then((quiz) => {
+      console.log("Formatted Quiz:");
+      console.log(formatQuiz(quiz));
+    }); */
+
+    console.log(quizAI.candidates[0]?.content?.parts[0]?.text);
+      //?.text);
+
     const quiz = new Quiz({
      ...req.body,
       course : req.params.id,
@@ -151,3 +170,137 @@ export const takeQuiz = async (req, res) => {
     res.status(500).json({ message: 'Error taking quiz', error: error.message });
   }
 };
+
+
+// GOOGLE VERTEX AI API APPROACH
+
+function initialize_vertex() {
+  // Initialize Vertex with your Cloud project and location
+const vertex_ai = new VertexAI({project: 'applied-range-428600-v9', location: 'us-central1'});
+const model = 'gemini-1.5-flash-001';
+
+// Instantiate the models
+const generativeModel = vertex_ai.preview.getGenerativeModel({
+  model: model,
+  generationConfig: {
+    'maxOutputTokens': 8192,
+    'temperature': 1,
+    'topP': 0.95,
+  },
+  safetySettings: [
+    {
+        'category': 'HARM_CATEGORY_HATE_SPEECH',
+        'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
+    },
+    {
+        'category': 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
+    },
+    {
+        'category': 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+        'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
+    },
+    {
+        'category': 'HARM_CATEGORY_HARASSMENT',
+        'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
+    }
+  ],
+});
+return generativeModel;
+}
+
+function formatQuizResponse(text) {
+  const questions = text?.strip("` \n");
+  let formattedQuiz = "";
+  questions?.forEach((question, index) => {
+    formattedQuiz += `Q${index + 1}: ${question.trim()}\n\n`;
+  });
+  return formattedQuiz;
+}
+
+async function generateQuizContent(numQuestions, numAnswers, topic) {
+  const generativeModel = initialize_vertex();
+  const req = {
+    contents: [
+        { role: 'user', 
+          parts: [
+          { text: `Generate a quiz in french with ${numQuestions} questions on the topic ${topic}. 
+            Each question should have ${numAnswers} answer choices and one correct answer indicated.
+
+           input: Quiz de programmation Python
+           output: { \"questions\": [
+                      {
+                        \"questionText\": \"Qu\'est-ce que Python ?\",
+                        \"options\": [
+                          {
+                            \"optionText\": \"Un langage de programmation\",
+                            \"isCorrect\": true
+                          },
+                          {
+                            \"optionText\": \"Un système d\'exploitation\",
+                            \"isCorrect\": false
+                          },
+                          {
+                            \"optionText\": \"Un navigateur Web\",
+                            \"isCorrect\": false
+                          },
+                          {
+                            \"optionText\": \"Un moteur de recherche\",
+                            \"isCorrect\": false
+                          }
+                       ]
+                      }
+                    ]
+                  }
+           `
+          }
+        ]}
+    ]
+  };
+try {
+  const streamingResp = await generativeModel.generateContentStream(req);
+
+  /* for await (const item of streamingResp.stream) {
+    process.stdout.write('stream chunk: ' + JSON.stringify(item) + '\n');
+  } */
+
+  return await streamingResp.response;
+  /* ) */
+}
+catch (error) {
+  console.log(error);
+}
+  
+}
+
+
+
+// OPEN AI APPROACH
+
+async function generateQuiz(topic, numQuestions = 5) {
+  // Set up OpenAI configuration
+  const openai = new OpenAI({apiKey: 'sk-proj-yehwfg8ojcmGC2BaNaGdT3BlbkFJj4Vpz4lngsY4KpkFDX4r'});
+  const prompt = `Generate a quiz with ${numQuestions} questions on the topic '${topic}'. Each question should have 4 answer choices and one correct answer indicated.`;
+  
+  try {
+    const response = await openai.completions.create({
+      model: "gpt-3.5-turbo-instruct",
+      prompt: prompt,
+      max_tokens: 500,
+    });
+
+    return response?.choices[0]?.text?.trim();
+  } catch (error) {
+    console.error("Error generating quiz:", error);
+  }
+
+}
+
+function formatQuiz(quizText) {
+  const questions = quizText?.split("\n\n");
+  let formattedQuiz = "";
+  questions?.forEach((question, index) => {
+    formattedQuiz += `Q${index + 1}: ${question.trim()}\n\n`;
+  });
+  return formattedQuiz;
+}
