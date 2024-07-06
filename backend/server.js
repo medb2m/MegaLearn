@@ -23,10 +23,6 @@ import videoRoutes from './routes/video.routes.js'
 import categoryRoutes from './routes/category.routes.js'
 import blogRoutes from './routes/post.routes.js'
 import claimRoutes from './routes/claim.routes.js'
-<<<<<<< HEAD
-=======
-import chatRoutes from './routes/chat.routes.js'
->>>>>>> siwarMerge
 import quizRoutes from './routes/quiz.routes.js'
 import certificateRoutes from './routes/certificate.routes.js'
 import eventRoutes from './routes/event.routes.js'
@@ -42,12 +38,8 @@ const httpServer = createServer(app)
 // Init Socket.io with the HTTP Server
 const io = new Server(httpServer, {
     cors: {
-<<<<<<< HEAD
         origin: '*',
         //origin: ['http://localhost:4200', 'http://172.20.10.2:4200'],
-=======
-        origin: 'http://localhost:4200', // Update this with your client's origin if needed
->>>>>>> siwarMerge
         methods: ['GET', 'POST']
     }
 });
@@ -63,7 +55,6 @@ const io = new Server(httpServer, {
     
   }); */
 
-<<<<<<< HEAD
   import User from './models/user.model.js';
   import jwt from 'jsonwebtoken';
   import { config } from './_helpers/config.js';
@@ -127,10 +118,6 @@ io.on('connection', (socket) => {
 })
 
 
-=======
-// Socket Event Management
-handleSocketEvents(io)
->>>>>>> siwarMerge
 
 
 
@@ -178,11 +165,6 @@ app.use('/categories', categoryRoutes);
 app.use('/blog', blogRoutes);
 // Claim Routers 
 app.use('/claim', claimRoutes);
-<<<<<<< HEAD
-=======
-// Chat Routers 
-app.use('/chat', chatRoutes);
->>>>>>> siwarMerge
 // Quiz Routers 
 app.use('/quiz', quizRoutes);
 // Certificate Routers 

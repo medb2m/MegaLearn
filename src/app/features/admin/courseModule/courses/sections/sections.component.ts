@@ -96,11 +96,7 @@ export class SectionsComponent {
       }
     });
   }
-<<<<<<< HEAD
   
-=======
-  // Dont close HERE !!!!!!!!!!
->>>>>>> siwarMerge
   close() {
     // Logic to close the modal, if needed
     const modal = document.getElementById('videoModal');

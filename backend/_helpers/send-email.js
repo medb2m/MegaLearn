@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* import nodemailer from 'nodemailer'
-=======
-import nodemailer from 'nodemailer'
->>>>>>> siwarMerge
 import { config } from './config.js';
 
 
@@ -11,7 +7,6 @@ export async function sendEmail({ to, subject, html, from = config.emailFrom }) 
     await transporter.sendMail({ from, to, subject, html });
 }
 
-<<<<<<< HEAD
 export default sendEmail */
 
 import nodemailer from 'nodemailer';
@@ -57,6 +52,3 @@ export async function sendEmail({ to, subject, htmlContent, from = config.emailF
 }
 
 export default sendEmail;
-=======
-export default sendEmail
->>>>>>> siwarMerge
