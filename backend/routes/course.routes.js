@@ -8,9 +8,12 @@ import {
     getCourseById, 
     updateCourseById, 
     deleteCourseById, 
-    enrollUserToCourse,
+    enrollUserToCourse, 
+    getCourseCreator, 
     getEnrolledCoursesByUser, 
-    checkUserEnrolled} from '../controllers/course.controller.js';
+    checkUserEnrolled,
+    searchCourses
+} from '../controllers/course.controller.js';
 
 const router = express.Router();
 
@@ -19,8 +22,10 @@ router.get('/', getAllCourses);
 router.get('/get/:id', getCourseById);
 router.put('/update/:id', authorize(), uploadImage, updateCourseById);
 router.delete('/delete/:id', authorize(Role.Admin), deleteCourseById);
+router.get('/creator/:id', getCourseCreator);
 router.post('/enroll/:id', authorize(), enrollUserToCourse);
 router.get('/enrolled-courses', authorize(), getEnrolledCoursesByUser);
 router.get('/isenrolled/:courseId', authorize(), checkUserEnrolled)
+router.get('/search', searchCourses)
 
 export default router;

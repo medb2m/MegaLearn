@@ -107,7 +107,7 @@ export const deleteCourseFromCategory = async (req, res) => {
       return res.status(404).json({ message: 'Course not found' });
     }
 
-    category.courses.pop(course);
+    category.courses.pop(course._id);
     await category.save();
 
     res.json(category);

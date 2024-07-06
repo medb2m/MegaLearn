@@ -17,9 +17,10 @@ const CourseSchema = new Schema({
   creator: { type: Schema.Types.ObjectId, ref: 'User' , required : true},
   category: { type: Schema.Types.ObjectId, ref: 'Category', required : true},
   sections: [SectionSchema],
-  image: {type : String, required : true },
+  image: String,
   enrolls: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 },{timestamps : true}
 );
+
 
 export default model('Course', CourseSchema);

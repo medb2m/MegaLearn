@@ -1,0 +1,43 @@
+<h1>Entities</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Create Entity</a>
+<div>
+    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" />
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:5%">
+                <input type="checkbox" (change)="toggleAll($event)" />
+            </th>
+            <th style="width:25%">Attribute 1</th>
+            <th style="width:25%">Attribute 2</th>
+            <th style="width:25%">Description</th>
+            <th style="width:15%">Number Attribute</th>
+            <th style="width:5%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entity of entities | search:searchText">
+            <td class="align-middle">
+                <input type="checkbox" [(ngModel)]="entity.selected" (change)="updateSelection()" />
+            </td>
+            <td class="align-middle">{{ entity.attribut_1 }}</td>
+            <td class="align-middle">{{ entity.attribut_2 }}</td>
+            <td class="align-middle">{{ entity.desc_attribut }}</td>
+            <td class="align-middle">{{ entity.num_attribut }}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{ entity.id }}" class="btn btn-sm btn-primary me-1">Edit</a>
+                <button (click)="deleteEntity(entity.id)" class="btn btn-sm btn-danger" [disabled]="entity.isDeleting">
+                    <span *ngIf="entity.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!entity.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!entities.length">
+            <td colspan="6" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button *ngIf="selectedEntities.length > 0" (click)="deleteSelectedEntities()" class="btn btn-sm btn-danger mt-2">Delete Selected</button>

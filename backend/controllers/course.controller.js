@@ -19,9 +19,7 @@ export const createCourse = async (req, res) => {
     };
 
     if (req.file) {
-      coursedata.image = `${req.protocol}://${req.get("host")}/img/${
-        req.file.filename
-      }`;
+      coursedata.image = `${req.protocol}://${req.get("host")}/img/${req.file.filename}`;
     }
 
     const course = new Course(coursedata);
@@ -30,12 +28,12 @@ export const createCourse = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+}
 
 export const enrollUserToCourse = async (req, res) => {
   try {
       const courseId = req.params.id;
-      const userId = req.user._id;
+      const userId = req.user.id;
 
       // Vérifiez si le cours existe
       const course = await Course.findById(courseId);
@@ -63,7 +61,7 @@ export const enrollUserToCourse = async (req, res) => {
       await course.save();
       await user.save();
 
-      res.json({ course, user });
+      res.json({course, user});
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
@@ -102,7 +100,7 @@ export const getEnrolledCoursesByUser = async (req, res) => {
 
 // Get all courses
 export const getAllCourses = async (req, res) => {
-  const courses = await Course.find().populate("creator").populate("sections");
+  const courses = await Course.find().populate("creator").populate("sections").populate('category');
   res.json(courses);
 };
 
@@ -204,15 +202,66 @@ export const enrollInCourse = async (req, res) => {
   }
 };
 
-// a revoir 
+
 export const checkUserEnrolled = async (req, res) => {
   try {
-    const course = await Course.find(req.params.courseId)
-    const isEnrolled = course.enrolls.includes(req.user._id) 
-    
+    const course = await Course.findById(req.params.courseId)
+    const isEnrolled = course.enrolls.includes(req.user._id)
+    console.log(isEnrolled)
     return res.status(200).json(isEnrolled)
   } catch (error) {
     res.status(500).json({ message: "Error while checking User enrolled", error: error.message });
   }
 }
 
+export const getCourseCreator = async (req, res) => {
+  try {
+    const creator = await Course.find(req.params.id);
+    if (!creator) {
+      return res.status(404).json({ message: "Creator not found" });
+    }
+    res.json(creator);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error getting course creator", error: error.message });
+  }
+};
+
+// Search courses
+/* export const searchCourses = async (req, res) => {
+  try {
+    const searchTerm = req.query.q;
+    if (!searchTerm) {
+      return res.status(400).json({ message: 'Search term is required' });
+    }
+    const courses = await Course.find({
+      $text: { $search: searchTerm }
+    });
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}; */
+
+export const searchCourses = async (req, res) => {
+  try {
+    const searchTerm = req.query.q;
+    if (!searchTerm) {
+      return res.status(400).json({ message: 'Search term is required' });
+    }
+
+    // Use a regular expression to find courses that match the search term
+    const regex = new RegExp(searchTerm, 'i'); // 'i' for case-insensitive
+    const courses = await Course.find({
+      $or: [
+        { title: { $regex: regex } },
+        { description: { $regex: regex } }
+      ]
+    });
+
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

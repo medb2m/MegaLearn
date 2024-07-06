@@ -1,0 +1,49 @@
+<h2>{{title}}</h2>
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <div *ngIf="!loading">
+            <div class="form-group">
+                <label>Attribut_1</label>
+                <input type="text" formControlName="attribut_1" class="form-control" />
+                <div *ngIf="submitted && f['attribut_1'].errors" class="invalid-feedback">
+                    <div *ngIf="f['attribut_1'].errors['required']">attribut_1 is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Attribut_2</label>
+                <input type="text" formControlName="attribut_2" class="form-control" />
+                <div *ngIf="submitted && f['attribut_2'].errors" class="invalid-feedback">
+                    <div *ngIf="f['attribut_2'].errors['required']">attribut_2 is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Desc_Attribut</label>
+                <textarea formControlName="desc_attribut" class="form-control"></textarea>
+                <div *ngIf="submitted && f['desc_attribut'].errors" class="invalid-feedback">
+                    <div *ngIf="f['desc_attribut'].errors['required']">Desc_Attribut is required</div>
+                    <div *ngIf="f['desc_attribut'].errors['minlength']">Desc_Attribut must be at least 6 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Image_Attribut</label>
+                <div *ngIf="previewUrl">
+                    <img [src]="previewUrl || 'https://picsum.photos/id/1005/800/450'" alt="Image preview" class="img-thumbnail mt-2" style="width: 200px; height: 150px;" />
+                </div>
+                <input type="file" id="image" (change)="onFileSelected($event)" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Num_Attribut</label>
+                <input type="number" formControlName="num_attribut" class="form-control" />
+                <div *ngIf="submitted && f['num_attribut'].errors" class="invalid-feedback">
+                    <div *ngIf="f['num_attribut'].errors['required']">Num_Attribut is required</div>
+                    <div *ngIf="f['num_attribut'].errors['min']">Num_Attribut must be a positive number</div>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <button [disabled]="submitting" class="btn btn-primary">Save</button>
+                <a type="button" routerLink="/admin/models" class="btn btn-link">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

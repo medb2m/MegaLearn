@@ -1,19 +1,16 @@
 import { config } from './config.js';
 import mongoose from 'mongoose'
 
-const connectionOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-};
 
-
-mongoose.connect(process.env.MONGODB_URI || config.connectionString, connectionOptions)
+// Connexion à MongoDB
+mongoose.connect(process.env.MONGODB_URI || config.connectionString)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => {
         console.error('MongoDB connection error:', err);
-        process.exit(1); // stop process if fails
+        process.exit(1); // Arrêter le processus si la connexion échoue
     });
 
+// Utilisation de Promise globale
 mongoose.Promise = global.Promise;
 
 

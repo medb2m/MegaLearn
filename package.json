@@ -1,17 +1,17 @@
 {
-  "name": "MegaLearn",
+  "name": "mega-learn",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "back": "nodemon ./backend/server.js"
+    "start": "npm run start:backend",
+    "start:backend": "nodemon ./backend/server.js & npm run start:frontend",
+    "start:frontend": "ng serve",
+    "build": "ng build"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.2.0",
+    "@angular/cdk": "^15.2.9",
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
     "@angular/core": "^15.2.0",
@@ -19,11 +19,13 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "apexcharts": "^3.49.1",
     "bootstrap": "^5.3.3",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.4.5",
-    "mongoose": "^8.4.1",
-    "morgan": "^1.10.0",
+    "chart.js": "^4.4.3",
+    "ng-apexcharts": "^1.10.0",
+    "ngx-mask": "^14.2.4",
+    "ngx-plyr": "^4.0.1",
+    "plyr": "^3.7.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -40,10 +42,5 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~4.9.4"
-  },
-  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.",
-  "main": "server.js",
-  "type": "module",
-  "author": "PowerRangers",
-  "license": "ISC"
+  }
 }
