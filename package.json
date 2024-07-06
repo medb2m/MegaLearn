@@ -24,6 +24,8 @@
     "apexcharts": "^3.49.1",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
+    "cookie-parser": "^1.4.6",
+    "morgan": "^1.10.0",
     "ng-apexcharts": "^1.10.0",
     "ngx-mask": "^14.2.4",
     "ngx-plyr": "^4.0.1",

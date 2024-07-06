@@ -102,7 +102,7 @@ export class AddEditPostComponent implements OnInit {
         formData.append('content', this.form.get('content')?.value)
         console.log('formdata ' + formData.get('title') )
         console.log('this seleced ', this.selectedFile)
-        // add image if selected
+        // add image if  its selected
         if (this.selectedFile){
             formData.append('image', this.selectedFile)
         }
