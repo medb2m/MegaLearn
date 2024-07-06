@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ArchwizardModule } from 'angular-archwizard';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
@@ -34,6 +34,7 @@ import { PlyrModule } from 'ngx-plyr';
     ReactiveFormsModule,
     SharedModule,
     PlyrModule,
+    ArchwizardModule
   ]
 })
 export class CoursesModule { }

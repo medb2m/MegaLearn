@@ -22,3 +22,8 @@ button {
     width: 100%;
     height: 180px;
 }
+
+.centered-content {
+    margin: auto;
+    text-align: center;
+  }

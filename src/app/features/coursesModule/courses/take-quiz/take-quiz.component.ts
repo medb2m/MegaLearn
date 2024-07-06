@@ -80,16 +80,19 @@ export class TakeQuizComponent implements OnInit {
         quiz.questions.forEach((question: any) => {
           this.addQuestion(question);
         });
+        console.log(this.questions?.controls[0]?.get('selectedOption')?.errors);
         this.loading = false;
       });
   }
 
   onSubmit() {
     this.submitted = true;
-    /* if (this.form.invalid) {
+    //console.log(this.form)
+    /*
+    if (this.form.invalid) {
       return;
-    } */
-    
+    }
+    */
     // Préparer les réponses
     const answers = this.form.value.questions?.map((question: any) => {
     const selectedOption = question?.options?.find((option: any) => option?.isCorrect);
@@ -134,5 +137,13 @@ export class TakeQuizComponent implements OnInit {
       });
     }
 
+
+    getStepSymbol(i: any) {
+      return {symbol : i+1};
+    }
+
+    getStepTitle(i: any) {
+      return 'Question ' + (i+1);
+    }
 
 }

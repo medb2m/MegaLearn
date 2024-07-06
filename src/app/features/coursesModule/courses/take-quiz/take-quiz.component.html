@@ -1,34 +1,72 @@
-<div class="container p-5">
-  <h2>{{ quiz?.title }}</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="container p-3">
+  <h2 class="centered-content">{{ quiz?.title }}</h2>
+  <br>
+  <form [formGroup]="form">
     <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
     <div *ngIf="!loading">
-      <div formArrayName="questions">
-        <div *ngFor="let question of questions.controls; let i = index" >
-          <div>
-            <div [formGroupName]="i" class="form-group">
-              <h3>{{i + 1}} . {{ question.get('questionText')!.value }}</h3>
-    
-              <div formArrayName="options" class="form-group">
-                <div *ngFor="let option of getOptions(i); let j = index" [formGroupName]="j" class="form-group">
+      <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
 
-                    <div class="row d-flex align-middle">
-                    <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect" [value]="option.get('optionText')!.value" class="form-check-input col-6">
-                    <div class="form-check col-6">
-                      <p class="">{{ j+1 }}. {{ option.get('optionText')!.value }}</p>
+        <aw-wizard-step [stepTitle]="getStepTitle(i)" [navigationSymbol]="getStepSymbol(i)"
+          *ngFor="let question of questions.controls; let i = index; let first = first; let last = last">
+          <br>
+          <br>
+
+          <div class="centered-content">
+            <div formArrayName="questions">
+              <div>
+                <div [formGroupName]="i" class="form-group">
+                  <h3>{{ question.get('questionText')!.value }}</h3>
+
+                  <br> <br>
+                  <div formArrayName="options" class="form-group">
+                    <div *ngFor="let option of getOptions(i); let j = index" [formGroupName]="j" class="form-group">
+
+                      <div class="row">
+                        <div class="col-4">
+                        </div>
+
+                        <div class="col-8">
+                          <div class="d-flex align-middle">
+                            <input id="isCorrect-{{i}}-{{j}}" type="checkbox" formControlName="isCorrect"
+                              [value]="option.get('optionText')!.value" class="form-check-input col-6">
+                            <p style="margin-left: 20px;" class="">{{ j+1 }}. {{ option.get('optionText')!.value }}</p>
+
+
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+
+                      <div *ngIf="submitted && question?.get('selectedOption')?.errors" class="invalid-feedback">
+                        <label>Option is required</label>
+                      </div>
                     </div>
-                  
                   </div>
-                  <div *ngIf="submitted && option.get('isCorrect')?.errors" class="invalid-feedback">
-                    <div *ngIf="option.get('isCorrect')?.errors">Option is required</div>
+
+                  <br>
+                  <br>
+
+                  <div class="btn-group">
+                    <button class="btn btn-secondary" awPreviousStep *ngIf="!first">Précédent</button>
+                    &nbsp;
+                    &nbsp;
+                    <button class="btn btn-secondary" awNextStep *ngIf="!last">Suivant</button>
+                  </div>
+                  &nbsp;
+                  <div class="btn-group">
+
+                    <button *ngIf="last" type="submit" (click)="onSubmit()" class="btn btn-primary">Submit Quiz</button>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        </aw-wizard-step>
+      </aw-wizard>
     </div>
+
+
+
   </form>
 </div>
