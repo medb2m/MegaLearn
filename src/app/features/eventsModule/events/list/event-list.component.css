@@ -1,4 +1,8 @@
 .ag-format-container {
+<<<<<<< HEAD
+    margin: 0 auto;
+  }
+=======
     width: 1142px;
     margin: 0 auto;
   }
@@ -7,6 +11,7 @@
   body {
     background-color: #000;
   }
+>>>>>>> siwarMerge
   .ag-courses_box {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -32,7 +37,12 @@
   .ag-courses-item_link {
     display: block;
     padding: 30px 20px;
+<<<<<<< HEAD
+    background-color: #ffffff80;
+    border: solid #212121;
+=======
     background-color: #121212;
+>>>>>>> siwarMerge
   
     overflow: hidden;
   
@@ -56,21 +66,33 @@
   
     font-weight: bold;
     font-size: 30px;
+<<<<<<< HEAD
+    color: #212121;
+=======
     color: #FFF;
+>>>>>>> siwarMerge
   
     z-index: 2;
     position: relative;
   }
   .ag-courses-item_date-box {
     font-size: 18px;
+<<<<<<< HEAD
+    color: #212121;
+=======
     color: #FFF;
+>>>>>>> siwarMerge
   
     z-index: 2;
     position: relative;
   }
   .ag-courses-item_date {
     font-weight: bold;
+<<<<<<< HEAD
+    color: #f934f9;
+=======
     color: #f9b234;
+>>>>>>> siwarMerge
   
     -webkit-transition: color .5s ease;
     -o-transition: color .5s ease;

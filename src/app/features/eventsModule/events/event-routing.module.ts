@@ -14,7 +14,11 @@ const routes: Routes = [
         { path: '', component: EventListComponent },
         { path: 'myevents', component: MyeventsComponent },
         { path: 'details/:id', component: EventdetailsComponent  },
+<<<<<<< HEAD
+        { path: 'meeting/:id', component: VideoChatComponent  },
+=======
         { path: 'video/:id', component: VideoChatComponent  },
+>>>>>>> siwarMerge
     ]
 }
 ];

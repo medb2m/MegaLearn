@@ -52,6 +52,15 @@ io.on('connection', (socket) => {
             }
       //console.log(token);
       //console.log('token');
+<<<<<<< HEAD
+      console.log('token222');
+      io.emit('message', message ,pdp, time, socket.user.username );
+      console.log('token333');
+    });
+  });
+
+  
+=======
       message = `${socket.user.username}: ${message}`
       console.log('token222');
       io.emit('message', message ,pdp, time );
@@ -62,6 +71,7 @@ io.on('connection', (socket) => {
       console.log('a user disconnected!');
     });
   });
+>>>>>>> siwarMerge
 
     /* io.on('connection', (socket) => {
        // console.log('User connected:' + socket.user.username);

@@ -3,13 +3,48 @@
     <figure class="ag-event-detail_image">
       <img [src]="event.image || 'https://picsum.photos/800/450'" alt="" />
     </figure>
+<<<<<<< HEAD
+    <div>
+      <button class="button" (click)="joinMeeting(event.meeting.meetingLink)"> Join Meeting</button>
+    </div> 
+=======
     <div *ngFor="let meeting of event.meetings">
       <button (click)="joinMeeting(meeting._id)">Join Meeting</button>
     </div>
+>>>>>>> siwarMerge
     <div class="ag-event-detail_body">
       <h2 class="ag-event-detail_title">{{ event.title }}</h2>
       <p class="ag-event-detail_description">{{ event.description }}</p>
       <p class="ag-event-detail_date">{{ event.date | date: 'short' }}</p>
+<<<<<<< HEAD
+      <p class="ag-event-detail_duration">
+        Duration:
+        {{ event.duration >= 60 ? (event.duration / 60) + ' hours' : event.duration + ' mins' }}
+      </p>
+      
+      <p class="ag-event-detail_type">Type: {{ event.type }}</p>
+      <h3 class="ag-event-detail_subtitle">Participants</h3>
+      <p class="ag-event-detail_participants">Number of participants: {{ approvedParticipantsCount +1 }}</p>
+    </div>
+    
+    <ng-container *ngIf="userStatus === 'notJoined'; else waitingOrApproved">
+      <div class="">
+        <button class="button" (click)="join(event._id)">Join Now</button>
+      </div>
+    </ng-container>
+    
+    <ng-template #waitingOrApproved>
+      <ng-container *ngIf="userStatus === 'waitingApproval'; else approved">
+        <div class="">
+          <button class="button" disabled>Waiting for Approval</button>
+        </div>
+      </ng-container>
+      <ng-template #approved>
+        <div class="">
+          <a class="button" [href]="event.meeting.meetingLink" target="_blank">Join Meeting</a>
+        </div>
+      </ng-template>
+=======
       <p class="ag-event-detail_duration">Duration: {{ event.duration }} mins</p>
       <p class="ag-event-detail_type">Type: {{ event.type }}</p>
       <h3 class="ag-event-detail_subtitle">Participants</h3>
@@ -25,6 +60,7 @@
       <div class="wrap">
         <button class="button">Meeting</button>
       </div>
+>>>>>>> siwarMerge
     </ng-template>
   </div>
 </div>

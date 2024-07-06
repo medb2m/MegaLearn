@@ -15,7 +15,11 @@ const QuizModule = () => import('@features/admin').then(x => x.QuizModule);
 const ProfileModule = () => import('@features/accountsModule/profile').then(x => x.ProfileModule);
 const eventModule = () => import('@features/admin/eventModule').then(x => x.EventModule);
 const blogModule = () => import('@features/admin/blogModule').then(x => x.PostModule);
+<<<<<<< HEAD
+const claimModule = () => import('@features/admin/claimModule/claim').then(x => x.ClaimModule);
+=======
 const claimModule = () => import('@features/claimModule/claim').then(x => x.ClaimModule);
+>>>>>>> siwarMerge
 
 
 const routes: Routes = [
@@ -33,7 +37,11 @@ const routes: Routes = [
             { path: 'profile', loadChildren: ProfileModule },
             { path: 'event', loadChildren: eventModule },
             { path: 'blog', loadChildren: blogModule },
+<<<<<<< HEAD
+            { path: 'claim', loadChildren: claimModule },
+=======
             { path: 'claim', loadChildren: blogModule },
+>>>>>>> siwarMerge
         ]
     }
 ];

@@ -1,9 +1,43 @@
+<<<<<<< HEAD
+#filterSortControls {
+  transition: height 0.3s ease;
+}
+
+a.text-primary {
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.text-primary:hover {
+  text-decoration: underline;
+}
+
+.coursebtn {
+  width: auto;
+  
+  padding-left: 13px;
+  padding-right: 13px;
+  white-space: nowrap;
+}
+
+.coursebtn i {
+  font-size: 0.9rem;
+}
+
+
+=======
+>>>>>>> siwarMerge
 .course-card {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     height: 100%;
+<<<<<<< HEAD
+    overflow: hidden;
+=======
     overflow: hidden; /* pour ne pas sortir du cadre */
+>>>>>>> siwarMerge
   }
   
   .course-card:hover {
@@ -12,13 +46,22 @@
   }
   
   .card-img-top {
+<<<<<<< HEAD
+    height: 150px; 
+    object-fit: cover;
+=======
     height: 150px; /* Fixed height for all images */
     object-fit: cover; /* Ensures images cover the area and don't distort */
+>>>>>>> siwarMerge
     transition: transform 0.3s ease-in-out;
   }
   
   .course-card:hover .card-img-top {
+<<<<<<< HEAD
+    transform: scale(1.1); 
+=======
     transform: scale(1.1); /* Zooms in slightly on hover */
+>>>>>>> siwarMerge
   }
 
   .card-title {
@@ -29,5 +72,94 @@
   }
   
   .card-text {
+<<<<<<< HEAD
+    text-align: left; 
+  } 
+
+
+
+
+  
+  /*--------------------------------------------------------------
+# Courses Section
+--------------------------------------------------------------*/
+
+.course-item {
+  border-radius: 5px;
+  border: 1px solid color-mix(in srgb, #444444, transparent 90%);
+}
+
+.course-content {
+  padding: 15px;
+}
+
+.course-content h3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.course-content h3 a {
+  color: #37423b;
+  transition: 0.3s;
+}
+
+.course-content h3 a:hover {
+  color: #6855e0;
+}
+
+.course-content .category {
+  background: #6855e0;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 6px 14px;
+  margin: 0;
+  border-radius: 30px;
+}
+
+.course-content .price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  color: color-mix(in srgb, #444444, transparent 20%);
+}
+
+.course-content .description {
+  font-size: 14px;
+  color: color-mix(in srgb, #444444, transparent 20%);
+}
+
+.trainer {
+  padding-top: 15px;
+  border-top: 1px solid color-mix(in srgb, #444444, transparent 90%);
+}
+
+.trainer .trainer-profile img {
+  max-width: 50px;
+  border-radius: 50px;
+}
+
+.trainer .trainer-profile .trainer-link {
+  padding-left: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: color-mix(in srgb, #444444, transparent 20%);
+  transition: 0.3s;
+}
+
+.trainer .trainer-profile .trainer-link:hover {
+  color: #6855e0;
+}
+
+.trainer .trainer-rank {
+  font-size: 18px;
+  color: color-mix(in srgb, #444444, transparent 60%);
+}
+
+.trainer .trainer-rank .user-icon {
+  font-size: 22px;
+}
+  
+=======
     text-align: left; /* Description from left */
   }
+>>>>>>> siwarMerge

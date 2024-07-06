@@ -21,7 +21,13 @@ export class CardMethodComponent {
   ) {}
 
   ngOnInit() {
+<<<<<<< HEAD
+    this.route.queryParamMap.subscribe(params => {
+      this.courseId = params.get('courseId');
+    });
+=======
     this.courseId = this.route.snapshot.paramMap.get('id');
+>>>>>>> siwarMerge
   }
 
   submitPayment() {

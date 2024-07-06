@@ -1,4 +1,24 @@
 <div class="chat-container">
+<<<<<<< HEAD
+  <h1>Chat about your claim</h1>
+  <div class="chat-messages" #chatMessages>
+    <div *ngFor="let msg of messages" class="message"> 
+      <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" class="rounded-circle" style="object-fit: cover;">
+      <div class="message-content">
+        <div class="message-header">
+          <span class="sender-name">{{ msg.senderName }}</span>
+          <span class="message-time text-muted">{{ msg.time }}</span>
+        </div>
+        <div class="message-text">{{ msg.message }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input search-box">
+    <button class="btn-search" (click)="sendMessage()"><i class="bi bi-arrow-right" ></i></button>
+    <input class="input-search-small" [(ngModel)]="message" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
+  </div>
+</div>
+=======
   <div class="chat-messages">
     <div *ngFor="let msg of messages" class="message"> 
       <img [src]="msg.pdp || 'assets/img/pdp.jpg'" height="40" width="40" width="45" height="45" class="rounded-circle"
@@ -14,3 +34,4 @@
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>
+>>>>>>> siwarMerge

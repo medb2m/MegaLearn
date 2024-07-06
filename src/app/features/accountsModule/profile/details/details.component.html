@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+﻿<!-- profile.component.html -->
+
+<div class="profile-container" *ngIf="account" >
+  <img [src]="account.image || 'assets/img/pdp.jpg'" alt="Profile Picture" class="profile-picture">
+  <div class="username">{{ account.username }}</div>
+  <div class="profile-details mb-3">
+    <strong>Name:</strong> {{ account.title }} {{ account.firstName }} {{ account.lastName }}<br />
+    <strong>Email:</strong> {{ account.email }}
+  </div>
+  <button class="button" routerLink="update">Update Profile</button>
+</div>
+=======
 ﻿<h1>My Profile</h1>
 <div *ngIf="account">
     <div class="d-flex align-items-center">
@@ -10,3 +23,4 @@
     <strong>Email: </strong> {{account.email}}
 </div>
 <p><a routerLink="update">Update Profile</a></p>
+>>>>>>> siwarMerge

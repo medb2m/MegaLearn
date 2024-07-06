@@ -5,13 +5,24 @@ import { v4 as uuidv4 } from 'uuid';
 // Create a new event
 export const createEvent = async (req, res) => {
   try {
+<<<<<<< HEAD
+    if (!req.file){
+      return res.status(400).json({ message : 'Please upload an image.'})
+    }
+=======
+>>>>>>> siwarMerge
     const eventData = {
       title : req.body.title,
       description : req.body.description,
       date : req.body.date,
       duration : req.body.duration,
       type : req.body.type,
+<<<<<<< HEAD
+      host : req.user.id,
+      image : `${req.protocol}://${req.get('host')}/img/${req.file.filename}`
+=======
       host : req.user.id
+>>>>>>> siwarMerge
     }
     const event = new Event(eventData);
     await event.save();
@@ -63,7 +74,18 @@ export const getEventById = async (req, res) => {
 // Update an event
 export const updateEvent = async (req, res) => {
   try {
+<<<<<<< HEAD
+    const eventData = {
+      ...req.body
+    }
+    if (req.file) {
+      eventData.image = `${req.protocol}://${req.get("host")}/img/${req.file.filename}`;
+    }
+    
+    const event = await Event.findByIdAndUpdate(req.params.eventId, eventData, { new: true });
+=======
     const event = await Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true });
+>>>>>>> siwarMerge
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
@@ -103,7 +125,10 @@ export const participeToEvent = async (req, res) => {
     }
 
     event.participants.push({ user: participantId});
+<<<<<<< HEAD
+=======
     event.updated = new Date();
+>>>>>>> siwarMerge
     await event.save();
 
     res.status(200).json(event);
@@ -203,7 +228,11 @@ export const createMeetingForEvent = async (req, res) => {
       event: eventId,
       startTime,
       endTime,
+<<<<<<< HEAD
+      meetingLink : meetingId
+=======
       meetingLink : `${req.protocol}://${req.get('host')}/meeting/${meetingId}`
+>>>>>>> siwarMerge
     });
     await meeting.save();
 
@@ -227,4 +256,33 @@ try {
 } catch (error) {
   res.status(500).json({ message: error.message });
 }
+<<<<<<< HEAD
 }
+
+// Get user status for an event
+export const getUserStatus = async (req, res) => {
+  try {
+    const eventId = req.params.eventId;
+    const userId = req.user.id;
+
+    const event = await Event.findById(eventId).populate('participants.user');
+
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    const participant = event.participants.find(p => p.user._id.toString() === userId);
+    console.log('userId :' +userId )
+    console.log('participant :' +participant.status )
+
+    if (!participant) {
+      return res.status(200).json('notJoined');
+    }
+      return res.status(200).json(participant.status);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+=======
+}
+>>>>>>> siwarMerge

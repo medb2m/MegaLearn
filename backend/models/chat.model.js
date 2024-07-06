@@ -7,6 +7,12 @@ const ChatSchema = new Schema({
   senderName: { type: String, required: true },
   message: { type: String, required: true },
   time: { type: String, required: true },
+<<<<<<< HEAD
+  },{timestamps : true})
+  
+export default model('Chat', ChatSchema)
+=======
   },{timestamps : true});
   
   export default model('Chat', ChatSchema);
+>>>>>>> siwarMerge

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<!-- <div class="video-player-container">
+=======
 <div class="video-player-container">
+>>>>>>> siwarMerge
     <div class="video-section">
       <plyr #player class="player" [plyrPlaysInline]="true" [plyrSources]="videoSources" [plyrOptions]="plyrOptions"></plyr> 
       <div class="sections-list">
@@ -14,4 +18,21 @@
         <p>{{ currentVideo?.vidDescription }}</p>
       </div>
     </div>
+<<<<<<< HEAD
+  </div> -->
+
+  <div class="video-player-container">
+    <div class="video-section">
+      <plyr #player class="player" [plyrPlaysInline]="true" [plyrSources]="videoSources" [plyrOptions]="plyrOptions"></plyr> 
+      <div class="sections-list">
+        <!-- <h4>Sections</h4> -->
+        <ul>
+          <li *ngFor="let section of sections; let i = index" (click)="playVideo(i)">
+            <i class="bi bi-caret-right"></i>{{ section.title }}
+          </li>
+        </ul>
+      </div>
+    </div>
+=======
+>>>>>>> siwarMerge
   </div>
